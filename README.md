@@ -1,4 +1,4 @@
-## React + Webpack + Npm scripts starter
+## Mastermind
 
 ## Dependencies
 * sources
@@ -65,4 +65,3 @@
  
  ``` npm run server:build```
 
- 

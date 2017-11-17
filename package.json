@@ -1,10 +1,10 @@
 {
-  "name": "js-starter",
-  "version": "1.0.1",
-  "description": "js starter",
+  "name": "mastermind",
+  "version": "0.0.1",
+  "description": "mastermind",
   "repository": {
     "type": "git",
-    "url": "git://github.com/giovanettid/js-starter.git"
+    "url": "git://github.com/giovanettid/mastermind.git"
   },
   "scripts": {
     "start": "webpack-dev-server --hot",
