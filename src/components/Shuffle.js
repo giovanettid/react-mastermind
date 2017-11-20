@@ -4,6 +4,10 @@ export default class Shuffle {
   }
 
   generate() {
-    return this.colors;
+    return Shuffle.random(this.colors);
+  }
+
+  static random(array) {
+    return array.sort(() => 0.5 - Math.random());
   }
 }
