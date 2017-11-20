@@ -8,10 +8,10 @@ describe('Shuffle', () => {
     });
   });
 
-  describe('fetch', () => {
+  describe('generate', () => {
     it('should shuffle all correct colors', () => {
       const shuffle = new Shuffle();
-      expect(shuffle.fetch()).to.have.members(['Blue', 'Red', 'Yellow', 'Green', 'White', 'Black']);
+      expect(shuffle.generate()).to.have.members(['Blue', 'Red', 'Yellow', 'Green', 'White', 'Black']);
     });
   });
 });

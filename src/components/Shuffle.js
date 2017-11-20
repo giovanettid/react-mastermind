@@ -3,7 +3,7 @@ export default class Shuffle {
     this.colors = ['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black'];
   }
 
-  fetch() {
+  generate() {
     return this.colors;
   }
 }
