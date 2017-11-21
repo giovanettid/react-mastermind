@@ -5,6 +5,10 @@ describe('Colors', () => {
   let sandbox;
   let colors;
 
+  const expectedColors = ['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black'];
+
+  const checkColor = color => expect(color).to.be.oneOf(expectedColors);
+
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
     colors = new Colors();
@@ -16,7 +20,7 @@ describe('Colors', () => {
 
   describe('set atribute', () => {
     it('should equal to all correct colors', () => {
-      expect(colors.set).to.deep.equal(['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black']);
+      expect(colors.set).to.deep.equal(expectedColors);
     });
   });
 
@@ -30,7 +34,11 @@ describe('Colors', () => {
     });
 
     it('should contains all correct colors', () => {
-      expect(colors.shuffle()).to.have.members(['Blue', 'Red', 'Yellow', 'Green', 'White', 'Black']);
+      colors.shuffle().every(checkColor);
+    });
+
+    it('should pick 4 colors', () => {
+      expect(colors.shuffle()).to.have.lengthOf(4);
     });
   });
 });

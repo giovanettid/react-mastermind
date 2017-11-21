@@ -6,6 +6,6 @@ export default class Colors {
   }
 
   shuffle() {
-    return this.set.sort(applyRandom);
+    return this.set.sort(applyRandom).slice(0, 4);
   }
 }
