@@ -3,6 +3,7 @@ import sinon from 'sinon';
 
 describe('Colors', () => {
   let sandbox;
+  let spyApplyRandom;
   let colors;
 
   const expectedColors = ['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black'];
@@ -11,7 +12,8 @@ describe('Colors', () => {
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
-    colors = new Colors();
+    spyApplyRandom = sandbox.spy();
+    colors = new Colors(spyApplyRandom);
   });
 
   afterEach(() => {
@@ -25,12 +27,10 @@ describe('Colors', () => {
   });
 
   describe('shuffle', () => {
-    it('should shuffle each color with Math.random', () => {
-      const spy = sandbox.spy(Math, 'random');
-
+    it('should use applyRandom', () => {
       colors.shuffle();
 
-      expect(spy.called).to.be.true;
+      expect(spyApplyRandom.called).to.be.true;
     });
 
     it('should contains all correct colors', () => {
