@@ -6,7 +6,11 @@ export default class Colors {
   }
 
   shuffle() {
-    return this.set.sort(() => 0.5 - this.applyRandom())
-      .slice(0, 4);
+    const NB_COLORS_TO_PICK = 4;
+    return new Array(NB_COLORS_TO_PICK).fill().map(() => this.pick());
+  }
+
+  pick() {
+    return this.set[Math.floor(this.applyRandom() * this.set.length)];
   }
 }
