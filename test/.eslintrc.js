@@ -8,6 +8,7 @@ module.exports = {
     "afterEach": false,
     "expect": false,
     "shallow": false,
+    "mount": false,
     "browser": false
   },
   "rules": {
