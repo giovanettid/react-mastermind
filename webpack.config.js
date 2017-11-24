@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const buildDir = 'build';
 const sourceDir = 'src';
+const stylesDir = `${sourceDir}/styles`;
 
 const config = {
   entry: {
@@ -36,6 +37,7 @@ const config = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
+              includePaths: [path.resolve(__dirname, stylesDir)],
             },
           }],
         }),
