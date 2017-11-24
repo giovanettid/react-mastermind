@@ -9,10 +9,6 @@ describe('Row', () => {
         <Row />
       </tbody></table>);
 
-    const row = wrapper.find('td.hole')
-      .map(node => node.text())
-      .join('');
-
-    expect(row).to.eql('OOOO');
+    expect(wrapper.find('.hole')).to.have.lengthOf(4);
   });
 });

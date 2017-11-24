@@ -1,5 +1,7 @@
 import React from 'react';
 
+import 'components/Hole.scss';
+
 export default function Hole() {
-  return <td className="hole">O</td>;
+  return <td className="hole" />;
 }
