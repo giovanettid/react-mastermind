@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Hole from 'components/Hole';
 
 describe('Hole', () => {

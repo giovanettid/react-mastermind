@@ -1,7 +1,7 @@
+import sinon from 'sinon';
+
 import ColorsFactory from 'components/ColorsFactory';
 import Colors from 'components/Colors';
-
-import sinon from 'sinon';
 
 describe('ColorsFactory', () => {
   let sandbox;
