@@ -1,5 +1,5 @@
 import React from 'react';
-import Row from './Row';
+import Row from 'components/Row';
 
 export default function Board() {
   const board = [...Array(10).keys()].map(e => <Row key={e} />);
