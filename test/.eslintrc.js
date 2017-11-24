@@ -7,6 +7,7 @@ module.exports = {
     "afterAll": false,
     "afterEach": false,
     "expect": false,
+    "sinon": false,
     "shallow": false,
     "mount": false,
     "browser": false
