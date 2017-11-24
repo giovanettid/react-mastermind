@@ -5,6 +5,6 @@ describe('Hole', () => {
   it('should display Hole', () => {
     const wrapper = shallow(<Hole />);
 
-    expect(wrapper.find('div').text()).to.equal('O');
+    expect(wrapper.find('.hole').text()).to.equal('O');
   });
 });

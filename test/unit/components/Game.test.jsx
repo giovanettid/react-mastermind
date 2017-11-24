@@ -5,6 +5,6 @@ describe('Game', () => {
   it('should display Board', () => {
     const wrapper = mount(<Game />);
 
-    expect(wrapper.find('.board')).to.have.lengthOf(1);
+    expect(wrapper.find('table.board')).to.have.lengthOf(1);
   });
 });
