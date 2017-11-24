@@ -1,5 +1,3 @@
-import sinon from 'sinon';
-
 import ColorsFactory from 'components/ColorsFactory';
 import Colors from 'components/Colors';
 

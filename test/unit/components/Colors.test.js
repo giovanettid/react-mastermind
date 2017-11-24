@@ -1,5 +1,3 @@
-import sinon from 'sinon';
-
 import Colors from 'components/Colors';
 
 describe('Colors', () => {
