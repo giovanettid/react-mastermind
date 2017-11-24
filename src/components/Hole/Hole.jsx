@@ -1,6 +1,6 @@
 import React from 'react';
 
-import 'components/Hole/Hole.scss';
+import './Hole.scss';
 
 export default function Hole() {
   return <td className="hole" />;
