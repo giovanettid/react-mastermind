@@ -1,5 +1,5 @@
-import ColorsFactory from 'components/ColorsFactory';
-import Colors from 'components/Colors';
+import ColorsFactory from 'components/Colors/ColorsFactory';
+import Colors from 'components/Colors/Colors';
 
 describe('ColorsFactory', () => {
   let sandbox;

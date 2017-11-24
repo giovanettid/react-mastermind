@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Board from 'components/Board';
+import Board from 'components/Board/Board';
 
-import 'components/Game.scss';
+import 'components/Game/Game.scss';
 
 export default function Game() {
   return <div><Board /></div>;

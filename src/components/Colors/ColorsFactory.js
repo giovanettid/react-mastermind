@@ -1,4 +1,4 @@
-import Colors from 'components/Colors';
+import Colors from 'components/Colors/Colors';
 
 export default class ColorsFactory {
   static create() {

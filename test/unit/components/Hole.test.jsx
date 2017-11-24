@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hole from 'components/Hole';
+import Hole from 'components/Hole/Hole';
 
 describe('Hole', () => {
   it('should display Hole', () => {

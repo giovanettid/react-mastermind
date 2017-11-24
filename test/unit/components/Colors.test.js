@@ -1,4 +1,4 @@
-import Colors from 'components/Colors';
+import Colors from 'components/Colors/Colors';
 
 describe('Colors', () => {
   let sandbox;
