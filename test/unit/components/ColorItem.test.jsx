@@ -3,9 +3,9 @@ import React from 'react';
 import ColorItem from 'components/ColorItem/ColorItem';
 
 describe('ColorItem', () => {
-  it('should display ColorItem', () => {
-    const wrapper = shallow(<ColorItem />);
+  it('should display ColorItem with a color', () => {
+    const wrapper = shallow(<ColorItem color={'Red'} />);
 
-    expect(wrapper.find('.colorItem')).to.have.lengthOf(1);
+    expect(wrapper.find('.colorItem').hasClass('colorRed')).to.be.true;
   });
 });
