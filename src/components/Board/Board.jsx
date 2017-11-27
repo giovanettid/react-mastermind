@@ -10,7 +10,9 @@ export default function Board() {
       <table className="board">
         <tbody>{board}</tbody>
       </table>
-      <ColorPicker />
+      <ColorPicker
+        colors={['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black']}
+      />
     </div>
   );
 }
