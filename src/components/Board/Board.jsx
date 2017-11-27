@@ -5,16 +5,16 @@ import Row from 'components/Row/Row';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
 const Board = (props) => {
-  const board = [...Array(10).keys()].map(e => <Row key={e} />);
+  const rows = [...Array(10).keys()].map(e => <Row key={e} />);
   const picker = <ColorPicker colors={props.colorsToPick} />;
 
   return (
     <div>
       <table className="board">
-        <tbody>{board}</tbody>
+        <tbody>{rows}</tbody>
       </table>
       <br />
-      <table>
+      <table className="picker">
         <tbody>{picker}</tbody>
       </table>
     </div>
