@@ -6,7 +6,7 @@ describe('Board', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Board />);
+    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} />);
   });
 
   it('should display 10 Row', () => {
@@ -17,7 +17,7 @@ describe('Board', () => {
     expect(wrapper.find('.colorPicker')).to.have.lengthOf(1);
   });
 
-  it('should display 6 ColorItem', () => {
-    expect(wrapper.find('.colorItem')).to.have.lengthOf(6);
+  it('should display 2 ColorItem', () => {
+    expect(wrapper.find('.colorItem')).to.have.lengthOf(2);
   });
 });
