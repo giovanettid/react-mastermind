@@ -7,11 +7,7 @@ const ColorItem = (props) => {
 };
 
 ColorItem.propTypes = {
-  color: PropTypes.string,
-};
-
-ColorItem.defaultProps = {
-  color: 'Red',
+  color: PropTypes.string.isRequired,
 };
 
 export default ColorItem;
