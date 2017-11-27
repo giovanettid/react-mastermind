@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ColorItem = (props) => {
   const className = `colorItem color${props.color}`;
-  return <div className={className} />;
+  return <td className={className} />;
 };
 
 ColorItem.propTypes = {

@@ -6,14 +6,17 @@ import ColorPicker from 'components/ColorPicker/ColorPicker';
 
 const Board = (props) => {
   const board = [...Array(10).keys()].map(e => <Row key={e} />);
+  const picker = <ColorPicker colors={props.colorsToPick} />;
+
   return (
     <div>
       <table className="board">
         <tbody>{board}</tbody>
       </table>
-      <ColorPicker
-        colors={props.colorsToPick}
-      />
+      <br />
+      <table>
+        <tbody>{picker}</tbody>
+      </table>
     </div>
   );
 };

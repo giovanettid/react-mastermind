@@ -8,7 +8,7 @@ const ColorPicker = (props) => {
     .map(color => <ColorItem key={color} color={color} />);
 
   return (
-    <div className="colorPicker">{items}</div>
+    <tr className="colorPicker">{items}</tr>
   );
 };
 

@@ -14,7 +14,7 @@ describe('Board', () => {
   });
 
   it('should display ColorPicker', () => {
-    expect(wrapper.find('.colorPicker')).to.have.lengthOf(1);
+    expect(wrapper.find('tr.colorPicker')).to.have.lengthOf(1);
   });
 
   it('should display 2 ColorItem', () => {
