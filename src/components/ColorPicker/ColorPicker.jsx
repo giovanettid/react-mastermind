@@ -8,7 +8,11 @@ const ColorPicker = (props) => {
     .map(color => <ColorItem key={color} color={color} />);
 
   return (
-    <tr className="colorPicker">{items}</tr>
+    <table>
+      <tbody>
+        <tr className="colorPicker">{items}</tr>
+      </tbody>
+    </table>
   );
 };
 

@@ -14,9 +14,7 @@ const Board = (props) => {
         <tbody>{rows}</tbody>
       </table>
       <br />
-      <table className="picker">
-        <tbody>{picker}</tbody>
-      </table>
+      {picker}
     </div>
   );
 };

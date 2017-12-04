@@ -13,7 +13,7 @@ describe('Game', () => {
   });
 
   it('should display ColorPicker', () => {
-    expect(wrapper.find('table.picker')).to.have.lengthOf(1);
+    expect(wrapper.find('.colorPicker')).to.have.lengthOf(1);
   });
 
   it('should display 6 ColorItem', () => {
