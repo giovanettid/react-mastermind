@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Row from 'components/Row/Row';
+import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
 const Board = (props) => {
-  const rows = [...Array(10).keys()].map(e => <Row key={e} />);
+  const rows = <Rows nb={10} />;
   const picker = <ColorPicker colors={props.colorsToPick} />;
 
   return (
-    <div>
-      <table className="board">
-        <tbody>{rows}</tbody>
-      </table>
+    <div className="board">
+      {rows}
       <br />
       {picker}
     </div>

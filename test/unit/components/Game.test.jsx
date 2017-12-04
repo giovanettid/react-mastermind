@@ -9,7 +9,7 @@ describe('Game', () => {
     wrapper = mount(<Game />);
   });
   it('should display Board', () => {
-    expect(wrapper.find('table.board')).to.have.lengthOf(1);
+    expect(wrapper.find('.board')).to.have.lengthOf(1);
   });
 
   it('should display ColorPicker', () => {
