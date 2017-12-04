@@ -5,8 +5,7 @@ import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
 const Board = (props) => {
-  const NB_ROWS = 10;
-  const rows = <Rows nb={NB_ROWS} />;
+  const rows = <Rows />;
   const picker = <ColorPicker colors={props.colorsToPick} />;
 
   return (

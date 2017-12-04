@@ -1,20 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Row from 'components/Row/Row';
 
-const Rows = (props) => {
-  const rows = [...Array(props.nb).keys()].map(e => <Row key={e} />);
+const Rows = () => {
+  const NB_ROWS = 10;
+  const rows = [...Array(NB_ROWS).keys()].map(e => <Row key={e} />);
 
   return (
     <table>
-      <tbody>{rows}</tbody>
+      <tbody className="rows">{rows}</tbody>
     </table>
   );
-};
-
-Rows.propTypes = {
-  nb: PropTypes.number.isRequired,
 };
 
 export default Rows;

@@ -9,8 +9,8 @@ describe('Board', () => {
     wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} />);
   });
 
-  it('should display 10 Row', () => {
-    expect(wrapper.find('tr.row')).to.have.lengthOf(10);
+  it('should display Rows', () => {
+    expect(wrapper.find('.rows')).to.have.lengthOf(1);
   });
 
   it('should display ColorPicker', () => {
