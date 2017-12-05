@@ -57,7 +57,7 @@
     "postcss-cli": "^4.1.1",
     "postcss-loader": "^2.0.8",
     "raf": "^3.4.0",
-    "sass-lint": "^1.11.1",
+    "sass-lint": "^1.12.1",
     "sass-loader": "^6.0.6",
     "sinon": "^3.2.1",
     "style-loader": "^0.19.0",
