@@ -6,6 +6,6 @@ describe('Rows', () => {
   it('should display Rows with 10 Row', () => {
     const wrapper = mount(<Rows />);
 
-    expect(wrapper.find('.row')).to.have.lengthOf(10);
+    expect(wrapper.find('.Row')).to.have.lengthOf(10);
   });
 });

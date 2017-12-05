@@ -10,14 +10,14 @@ describe('Board', () => {
   });
 
   it('should display Rows', () => {
-    expect(wrapper.find('.rows')).to.have.lengthOf(1);
+    expect(wrapper.find('.Rows')).to.have.lengthOf(1);
   });
 
   it('should display ColorPicker', () => {
-    expect(wrapper.find('tr.colorPicker')).to.have.lengthOf(1);
+    expect(wrapper.find('tr.ColorPicker')).to.have.lengthOf(1);
   });
 
   it('should display 2 ColorItem', () => {
-    expect(wrapper.find('.colorItem')).to.have.lengthOf(2);
+    expect(wrapper.find('.ColorItem')).to.have.lengthOf(2);
   });
 });

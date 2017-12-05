@@ -10,7 +10,7 @@ const ColorPicker = (props) => {
   return (
     <table>
       <tbody>
-        <tr className="colorPicker">{items}</tr>
+        <tr className="ColorPicker">{items}</tr>
       </tbody>
     </table>
   );

@@ -8,7 +8,7 @@ const Rows = () => {
 
   return (
     <table>
-      <tbody className="rows">{rows}</tbody>
+      <tbody className="Rows">{rows}</tbody>
     </table>
   );
 };

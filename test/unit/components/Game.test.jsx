@@ -9,14 +9,14 @@ describe('Game', () => {
     wrapper = mount(<Game />);
   });
   it('should display Board', () => {
-    expect(wrapper.find('.board')).to.have.lengthOf(1);
+    expect(wrapper.find('.Board')).to.have.lengthOf(1);
   });
 
   it('should display ColorPicker', () => {
-    expect(wrapper.find('.colorPicker')).to.have.lengthOf(1);
+    expect(wrapper.find('.ColorPicker')).to.have.lengthOf(1);
   });
 
   it('should display 6 ColorItem', () => {
-    expect(wrapper.find('.colorItem')).to.have.lengthOf(6);
+    expect(wrapper.find('.ColorItem')).to.have.lengthOf(6);
   });
 });

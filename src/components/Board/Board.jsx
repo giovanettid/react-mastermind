@@ -9,7 +9,7 @@ const Board = (props) => {
   const picker = <ColorPicker colors={props.colorsToPick} />;
 
   return (
-    <div className="board">
+    <div className="Board">
       {rows}
       <br />
       {picker}

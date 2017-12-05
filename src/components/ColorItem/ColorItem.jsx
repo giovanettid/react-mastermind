@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './ColorItem.scss';
 
 const ColorItem = (props) => {
-  const className = `colorItem color${props.color}`;
+  const className = `ColorItem ColorItem_color_${props.color.toLowerCase()}`;
   return <td className={className} />;
 };
 

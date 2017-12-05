@@ -9,6 +9,6 @@ describe('Row', () => {
         <Row />
       </tbody></table>);
 
-    expect(wrapper.find('.hole')).to.have.lengthOf(4);
+    expect(wrapper.find('.Hole')).to.have.lengthOf(4);
   });
 });
