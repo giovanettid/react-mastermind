@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
-const Board = (props) => {
+const Board = ({ colorsToPick }) => {
   const rows = <Rows />;
-  const picker = <ColorPicker colors={props.colorsToPick} />;
+  const picker = <ColorPicker colors={colorsToPick} />;
 
   return (
     <div className="Board">

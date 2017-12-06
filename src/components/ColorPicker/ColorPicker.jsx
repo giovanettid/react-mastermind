@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import ColorItem from 'components/ColorItem/ColorItem';
 
-const ColorPicker = (props) => {
-  const items = props.colors
+const ColorPicker = ({ colors }) => {
+  const items = colors
     .map(color => <ColorItem key={color} color={color} />);
 
   return (
