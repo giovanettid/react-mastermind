@@ -13,7 +13,7 @@ describe('Row', () => {
   });
 
   it('should display a Row with 4 Code large Hole', () => {
-    expect(wrapper.find('.Hole')).to.have.lengthOf(4);
+    expect(wrapper.find('.Hole_large')).to.have.lengthOf(4);
   });
 
   it('should display a Row with 4 Key small Hole', () => {

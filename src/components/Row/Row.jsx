@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Hole from 'components/Hole/Hole';
+import CodeHole from 'components/CodeHole/CodeHole';
 import KeyHole from 'components/KeyHole/KeyHole';
 
 export default function Row() {
   const NB_HOLES = 4;
   const holeIterator = [...Array(NB_HOLES).keys()];
-  const holes = holeIterator.map(e => <Hole key={e} />);
+  const codeHoles = holeIterator.map(e => <CodeHole key={e} />);
   const keyHoles = holeIterator.map(e => <KeyHole key={e} />);
 
   return (
-    <tr className="Row">{holes}{keyHoles}</tr>
+    <tr className="Row">{codeHoles}{keyHoles}</tr>
   );
 }
