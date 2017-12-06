@@ -3,12 +3,14 @@ import React from 'react';
 import CodeHole from 'components/CodeHole/CodeHole';
 import KeyHole from 'components/KeyHole/KeyHole';
 
+const keys = size => [...Array(size).keys()];
+
 export default function Row() {
   const NB_CODE_HOLES = 4;
-  const codeHolesRow = [...Array(NB_CODE_HOLES).keys()].map(e => <CodeHole key={e} />);
+  const codeHolesRow = keys(NB_CODE_HOLES).map(e => <CodeHole key={e} />);
 
   const NB_KEY_HOLES = 2;
-  const keyHolesRow = [...Array(NB_KEY_HOLES).keys()].map(e => <KeyHole key={e} />);
+  const keyHolesRow = keys(NB_KEY_HOLES).map(e => <KeyHole key={e} />);
 
   return (
     <tr className="Row">
