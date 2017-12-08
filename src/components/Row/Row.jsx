@@ -9,7 +9,8 @@ const keys = size => [...Array(size).keys()];
 // eslint-disable-next-line no-unused-vars
 const Row = ({ nextCode, color }) => {
   const NB_CODE_HOLES = 4;
-  const codeHolesRow = keys(NB_CODE_HOLES).map(e => <CodeHole key={e} />);
+  const mapCallback = e => (color ? <CodeHole key={e} color={color} /> : <CodeHole key={e} />);
+  const codeHolesRow = keys(NB_CODE_HOLES).map(mapCallback);
 
   const NB_KEY_HOLES = 2;
   const keyHolesRow = keys(NB_KEY_HOLES).map(e => <KeyHole key={e} />);
