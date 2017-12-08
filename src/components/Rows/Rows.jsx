@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import Row from 'components/Row/Row';
 
-const Rows = ({ nextCode }) => {
+const Rows = ({ nextCode, color }) => {
   const NB_ROWS = 10;
-  const rows = [...Array(NB_ROWS).keys()].map(e => <Row key={e} nextCode={nextCode} />);
+  const rows = [...Array(NB_ROWS).keys()]
+    .map(e => <Row key={e} nextCode={nextCode} color={color} />);
 
   return (
     <table>
@@ -19,6 +20,7 @@ Rows.propTypes = {
     row: PropTypes.number,
     item: PropTypes.number,
   }).isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default Rows;

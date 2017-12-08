@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Board from 'components/Board/Board';
+import Rows from 'components/Rows/Rows';
 
 describe('Board', () => {
   let wrapper;
@@ -34,6 +35,12 @@ describe('Board', () => {
       wrapper.find('.ColorItem_color_green').simulate('click');
 
       expect(wrapper.state('pick')).to.equal('Green');
+    });
+
+    it('should change color prop', () => {
+      wrapper.find('.ColorItem_color_green').simulate('click');
+
+      expect(wrapper.find(Rows).prop('color')).to.equal('Green');
     });
   });
 });

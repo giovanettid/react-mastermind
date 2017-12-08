@@ -8,7 +8,7 @@ describe('Row', () => {
   beforeEach(() => {
     wrapper = mount(
       <table><tbody>
-        <Row nextCode={{ row: 4, item: 2 }} />
+        <Row nextCode={{ row: 4, item: 2 }} color={'Yellow'} />
       </tbody></table>);
   });
 
@@ -25,6 +25,10 @@ describe('Row', () => {
   describe('props', () => {
     it('should receive nextCode prop', () => {
       expect(wrapper.find(Row).prop('nextCode')).to.deep.equal({ row: 4, item: 2 });
+    });
+
+    it('should receive color prop', () => {
+      expect(wrapper.find(Row).prop('color')).to.equal('Yellow');
     });
   });
 });

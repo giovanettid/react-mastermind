@@ -6,7 +6,7 @@ describe('Rows', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Rows nextCode={{ row: 2, item: 1 }} />);
+    wrapper = mount(<Rows nextCode={{ row: 2, item: 1 }} color={'Red'} />);
   });
 
   describe('render', () => {
@@ -18,6 +18,10 @@ describe('Rows', () => {
   describe('props', () => {
     it('should receive nextCode prop', () => {
       expect(wrapper.prop('nextCode')).to.deep.equal({ row: 2, item: 1 });
+    });
+
+    it('should receive color prop', () => {
+      expect(wrapper.prop('color')).to.equal('Red');
     });
   });
 });

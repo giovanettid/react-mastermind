@@ -16,7 +16,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const rows = <Rows nextCode={this.state.nextCode} />;
+    const rows = <Rows nextCode={this.state.nextCode} color={this.state.pick} />;
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
       onColorClick={this.handleColorClick}
