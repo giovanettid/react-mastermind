@@ -1,7 +1,7 @@
 @import 'variables';
 
 @each $name, $code in $colors {
-  .Hole_large_color_#{$name} {
+  .CodeHole_color_#{$name} {
     background: #{$code};
     border: 2px solid map-get($colors, 'black');
     border-radius: 100%;

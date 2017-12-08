@@ -13,21 +13,21 @@ describe('Row', () => {
   const createWrapperNoColor = () => createWrapper('');
 
   describe('render', () => {
-    it('should display a Row with 4 Code large Hole', () => {
-      expect(createWrapperYellow().find('.Hole_large')).to.have.lengthOf(4);
+    it('should display a Row with 4 Code Hole', () => {
+      expect(createWrapperYellow().find('.CodeHole')).to.have.lengthOf(4);
     });
 
     it('should display a Row with 4 Key small Hole', () => {
       expect(createWrapperYellow().find('.Hole_small')).to.have.lengthOf(4);
     });
 
-    it('should display a Row with 4 yellow Code large Hole', () => {
-      expect(createWrapperYellow().find('.Hole_large_color_yellow')).to.have.lengthOf(4);
+    it('should display a Row with 4 yellow Code Hole', () => {
+      expect(createWrapperYellow().find('.CodeHole_color_yellow')).to.have.lengthOf(4);
     });
 
     describe('when no color', () => {
-      it('should display a Row with 4 lightgray Code large Hole', () => {
-        expect(createWrapperNoColor().find('.Hole_large_color_lightgrey')).to.have.lengthOf(4);
+      it('should display a Row with 4 lightgray Code Hole', () => {
+        expect(createWrapperNoColor().find('.CodeHole_color_lightgrey')).to.have.lengthOf(4);
       });
     });
   });
