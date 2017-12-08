@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './CodeHole.scss';
 
 const CodeHole = ({ color }) => {
-  const className = `Hole_large Hole_large_color_${color}`;
+  const className = `Hole_large Hole_large_color_${color.toLowerCase()}`;
 
   return <td className={className} />;
 };
