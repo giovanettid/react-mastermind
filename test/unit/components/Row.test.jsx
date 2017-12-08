@@ -17,8 +17,8 @@ describe('Row', () => {
       expect(createWrapperYellow().find('.CodeHole')).to.have.lengthOf(4);
     });
 
-    it('should display a Row with 4 Key small Hole', () => {
-      expect(createWrapperYellow().find('.Hole_small')).to.have.lengthOf(4);
+    it('should display a Row with 4 Key Hole', () => {
+      expect(createWrapperYellow().find('.KeyHole')).to.have.lengthOf(4);
     });
 
     it('should display a Row with 4 yellow Code Hole', () => {

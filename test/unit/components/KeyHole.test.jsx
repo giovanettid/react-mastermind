@@ -6,6 +6,6 @@ describe('KeyHole', () => {
   it('should display KeyHole', () => {
     const wrapper = shallow(<KeyHole />);
 
-    expect(wrapper.find('td.Hole_small')).to.have.lengthOf(1);
+    expect(wrapper.find('td.KeyHole')).to.have.lengthOf(1);
   });
 });
