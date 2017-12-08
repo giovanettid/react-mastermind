@@ -21,8 +21,11 @@ describe('Row', () => {
       expect(createWrapperYellow().find('.KeyHole')).to.have.lengthOf(4);
     });
 
-    it('should display a Row with 4 yellow Code Hole', () => {
-      expect(createWrapperYellow().find('.CodeHole_color_yellow')).to.have.lengthOf(4);
+    it('should display a Row with 1 yellow Code Hole and 3 lightgrey', () => {
+      const wrapper = createWrapperYellow();
+
+      expect(wrapper.find('.CodeHole_color_yellow')).to.have.lengthOf(1);
+      expect(wrapper.find('.CodeHole_color_lightgrey')).to.have.lengthOf(3);
     });
 
     describe('when no color', () => {
