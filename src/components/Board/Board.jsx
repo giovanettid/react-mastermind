@@ -4,21 +4,34 @@ import PropTypes from 'prop-types';
 import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
-const Board = ({ colorsToPick }) => {
-  const rows = <Rows />;
-  const picker = <ColorPicker colors={colorsToPick} />;
+export default class Board extends React.Component {
+  constructor() {
+    super();
+    this.state = { pick: '' };
+    this.handleColorClick = this.handleColorClick.bind(this);
+  }
 
-  return (
-    <div className="Board">
-      {rows}
-      <br />
-      {picker}
-    </div>
-  );
-};
+  handleColorClick(color) {
+    this.setState({ pick: color });
+  }
+
+  render() {
+    const rows = <Rows />;
+    const picker = (<ColorPicker
+      colors={this.props.colorsToPick}
+      onColorClick={this.handleColorClick}
+    />);
+
+    return (
+      <div className="Board">
+        {rows}
+        <br />
+        {picker}
+      </div>
+    );
+  }
+}
 
 Board.propTypes = {
   colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-export default Board;

@@ -4,8 +4,8 @@ import ColorItem from 'components/ColorItem/ColorItem';
 
 describe('ColorItem', () => {
   let sandbox;
-  let wrapper;
   let spyClick;
+  let wrapper;
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();

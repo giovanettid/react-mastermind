@@ -3,10 +3,18 @@ import React from 'react';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
 describe('ColorPicker', () => {
+  let sandbox;
+  let spyClick;
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<ColorPicker colors={['Yellow', 'Black']} />);
+    sandbox = sinon.sandbox.create();
+    spyClick = sandbox.spy();
+    wrapper = mount(<ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />);
+  });
+
+  afterEach(() => {
+    sandbox.restore();
   });
 
   describe('render', () => {
@@ -18,10 +26,10 @@ describe('ColorPicker', () => {
   });
 
   describe('click a ColorItem', () => {
-    it('should change pick state to correct color', () => {
+    it('should call onColorClick once', () => {
       wrapper.find('.ColorItem_color_black').simulate('click');
 
-      expect(wrapper.state('pick')).to.equal('Black');
+      expect(spyClick.calledOnce).to.be.true;
     });
   });
 });
