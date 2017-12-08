@@ -9,6 +9,12 @@ describe('Board', () => {
     wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} />);
   });
 
+  describe('state', () => {
+    it('should init nextCode with first code hole', () => {
+      expect(wrapper.state('nextCode')).to.deep.equal({ row: 1, item: 1 });
+    });
+  });
+
   describe('render', () => {
     it('should display Rows', () => {
       expect(wrapper.find('.Rows')).to.have.lengthOf(1);
