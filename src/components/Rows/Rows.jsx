@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 import Row from 'components/Row/Row';
 
-// eslint-disable-next-line no-unused-vars
 const Rows = ({ nextCode }) => {
   const NB_ROWS = 10;
-  const rows = [...Array(NB_ROWS).keys()].map(e => <Row key={e} />);
+  const rows = [...Array(NB_ROWS).keys()].map(e => <Row key={e} nextCode={nextCode} />);
 
   return (
     <table>

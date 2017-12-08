@@ -8,15 +8,17 @@ describe('Row', () => {
   beforeEach(() => {
     wrapper = mount(
       <table><tbody>
-        <Row />
+        <Row nextCode={{ row: 2, item: 1 }} />
       </tbody></table>);
   });
 
-  it('should display a Row with 4 Code large Hole', () => {
-    expect(wrapper.find('.Hole_large')).to.have.lengthOf(4);
-  });
+  describe('render', () => {
+    it('should display a Row with 4 Code large Hole', () => {
+      expect(wrapper.find('.Hole_large')).to.have.lengthOf(4);
+    });
 
-  it('should display a Row with 4 Key small Hole', () => {
-    expect(wrapper.find('.Hole_small')).to.have.lengthOf(4);
+    it('should display a Row with 4 Key small Hole', () => {
+      expect(wrapper.find('.Hole_small')).to.have.lengthOf(4);
+    });
   });
 });
