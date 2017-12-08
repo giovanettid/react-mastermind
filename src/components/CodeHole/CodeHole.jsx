@@ -1,7 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './CodeHole.scss';
 
-export default function CodeHole() {
-  return <td className="Hole_large" />;
-}
+const CodeHole = ({ color }) => {
+  const className = `Hole_large Hole_large_color_${color}`;
+
+  return <td className={className} />;
+};
+
+CodeHole.propTypes = {
+  color: PropTypes.string,
+};
+
+CodeHole.defaultProps = {
+  color: 'lightgrey',
+};
+
+export default CodeHole;
