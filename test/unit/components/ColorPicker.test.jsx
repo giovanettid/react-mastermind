@@ -9,15 +9,19 @@ describe('ColorPicker', () => {
     wrapper = mount(<ColorPicker colors={['Yellow', 'Black']} />);
   });
 
-  it('should display ColorPicker with n ColorItem', () => {
-    expect(wrapper.find('.ColorItem')).to.have.lengthOf(2);
-    expect(wrapper.find('.ColorItem_color_yellow').exists()).to.be.true;
-    expect(wrapper.find('.ColorItem_color_black').exists()).to.be.true;
+  describe('render', () => {
+    it('should display ColorPicker with n ColorItem', () => {
+      expect(wrapper.find('.ColorItem')).to.have.lengthOf(2);
+      expect(wrapper.find('.ColorItem_color_yellow').exists()).to.be.true;
+      expect(wrapper.find('.ColorItem_color_black').exists()).to.be.true;
+    });
   });
 
-  it('should handle color black click', () => {
-    wrapper.find('.ColorItem_color_black').simulate('click');
+  describe('click a ColorItem', () => {
+    it('should change pick state to correct color', () => {
+      wrapper.find('.ColorItem_color_black').simulate('click');
 
-    expect(wrapper.state('click')).to.be.true;
+      expect(wrapper.state('pick')).to.equal('Black');
+    });
   });
 });

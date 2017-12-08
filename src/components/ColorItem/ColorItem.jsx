@@ -10,7 +10,7 @@ export default class ColorItem extends React.Component {
   }
 
   handleClick() {
-    this.props.onColorClick();
+    this.props.onColorClick(this.props.color);
   }
 
   render() {

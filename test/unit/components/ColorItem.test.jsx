@@ -17,13 +17,23 @@ describe('ColorItem', () => {
     sandbox.restore();
   });
 
-  it('should display ColorItem with a color', () => {
-    expect(wrapper.find('button.ColorItem').hasClass('ColorItem_color_red')).to.be.true;
+  describe('render', () => {
+    it('should display ColorItem with a color', () => {
+      expect(wrapper.find('button.ColorItem').hasClass('ColorItem_color_red')).to.be.true;
+    });
   });
 
-  it('should handle click', () => {
-    wrapper.find('button').simulate('click');
+  describe('on click', () => {
+    it('should call onColorClick once', () => {
+      wrapper.find('button').simulate('click');
 
-    expect(spyClick.calledOnce).to.be.true;
+      expect(spyClick.calledOnce).to.be.true;
+    });
+
+    it('should call onColorClick with color prop', () => {
+      wrapper.find('button').simulate('click');
+
+      expect(spyClick.calledWith('Red')).to.be.true;
+    });
   });
 });

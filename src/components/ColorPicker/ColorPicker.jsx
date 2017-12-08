@@ -6,12 +6,12 @@ import ColorItem from 'components/ColorItem/ColorItem';
 export default class ColorPicker extends React.Component {
   constructor() {
     super();
-    this.state = { click: false };
+    this.state = { pick: '' };
     this.handleColorClick = this.handleColorClick.bind(this);
   }
 
-  handleColorClick() {
-    this.setState({ click: true });
+  handleColorClick(color) {
+    this.setState({ pick: color });
   }
 
   render() {
