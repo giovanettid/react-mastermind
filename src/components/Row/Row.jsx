@@ -45,7 +45,11 @@ Row.propTypes = {
     row: PropTypes.number,
     item: PropTypes.number,
   }).isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
+};
+
+Row.defaultProps = {
+  color: undefined,
 };
 
 export default Row;

@@ -5,8 +5,13 @@ import Row from 'components/Row/Row';
 
 const Rows = ({ nextCode, color }) => {
   const NB_ROWS = 10;
-  const rows = [...Array(NB_ROWS).keys()]
-    .map(e => <Row key={e} nextCode={nextCode} color={color} />);
+  const mapCallback = (e) => {
+    if (nextCode.row === e + 1) {
+      return <Row key={e} nextCode={nextCode} color={color} />;
+    }
+    return <Row key={e} nextCode={nextCode} />;
+  };
+  const rows = [...Array(NB_ROWS).keys()].map(mapCallback);
 
   return (
     <table>

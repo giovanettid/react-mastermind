@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Rows from 'components/Rows/Rows';
+import Row from 'components/Row/Row';
 
 describe('Rows', () => {
   let wrapper;
@@ -22,6 +23,12 @@ describe('Rows', () => {
 
     it('should receive color prop', () => {
       expect(wrapper.prop('color')).to.equal('Red');
+    });
+
+    it('should pass color prop to only 1 Row', () => {
+      expect(wrapper.find(Row)
+        .map(node => node.prop('color')).filter(color => color))
+        .to.have.lengthOf(1);
     });
   });
 });
