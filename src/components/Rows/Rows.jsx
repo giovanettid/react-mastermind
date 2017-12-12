@@ -7,9 +7,9 @@ const Rows = ({ row, item, color }) => {
   const NB_ROWS = 10;
   const mapCallback = (e) => {
     if (row === e + 1) {
-      return <Row key={e} nextItem={item} color={color} />;
+      return <Row key={e} {...{ item, color }} />;
     }
-    return <Row key={e} nextItem={item} />;
+    return <Row key={e} {...{ item }} />;
   };
   const rows = [...Array(NB_ROWS).keys()].map(mapCallback);
 
