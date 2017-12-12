@@ -6,10 +6,10 @@ import KeyHole from 'components/KeyHole/KeyHole';
 
 const keys = size => [...Array(size).keys()];
 
-const Row = ({ nextCode, color }) => {
+const Row = ({ nextItem, color }) => {
   const NB_CODE_HOLES = 4;
   const mapCallback = (e) => {
-    if (color && nextCode.item === e + 1) {
+    if (color && nextItem === e + 1) {
       return <CodeHole key={e} color={color} />;
     }
     return <CodeHole key={e} />;
@@ -41,10 +41,7 @@ const Row = ({ nextCode, color }) => {
 };
 
 Row.propTypes = {
-  nextCode: PropTypes.shape({
-    row: PropTypes.number,
-    item: PropTypes.number,
-  }).isRequired,
+  nextItem: PropTypes.number.isRequired,
   color: PropTypes.string,
 };
 

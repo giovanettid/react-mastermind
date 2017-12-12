@@ -5,7 +5,7 @@ import Row from 'components/Row/Row';
 describe('Row', () => {
   const createWrapper = color => mount(
     <table><tbody>
-      <Row nextCode={{ row: 4, item: 2 }} color={color} />
+      <Row nextItem={2} color={color} />
     </tbody></table>);
 
   const createWrapperYellow = () => createWrapper('Yellow');
@@ -37,7 +37,7 @@ describe('Row', () => {
 
   describe('props', () => {
     it('should receive nextCode prop', () => {
-      expect(createWrapperYellow().find(Row).prop('nextCode')).to.deep.equal({ row: 4, item: 2 });
+      expect(createWrapperYellow().find(Row).prop('nextItem')).to.equal(2);
     });
   });
 });

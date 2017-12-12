@@ -7,16 +7,16 @@ import ColorPicker from 'components/ColorPicker/ColorPicker';
 export default class Board extends React.Component {
   constructor() {
     super();
-    this.state = { pick: '', nextCode: { row: 1, item: 1 } };
+    this.state = { row: 1, item: 1, color: '' };
     this.handleColorClick = this.handleColorClick.bind(this);
   }
 
   handleColorClick(color) {
-    this.setState({ pick: color });
+    this.setState({ row: 1, item: 1, color });
   }
 
   render() {
-    const rows = <Rows nextCode={this.state.nextCode} color={this.state.pick} />;
+    const rows = <Rows {...this.state} />;
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
       onColorClick={this.handleColorClick}
