@@ -11,8 +11,8 @@ describe('Board', () => {
   });
 
   describe('state', () => {
-    it('should init nextCode with first code hole', () => {
-      expect(wrapper.state()).to.deep.equal({ row: 1, item: 1, color: '' });
+    it('should init with first code hole', () => {
+      expect(wrapper.state()).to.deep.equal({ row: 1, item: 1 });
     });
   });
 

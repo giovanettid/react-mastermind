@@ -10,11 +10,7 @@ const CodeHole = ({ color }) => {
 };
 
 CodeHole.propTypes = {
-  color: PropTypes.string,
-};
-
-CodeHole.defaultProps = {
-  color: 'lightgrey',
+  color: PropTypes.string.isRequired,
 };
 
 export default CodeHole;

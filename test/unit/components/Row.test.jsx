@@ -10,7 +10,7 @@ describe('Row', () => {
 
   const createWrapperYellow = () => createWrapper('Yellow');
 
-  const createWrapperNoColor = () => createWrapper('');
+  const createWrapperDefaultColor = () => createWrapper('lightgrey');
 
   describe('render', () => {
     it('should display a Row with 4 Code Hole', () => {
@@ -30,7 +30,7 @@ describe('Row', () => {
 
     describe('when no color', () => {
       it('should display a Row with 4 lightgray Code Hole', () => {
-        expect(createWrapperNoColor().find('.CodeHole_color_lightgrey')).to.have.lengthOf(4);
+        expect(createWrapperDefaultColor().find('.CodeHole_color_lightgrey')).to.have.lengthOf(4);
       });
     });
   });

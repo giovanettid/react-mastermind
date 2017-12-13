@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 import CodeHole from 'components/CodeHole/CodeHole';
 import KeyHole from 'components/KeyHole/KeyHole';
@@ -8,13 +9,9 @@ const keys = size => [...Array(size).keys()];
 
 const Row = ({ item, color }) => {
   const NB_CODE_HOLES = 4;
-  const mapCallback = (e) => {
-    if (color && item === e + 1) {
-      return <CodeHole key={e} color={color} />;
-    }
-    return <CodeHole key={e} />;
-  };
-  const codeHolesRow = keys(NB_CODE_HOLES).map(mapCallback);
+  const colors = new Array(NB_CODE_HOLES).fill('lightgrey');
+  colors[item - 1] = color;
+  const codeHolesRow = colors.map(e => <CodeHole key={shortid.generate()} color={e} />);
 
   const NB_KEY_HOLES = 2;
   const keyHolesRow = keys(NB_KEY_HOLES).map(e => <KeyHole key={e} />);
@@ -42,11 +39,7 @@ const Row = ({ item, color }) => {
 
 Row.propTypes = {
   item: PropTypes.number.isRequired,
-  color: PropTypes.string,
-};
-
-Row.defaultProps = {
-  color: undefined,
+  color: PropTypes.string.isRequired,
 };
 
 export default Row;

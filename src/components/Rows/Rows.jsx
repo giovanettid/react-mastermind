@@ -9,7 +9,7 @@ const Rows = ({ row, item, color }) => {
     if (row === e + 1) {
       return <Row key={e} {...{ item, color }} />;
     }
-    return <Row key={e} {...{ item }} />;
+    return <Row key={e} {...{ item, color: 'lightgrey' }} />;
   };
   const rows = [...Array(NB_ROWS).keys()].map(mapCallback);
 
@@ -23,7 +23,11 @@ const Rows = ({ row, item, color }) => {
 Rows.propTypes = {
   row: PropTypes.number.isRequired,
   item: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
+};
+
+Rows.defaultProps = {
+  color: 'lightgrey',
 };
 
 export default Rows;

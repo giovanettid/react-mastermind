@@ -25,9 +25,9 @@ describe('Rows', () => {
       expect(wrapper.prop('color')).to.equal('Red');
     });
 
-    it('should pass color prop to only 1 Row', () => {
+    it('should pass non default color prop to only 1 Row', () => {
       expect(wrapper.find(Row)
-        .map(node => node.prop('color')).filter(color => color))
+        .map(node => node.prop('color')).filter(color => color !== 'lightgrey'))
         .to.have.lengthOf(1);
     });
   });
