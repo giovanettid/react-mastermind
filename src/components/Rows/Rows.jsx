@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 import Row from 'components/Row/Row';
 
@@ -9,15 +10,10 @@ const Rows = ({ row, item, color }) => {
   const NB_ROWS = 10;
   const NB_CODE_HOLES = 4;
 
-  const mapCallback = (e) => {
-    const activeColors = defaultColors(NB_CODE_HOLES);
-    activeColors[item - 1] = color;
+  const boardColors = Array.from({ length: NB_ROWS }, () => defaultColors(NB_CODE_HOLES));
+  boardColors[row - 1][item - 1] = color;
 
-    const colors = row === e + 1 ? activeColors : defaultColors(NB_CODE_HOLES);
-    return <Row key={e} {...{ colors }} />;
-  };
-
-  const rows = [...Array(NB_ROWS).keys()].map(mapCallback);
+  const rows = boardColors.map(e => <Row key={shortid.generate()} colors={e} />);
 
   return (
     <table>
