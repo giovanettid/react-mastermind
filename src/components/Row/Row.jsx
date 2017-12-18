@@ -7,10 +7,7 @@ import KeyHole from 'components/KeyHole/KeyHole';
 
 const keys = size => [...Array(size).keys()];
 
-const Row = ({ item, color }) => {
-  const NB_CODE_HOLES = 4;
-  const colors = new Array(NB_CODE_HOLES).fill('lightgrey');
-  colors[item - 1] = color;
+const Row = ({ colors }) => {
   const codeHolesRow = colors.map(e => <CodeHole key={shortid.generate()} color={e} />);
 
   const NB_KEY_HOLES = 2;
@@ -38,8 +35,7 @@ const Row = ({ item, color }) => {
 };
 
 Row.propTypes = {
-  item: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Row;
