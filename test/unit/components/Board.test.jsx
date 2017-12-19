@@ -11,8 +11,8 @@ describe('Board', () => {
   });
 
   describe('state', () => {
-    it('should init with first code hole', () => {
-      expect(wrapper.state()).to.deep.equal({ row: 1, item: 1 });
+    it('should init with first code hole and lightgrey', () => {
+      expect(wrapper.state()).to.deep.equal({ row: 1, item: 1, color: 'lightgrey' });
     });
   });
 
@@ -37,10 +37,11 @@ describe('Board', () => {
       expect(wrapper.state('color')).to.equal('Green');
     });
 
-    it('should change color prop', () => {
+    it('should pass boardColors to Rows with correct color', () => {
       wrapper.find('.ColorItem_color_green').simulate('click');
 
-      expect(wrapper.find(Rows).prop('color')).to.equal('Green');
+      const { row, item } = wrapper.state();
+      expect(wrapper.find(Rows).prop('boardColors')[row - 1][item - 1]).to.equal('Green');
     });
   });
 });

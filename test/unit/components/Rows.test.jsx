@@ -7,24 +7,16 @@ describe('Rows', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Rows {...{ row: 2, item: 1, color: 'Red' }} />);
+    wrapper = mount(<Rows boardColors={[['lightgrey', 'lightgrey'], ['Red', 'lightgrey']]} />);
   });
 
   describe('render', () => {
-    it('should display Rows with 10 Row', () => {
-      expect(wrapper.find('.Row')).to.have.lengthOf(10);
+    it('should display Rows with 2 Row', () => {
+      expect(wrapper.find('.Row')).to.have.lengthOf(2);
     });
   });
 
   describe('props', () => {
-    it('should receive row, item & color props', () => {
-      expect(wrapper.props()).to.deep.equal({ row: 2, item: 1, color: 'Red' });
-    });
-
-    it('should receive color prop', () => {
-      expect(wrapper.prop('color')).to.equal('Red');
-    });
-
     it('should pass non default color prop to only 1 Row', () => {
       expect(wrapper.find(Row)
         .map(node => node.prop('colors')).filter(colors => colors.includes('Red')))
