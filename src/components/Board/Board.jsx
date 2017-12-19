@@ -14,19 +14,18 @@ const createBoardColors = () => Array.from({ length: NB_ROWS }, () => defaultCol
 export default class Board extends React.Component {
   constructor() {
     super();
-    this.state = { row: 1, item: 1, color: 'lightgrey' };
+    this.state = { row: 1, item: 1, boardColors: createBoardColors() };
     this.handleColorClick = this.handleColorClick.bind(this);
   }
 
   handleColorClick(color) {
-    this.setState({ row: 1, item: 1, color });
+    const boardColors = createBoardColors();
+    boardColors[0][0] = color;
+    this.setState({ row: 1, item: 1, boardColors });
   }
 
   render() {
-    const boardColors = createBoardColors();
-    boardColors[this.state.row - 1][this.state.item - 1] = this.state.color;
-
-    const rows = <Rows boardColors={boardColors} />;
+    const rows = <Rows boardColors={this.state.boardColors} />;
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
       onColorClick={this.handleColorClick}
