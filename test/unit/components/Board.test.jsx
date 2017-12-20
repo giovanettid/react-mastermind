@@ -2,6 +2,8 @@ import React from 'react';
 
 import Board from 'components/Board/Board';
 import Rows from 'components/Rows/Rows';
+import Row from 'components/Row/Row';
+import CodeHole from 'components/CodeHole/CodeHole';
 
 describe('Board', () => {
   let wrapper;
@@ -32,19 +34,31 @@ describe('Board', () => {
     });
   });
 
-  describe('click a ColorItem', () => {
-    it('should change boardColors state to correct color', () => {
+  describe('click ColorItem(s)', () => {
+    it('should change state to next item', () => {
       wrapper.find('.ColorItem_color_green').simulate('click');
 
-      const { row, item } = wrapper.state();
-      expect(wrapper.state('boardColors')[row - 1][item - 1]).to.equal('Green');
+      expect(wrapper.state().item).to.equal(2);
     });
 
-    it('should pass boardColors to Rows with correct color', () => {
-      wrapper.find('.ColorItem_color_green').simulate('click');
+    describe('click 2 ColorItem', () => {
+      it('should pass boardColors to Rows with correct colors in each item', () => {
+        wrapper.find('.ColorItem_color_green').simulate('click');
+        wrapper.find('.ColorItem_color_yellow').simulate('click');
 
-      const { row, item } = wrapper.state();
-      expect(wrapper.find(Rows).prop('boardColors')[row - 1][item - 1]).to.equal('Green');
+        const boardColors = wrapper.find(Rows).prop('boardColors');
+        expect(boardColors[0][0]).to.equal('Green');
+        expect(boardColors[0][1]).to.equal('Yellow');
+      });
+
+      it('should pass correct color to first and second CodeHole on the first Row', () => {
+        wrapper.find('.ColorItem_color_green').simulate('click');
+        wrapper.find('.ColorItem_color_yellow').simulate('click');
+
+        const codeHoles = wrapper.find(Row).first().find(CodeHole);
+        expect(codeHoles.first().prop('color')).to.be.equal('Green');
+        expect(codeHoles.at(1).prop('color')).to.be.equal('Yellow');
+      });
     });
   });
 });

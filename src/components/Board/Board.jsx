@@ -21,8 +21,8 @@ export default class Board extends React.Component {
   handleColorClick(color) {
     this.setState((prevState) => {
       const boardColors = prevState.boardColors;
-      boardColors[0][0] = color;
-      return { row: 1, item: 1, boardColors };
+      boardColors[0][prevState.item - 1] = color;
+      return { row: 1, item: prevState.item + 1, boardColors };
     });
   }
 
