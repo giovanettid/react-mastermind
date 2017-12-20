@@ -14,15 +14,26 @@ const createBoardColors = () => Array.from({ length: NB_ROWS }, () => defaultCol
 export default class Board extends React.Component {
   constructor() {
     super();
-    this.state = { row: 1, item: 1, boardColors: createBoardColors() };
+    this.state = { row: 0, item: 0, boardColors: createBoardColors() };
     this.handleColorClick = this.handleColorClick.bind(this);
   }
 
   handleColorClick(color) {
     this.setState((prevState) => {
       const boardColors = prevState.boardColors;
-      boardColors[0][prevState.item - 1] = color;
-      return { row: 1, item: prevState.item + 1, boardColors };
+
+      let nextRow;
+      let nextItem;
+      if (prevState.item % NB_CODE_HOLES === 0) {
+        nextRow = prevState.row + 1;
+        nextItem = 1;
+      } else {
+        nextRow = prevState.row;
+        nextItem = prevState.item + 1;
+      }
+      boardColors[nextRow - 1][nextItem - 1] = color;
+
+      return { row: nextRow, item: nextItem, boardColors };
     });
   }
 

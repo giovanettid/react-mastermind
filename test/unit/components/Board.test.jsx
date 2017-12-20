@@ -15,7 +15,7 @@ describe('Board', () => {
   describe('state', () => {
     it('should init with first code hole and lightgrey', () => {
       expect(wrapper.state()).to.deep.equal({
-        row: 1, item: 1, boardColors: new Array(10).fill(new Array(4).fill('lightgrey')),
+        row: 0, item: 0, boardColors: new Array(10).fill(new Array(4).fill('lightgrey')),
       });
     });
   });
@@ -35,10 +35,10 @@ describe('Board', () => {
   });
 
   describe('click ColorItem(s)', () => {
-    it('should change state to next item', () => {
+    it('should change state to first item', () => {
       wrapper.find('.ColorItem_color_green').simulate('click');
 
-      expect(wrapper.state().item).to.equal(2);
+      expect(wrapper.state().item).to.equal(1);
     });
 
     describe('click 2 ColorItem', () => {
@@ -58,6 +58,19 @@ describe('Board', () => {
         const codeHoles = wrapper.find(Row).first().find(CodeHole);
         expect(codeHoles.first().prop('color')).to.be.equal('Green');
         expect(codeHoles.at(1).prop('color')).to.be.equal('Yellow');
+      });
+    });
+
+    describe('click 5th ColorItem', () => {
+      it('should pass correct color to first CodeHole on the second Row', () => {
+        wrapper.find('.ColorItem_color_green').simulate('click');
+        wrapper.find('.ColorItem_color_yellow').simulate('click');
+        wrapper.find('.ColorItem_color_green').simulate('click');
+        wrapper.find('.ColorItem_color_yellow').simulate('click');
+        wrapper.find('.ColorItem_color_green').simulate('click');
+
+        const codeHoles = wrapper.find(Row).at(1).find(CodeHole);
+        expect(codeHoles.first().prop('color')).to.be.equal('Green');
       });
     });
   });
