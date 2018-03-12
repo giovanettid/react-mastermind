@@ -11,21 +11,19 @@ const defaultColors = size => new Array(size).fill('lightgrey');
 
 const createBoardColors = () => Array.from({ length: NB_ROWS }, () => defaultColors(NB_CODE_HOLES));
 
+const isNextRow = prevState => prevState.item % NB_CODE_HOLES === 0;
+
+const nextRow = prevState => ({ row: prevState.row + 1, item: 1 });
+
+const nextItem = prevState => ({ row: prevState.row, item: prevState.item + 1 });
+
 const nextState = color => (prevState) => {
   const boardColors = prevState.boardColors;
 
-  let nextRow;
-  let nextItem;
-  if (prevState.item % NB_CODE_HOLES === 0) {
-    nextRow = prevState.row + 1;
-    nextItem = 1;
-  } else {
-    nextRow = prevState.row;
-    nextItem = prevState.item + 1;
-  }
-  boardColors[nextRow - 1][nextItem - 1] = color;
+  const { row, item } = isNextRow(prevState) ? nextRow(prevState) : nextItem(prevState);
+  boardColors[row - 1][item - 1] = color;
 
-  return { row: nextRow, item: nextItem, boardColors };
+  return { row, item, boardColors };
 };
 
 export default class Board extends React.Component {
