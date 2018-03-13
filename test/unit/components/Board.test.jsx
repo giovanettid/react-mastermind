@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Board from 'components/Board/Board';
-import Rows from 'components/Rows/Rows';
 import Row from 'components/Row/Row';
 import CodeHole from 'components/CodeHole/CodeHole';
 
@@ -13,7 +12,7 @@ describe('Board', () => {
   });
 
   describe('state', () => {
-    it('should init with first code hole and lightgrey', () => {
+    it('should init with initial position and lightgrey', () => {
       expect(wrapper.state()).to.deep.equal({
         row: 0, item: 0, boardColors: new Array(10).fill(new Array(4).fill('lightgrey')),
       });
@@ -35,22 +34,7 @@ describe('Board', () => {
   });
 
   describe('click ColorItem(s)', () => {
-    it('should change state to first item', () => {
-      wrapper.find('.ColorItem_color_green').simulate('click');
-
-      expect(wrapper.state().item).to.equal(1);
-    });
-
     describe('click 2 ColorItem', () => {
-      it('should pass boardColors to Rows with correct colors in each item', () => {
-        wrapper.find('.ColorItem_color_green').simulate('click');
-        wrapper.find('.ColorItem_color_yellow').simulate('click');
-
-        const boardColors = wrapper.find(Rows).prop('boardColors');
-        expect(boardColors[0][0]).to.equal('Green');
-        expect(boardColors[0][1]).to.equal('Yellow');
-      });
-
       it('should pass correct color to first and second CodeHole on the first Row', () => {
         wrapper.find('.ColorItem_color_green').simulate('click');
         wrapper.find('.ColorItem_color_yellow').simulate('click');
@@ -61,7 +45,7 @@ describe('Board', () => {
       });
     });
 
-    describe('click 5th ColorItem', () => {
+    describe('click 5 ColorItem', () => {
       it('should pass correct color to first CodeHole on the second Row', () => {
         wrapper.find('.ColorItem_color_green').simulate('click');
         wrapper.find('.ColorItem_color_yellow').simulate('click');
