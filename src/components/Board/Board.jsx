@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
-import BoardState from './BoardState';
+import BoardStateMutator from './BoardStateMutator';
 
 const NB_ROWS = 10;
 const NB_CODE_HOLES = 4;
@@ -12,13 +12,13 @@ const NB_CODE_HOLES = 4;
 export default class Board extends React.Component {
   constructor() {
     super();
-    this.boardState = new BoardState(NB_ROWS, NB_CODE_HOLES);
-    this.state = this.boardState.getInitial();
+    this.stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES);
+    this.state = this.stateMutator.getInitial();
     this.handleColorClick = this.handleColorClick.bind(this);
   }
 
   handleColorClick(color) {
-    this.setState(this.boardState.getNext(color));
+    this.setState(this.stateMutator.getNext(color));
   }
 
   render() {
