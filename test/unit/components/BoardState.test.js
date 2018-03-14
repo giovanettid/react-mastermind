@@ -1,7 +1,7 @@
 import BoardState from 'components/Board/BoardState';
 
 describe('BoardState', () => {
-  const state = new BoardState(2);
+  const state = new BoardState(2, 2);
 
   describe('isNextRow', () => {
     it('should return true when set to last item', () => {
@@ -22,6 +22,12 @@ describe('BoardState', () => {
   describe('nextItem', () => {
     it('should return move state to next item, same row', () => {
       expect(BoardState.nextItem({ row: 1, item: 1 })).to.deep.equal({ row: 1, item: 2 });
+    });
+  });
+
+  describe('getInitial', () => {
+    it('should return initial state', () => {
+      expect(state.getInitial()).to.deep.equal({ row: 0, item: 0, boardColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']] });
     });
   });
 

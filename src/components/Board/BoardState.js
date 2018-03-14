@@ -1,6 +1,12 @@
 
+const defaultColors = size => new Array(size).fill('lightgrey');
+
+const createBoardColors = (nbRows, nbCodeHoles) => Array.from({ length: nbRows },
+  () => defaultColors(nbCodeHoles));
+
 export default class BoardState {
-  constructor(nbCodeHoles) {
+  constructor(nbRows, nbCodeHoles) {
+    this.nbRows = nbRows;
     this.nbCodeHoles = nbCodeHoles;
   }
 
@@ -14,6 +20,10 @@ export default class BoardState {
 
   static nextItem(prevState) {
     return { row: prevState.row, item: prevState.item + 1 };
+  }
+
+  getInitial() {
+    return { row: 0, item: 0, boardColors: createBoardColors(this.nbRows, this.nbCodeHoles) };
   }
 
   getNext(color) {

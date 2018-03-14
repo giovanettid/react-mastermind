@@ -9,15 +9,11 @@ import BoardState from './BoardState';
 const NB_ROWS = 10;
 const NB_CODE_HOLES = 4;
 
-const defaultColors = size => new Array(size).fill('lightgrey');
-
-const createBoardColors = () => Array.from({ length: NB_ROWS }, () => defaultColors(NB_CODE_HOLES));
-
 export default class Board extends React.Component {
   constructor() {
     super();
-    this.boardState = new BoardState(NB_CODE_HOLES);
-    this.state = { row: 0, item: 0, boardColors: createBoardColors() };
+    this.boardState = new BoardState(NB_ROWS, NB_CODE_HOLES);
+    this.state = this.boardState.getInitial();
     this.handleColorClick = this.handleColorClick.bind(this);
   }
 
