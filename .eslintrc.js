@@ -7,6 +7,7 @@ module.exports = {
     "import",
     "react"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
