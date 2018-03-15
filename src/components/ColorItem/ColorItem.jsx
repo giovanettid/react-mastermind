@@ -4,12 +4,7 @@ import PropTypes from 'prop-types';
 import './ColorItem.scss';
 
 export default class ColorItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
+  handleClick = () => {
     this.props.onColorClick(this.props.color);
   }
 
