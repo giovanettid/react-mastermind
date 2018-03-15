@@ -10,6 +10,10 @@ const NB_ROWS = 10;
 const NB_CODE_HOLES = 4;
 
 export default class Board extends React.Component {
+  static propTypes = {
+    colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }
+
   static stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES);
 
   state = Board.stateMutator.getInitial();
@@ -34,7 +38,3 @@ export default class Board extends React.Component {
     );
   }
 }
-
-Board.propTypes = {
-  colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
-};

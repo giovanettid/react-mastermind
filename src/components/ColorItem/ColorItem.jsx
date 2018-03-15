@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import './ColorItem.scss';
 
 export default class ColorItem extends React.Component {
+  static propTypes = {
+    color: PropTypes.string.isRequired,
+    onColorClick: PropTypes.func.isRequired,
+  }
+
   handleClick = () => {
     this.props.onColorClick(this.props.color);
   }
@@ -17,8 +22,3 @@ export default class ColorItem extends React.Component {
     );
   }
 }
-
-ColorItem.propTypes = {
-  color: PropTypes.string.isRequired,
-  onColorClick: PropTypes.func.isRequired,
-};
