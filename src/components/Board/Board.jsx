@@ -10,15 +10,12 @@ const NB_ROWS = 10;
 const NB_CODE_HOLES = 4;
 
 export default class Board extends React.Component {
-  constructor() {
-    super();
-    this.stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES);
-    this.state = this.stateMutator.getInitial();
-    this.handleColorClick = this.handleColorClick.bind(this);
-  }
+  static stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES);
 
-  handleColorClick(color) {
-    this.setState(this.stateMutator.getNext(color));
+  state = Board.stateMutator.getInitial();
+
+  handleColorClick = (color) => {
+    this.setState(Board.stateMutator.getNext(color));
   }
 
   render() {
