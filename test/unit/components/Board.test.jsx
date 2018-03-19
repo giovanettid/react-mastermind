@@ -5,6 +5,7 @@ import Row from 'components/Row/Row';
 import CodeHole from 'components/CodeHole/CodeHole';
 
 describe('Board', () => {
+  const NB_ROWS = 10;
   let wrapper;
 
   beforeEach(() => {
@@ -13,9 +14,7 @@ describe('Board', () => {
 
   describe('state', () => {
     it('should init with initial position and lightgrey', () => {
-      expect(wrapper.state()).to.deep.equal({
-        row: 0, item: 0, boardColors: new Array(10).fill(new Array(4).fill('lightgrey')),
-      });
+      expect(wrapper.state()).to.deep.equal({ boardColors: new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')) });
     });
   });
 
@@ -35,25 +34,25 @@ describe('Board', () => {
 
   describe('click ColorItem(s)', () => {
     describe('click 2 ColorItem', () => {
-      it('should pass correct color to first and second CodeHole on the first Row', () => {
+      it('should pass correct color to first and second CodeHole on the last Row', () => {
         wrapper.find('.ColorItem_color_green').simulate('click');
         wrapper.find('.ColorItem_color_yellow').simulate('click');
 
-        const codeHoles = wrapper.find(Row).first().find(CodeHole);
+        const codeHoles = wrapper.find(Row).last().find(CodeHole);
         expect(codeHoles.first().prop('color')).to.be.equal('Green');
         expect(codeHoles.at(1).prop('color')).to.be.equal('Yellow');
       });
     });
 
     describe('click 5 ColorItem', () => {
-      it('should pass correct color to first CodeHole on the second Row', () => {
+      it('should pass correct color to first CodeHole on the 9th Row', () => {
         wrapper.find('.ColorItem_color_green').simulate('click');
         wrapper.find('.ColorItem_color_yellow').simulate('click');
         wrapper.find('.ColorItem_color_green').simulate('click');
         wrapper.find('.ColorItem_color_yellow').simulate('click');
         wrapper.find('.ColorItem_color_green').simulate('click');
 
-        const codeHoles = wrapper.find(Row).at(1).find(CodeHole);
+        const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(CodeHole);
         expect(codeHoles.first().prop('color')).to.be.equal('Green');
       });
     });
