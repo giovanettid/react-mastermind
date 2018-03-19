@@ -14,6 +14,10 @@ export default class BoardStateMutator {
     return item === this.nbCodeHoles;
   }
 
+  isLastMove({ row, item }) {
+    return row === 1 && item === this.nbCodeHoles;
+  }
+
   static previousRow({ row }) {
     return { row: row - 1, item: 1 };
   }
@@ -28,6 +32,10 @@ export default class BoardStateMutator {
 
   getNext(color) {
     return (prevState) => {
+      if (this.isLastMove(prevState)) {
+        return prevState;
+      }
+
       const boardColors = prevState.boardColors;
 
       const { row, item } = this.isPreviousRow(prevState.item)

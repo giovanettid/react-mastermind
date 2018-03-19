@@ -13,6 +13,16 @@ describe('BoardStateMutator', () => {
     });
   });
 
+  describe('isLastMove', () => {
+    it('should return true when position is first row and last item', () => {
+      expect(mutator.isLastMove({ row: 1, item: 2 })).to.be.true;
+    });
+
+    it('should return false when position is last row', () => {
+      expect(mutator.isLastMove({ row: 2, item: 2 })).to.be.false;
+    });
+  });
+
   describe('previousRow', () => {
     it('should move state to previous row, first item', () => {
       expect(BoardStateMutator.previousRow({ row: 2, item: 2 })).to.deep.equal({ row: 1, item: 1 });
@@ -54,6 +64,14 @@ describe('BoardStateMutator', () => {
       const next = mutator.getNext('Red')(prev);
 
       expect(next).to.deep.equal({ row: 1, item: 1, boardColors: [['Red', 'lightgrey'], ['Green', 'Yellow']] });
+    });
+
+    it('should not move when position is first row and last item', () => {
+      const prev = { row: 1, item: 2, boardColors: [['Red', 'Red'], ['Green', 'Yellow']] };
+
+      const next = mutator.getNext('Green')(prev);
+
+      expect(next).to.deep.equal(prev);
     });
   });
 });
