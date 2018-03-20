@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ColorItem from 'components/ColorItem/ColorItem';
+import ClickableColor from 'components/ClickableColor/ClickableColor';
 
 const ColorPicker = ({ colors, onColorClick }) => {
   const items = colors
-    .map(color => <ColorItem key={color} color={color} onColorClick={onColorClick} />);
+    .map(color => <ClickableColor key={color} color={color} onColorClick={onColorClick} />);
 
   return (
     <table>

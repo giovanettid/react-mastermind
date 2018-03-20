@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ColorItem from 'components/ColorItem/ColorItem';
+import ClickableColor from 'components/ClickableColor/ClickableColor';
 
-describe('ColorItem', () => {
+describe('ClickableColor', () => {
   let sandbox;
   let spyClick;
   let wrapper;
@@ -10,7 +10,7 @@ describe('ColorItem', () => {
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
     spyClick = sandbox.spy();
-    wrapper = shallow(<ColorItem color={'Red'} onColorClick={spyClick} />);
+    wrapper = shallow(<ClickableColor color={'Red'} onColorClick={spyClick} />);
   });
 
   afterEach(() => {
@@ -18,8 +18,8 @@ describe('ColorItem', () => {
   });
 
   describe('render', () => {
-    it('should display ColorItem with a color', () => {
-      expect(wrapper.find('button.ColorItem').hasClass('ColorItem_color_red')).to.be.true;
+    it('should display ClickableColor with a color', () => {
+      expect(wrapper.find('button.ClickableColor').hasClass('ClickableColor_color_red')).to.be.true;
     });
   });
 

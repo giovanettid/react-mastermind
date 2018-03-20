@@ -27,16 +27,16 @@ describe('Board', () => {
       expect(wrapper.find('tr.ColorPicker')).to.have.lengthOf(1);
     });
 
-    it('should display 2 ColorItem', () => {
-      expect(wrapper.find('.ColorItem')).to.have.lengthOf(2);
+    it('should display 2 ClickableColor', () => {
+      expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
     });
   });
 
-  describe('click ColorItem(s)', () => {
-    describe('click 2 ColorItem', () => {
+  describe('click ClickableColor(s)', () => {
+    describe('click 2 ClickableColor', () => {
       it('should pass correct color to first and second CodeHole on the last Row', () => {
-        wrapper.find('.ColorItem_color_green').simulate('click');
-        wrapper.find('.ColorItem_color_yellow').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
 
         const codeHoles = wrapper.find(Row).last().find(CodeHole);
         expect(codeHoles.first().prop('color')).to.be.equal('Green');
@@ -44,13 +44,13 @@ describe('Board', () => {
       });
     });
 
-    describe('click 5 ColorItem', () => {
+    describe('click 5 ClickableColor', () => {
       it('should pass correct color to first CodeHole on the 9th Row', () => {
-        wrapper.find('.ColorItem_color_green').simulate('click');
-        wrapper.find('.ColorItem_color_yellow').simulate('click');
-        wrapper.find('.ColorItem_color_green').simulate('click');
-        wrapper.find('.ColorItem_color_yellow').simulate('click');
-        wrapper.find('.ColorItem_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
 
         const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(CodeHole);
         expect(codeHoles.first().prop('color')).to.be.equal('Green');

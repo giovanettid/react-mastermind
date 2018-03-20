@@ -18,16 +18,16 @@ describe('ColorPicker', () => {
   });
 
   describe('render', () => {
-    it('should display ColorPicker with n ColorItem', () => {
-      expect(wrapper.find('.ColorItem')).to.have.lengthOf(2);
-      expect(wrapper.find('.ColorItem_color_yellow').exists()).to.be.true;
-      expect(wrapper.find('.ColorItem_color_black').exists()).to.be.true;
+    it('should display ColorPicker with n ClickableColor', () => {
+      expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
+      expect(wrapper.find('.ClickableColor_color_yellow').exists()).to.be.true;
+      expect(wrapper.find('.ClickableColor_color_black').exists()).to.be.true;
     });
   });
 
-  describe('click a ColorItem', () => {
+  describe('click a ClickableColor', () => {
     it('should call onColorClick once', () => {
-      wrapper.find('.ColorItem_color_black').simulate('click');
+      wrapper.find('.ClickableColor_color_black').simulate('click');
 
       expect(spyClick.calledOnce).to.be.true;
     });

@@ -1,7 +1,7 @@
 @import 'variables';
 
 @each $name, $code in $colors {
-  .ColorItem_color_#{$name} {
+  .ClickableColor_color_#{$name} {
     background: #{$code};
     border: 2px solid map-get($colors, 'black');
     border-radius: 100%;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './ColorItem.scss';
+import './ClickableColor.scss';
 
-export default class ColorItem extends React.Component {
+export default class ClickableColor extends React.Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
     onColorClick: PropTypes.func.isRequired,
@@ -14,7 +14,7 @@ export default class ColorItem extends React.Component {
   }
 
   render() {
-    const className = `ColorItem ColorItem_color_${this.props.color.toLowerCase()}`;
+    const className = `ClickableColor ClickableColor_color_${this.props.color.toLowerCase()}`;
     return (
       <td>
         <button className={className} onClick={this.handleClick} />
