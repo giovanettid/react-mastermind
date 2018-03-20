@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
-import CodeHole from 'components/CodeHole/CodeHole';
+import ColorItem from 'components/ColorItem/ColorItem';
 import KeyHole from 'components/KeyHole/KeyHole';
 
 const keys = size => [...Array(size).keys()];
 
 const Row = ({ colors }) => {
-  const codeHolesRow = colors.map(e => <CodeHole key={shortid.generate()} color={e} />);
+  const codeHolesRow = colors.map(e => <ColorItem key={shortid.generate()} color={e} />);
 
   const NB_KEY_HOLES = 2;
   const keyHolesRow = keys(NB_KEY_HOLES).map(e => <KeyHole key={e} />);

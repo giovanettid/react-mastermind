@@ -2,7 +2,7 @@ import React from 'react';
 
 import Board from 'components/Board/Board';
 import Row from 'components/Row/Row';
-import CodeHole from 'components/CodeHole/CodeHole';
+import ColorItem from 'components/ColorItem/ColorItem';
 
 describe('Board', () => {
   const NB_ROWS = 10;
@@ -34,25 +34,25 @@ describe('Board', () => {
 
   describe('click ClickableColor(s)', () => {
     describe('click 2 ClickableColor', () => {
-      it('should pass correct color to first and second CodeHole on the last Row', () => {
+      it('should pass correct color to first and second ColorItem on the last Row', () => {
         wrapper.find('.ClickableColor_color_green').simulate('click');
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
 
-        const codeHoles = wrapper.find(Row).last().find(CodeHole);
+        const codeHoles = wrapper.find(Row).last().find(ColorItem);
         expect(codeHoles.first().prop('color')).to.be.equal('Green');
         expect(codeHoles.at(1).prop('color')).to.be.equal('Yellow');
       });
     });
 
     describe('click 5 ClickableColor', () => {
-      it('should pass correct color to first CodeHole on the 9th Row', () => {
+      it('should pass correct color to first ColorItem on the 9th Row', () => {
         wrapper.find('.ClickableColor_color_green').simulate('click');
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
         wrapper.find('.ClickableColor_color_green').simulate('click');
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
         wrapper.find('.ClickableColor_color_green').simulate('click');
 
-        const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(CodeHole);
+        const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(ColorItem);
         expect(codeHoles.first().prop('color')).to.be.equal('Green');
       });
     });
