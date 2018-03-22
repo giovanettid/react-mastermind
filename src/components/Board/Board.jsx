@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
+import Solution from 'components/Solution/Solution';
 
 import BoardStateMutator from './BoardStateMutator';
 
@@ -23,6 +24,7 @@ export default class Board extends React.Component {
   }
 
   render() {
+    const solution = <Solution colors={[]} />;
     const rows = <Rows boardColors={this.state.boardColors} />;
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
@@ -31,6 +33,8 @@ export default class Board extends React.Component {
 
     return (
       <div className="Board">
+        {solution}
+        <br />
         {rows}
         <br />
         {picker}

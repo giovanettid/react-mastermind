@@ -30,6 +30,10 @@ describe('Board', () => {
     it('should display 2 ClickableColor', () => {
       expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
     });
+
+    it('should render hidden Solution', () => {
+      expect(wrapper.find('.Solution_hidden')).to.have.lengthOf(1);
+    });
   });
 
   describe('click ClickableColor(s)', () => {
