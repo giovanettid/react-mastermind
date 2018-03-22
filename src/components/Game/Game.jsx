@@ -7,5 +7,5 @@ import './Game.scss';
 
 export default function Game() {
   const colorsToPick = ColorsFactory.create().set;
-  return <Board colorsToPick={colorsToPick} />;
+  return <Board colorsToPick={colorsToPick} colorsToGuess={[]} />;
 }

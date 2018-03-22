@@ -9,7 +9,7 @@ describe('Board', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} />);
+    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} colorsToGuess={['Yellow', 'Yellow']} />);
   });
 
   describe('state', () => {
@@ -31,8 +31,8 @@ describe('Board', () => {
       expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
     });
 
-    it('should render hidden Solution', () => {
-      expect(wrapper.find('.Solution_hidden')).to.have.lengthOf(1);
+    it('should render hidden Solution with 2 ColorItem', () => {
+      expect(wrapper.find('.Solution_hidden .ColorItem')).to.have.lengthOf(2);
     });
   });
 

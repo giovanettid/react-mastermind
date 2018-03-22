@@ -13,6 +13,7 @@ const NB_CODE_HOLES = 4;
 export default class Board extends React.Component {
   static propTypes = {
     colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
+    colorsToGuess: PropTypes.arrayOf(PropTypes.string).isRequired,
   }
 
   static stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES);
@@ -24,7 +25,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const solution = <Solution colors={[]} />;
+    const solution = <Solution colors={this.props.colorsToGuess} />;
     const rows = <Rows boardColors={this.state.boardColors} />;
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
