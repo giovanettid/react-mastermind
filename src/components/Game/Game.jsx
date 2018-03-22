@@ -6,6 +6,6 @@ import Board from 'components/Board/Board';
 import './Game.scss';
 
 export default function Game() {
-  const colorsToPick = ColorsFactory.create().set;
-  return <Board colorsToPick={colorsToPick} colorsToGuess={[]} />;
+  const colorFactory = ColorsFactory.create();
+  return <Board colorsToPick={colorFactory.set} colorsToGuess={colorFactory.shuffle()} />;
 }
