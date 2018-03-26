@@ -13,8 +13,13 @@ describe('Board', () => {
   });
 
   describe('state', () => {
-    it('should init with initial position and lightgrey', () => {
-      expect(wrapper.state()).to.deep.equal({ boardColors: new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')) });
+    it('should init boardColors with 10*4 lightgrey', () => {
+      expect(wrapper.state().boardColors).to.deep.equal(new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')));
+    });
+
+    it('should init correct and wrong postions with 10 zeros', () => {
+      expect(wrapper.state().numberOfCorrectPositions).to.deep.equal(new Array(NB_ROWS).fill(0));
+      expect(wrapper.state().numberOfWrongPositions).to.deep.equal(new Array(NB_ROWS).fill(0));
     });
   });
 

@@ -36,8 +36,16 @@ describe('BoardStateMutator', () => {
   });
 
   describe('getInitial', () => {
-    it('should return initial state', () => {
-      expect(mutator.getInitial()).to.deep.equal({ boardColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']] });
+    it('should return initial boardColors', () => {
+      expect(mutator.getInitial().boardColors).to.deep.equal([['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']]);
+    });
+
+    it('should return initial number of correct position', () => {
+      expect(mutator.getInitial().numberOfCorrectPositions).to.deep.equal([0, 0]);
+    });
+
+    it('should return initial number of wrong position', () => {
+      expect(mutator.getInitial().numberOfWrongPositions).to.deep.equal([0, 0]);
     });
   });
 
