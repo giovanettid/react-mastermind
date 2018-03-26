@@ -1,7 +1,7 @@
 import BoardStateMutator from 'components/Board/BoardStateMutator';
 
 describe('BoardStateMutator', () => {
-  const mutator = new BoardStateMutator(2, 2);
+  const mutator = new BoardStateMutator(2, 2, ['Red', 'Blue']);
 
   describe('isPreviousRow', () => {
     it('should return true when set to last item', () => {
@@ -80,6 +80,37 @@ describe('BoardStateMutator', () => {
       const next = mutator.getNext('Green')(prev);
 
       expect(next).to.deep.equal(prev);
+    });
+  });
+
+  describe('getPositions', () => {
+    const threeCodeMutator = new BoardStateMutator(1, 3, ['Red', 'Blue', 'Yellow']);
+
+    describe('when 1 correct color but wrong position', () => {
+      it('should return 1 wrong position & 0 correct position', () => {
+        expect(threeCodeMutator.getPositions(['Green', 'Red', 'Black'])).to.deep.equal({
+          numberOfCorrectPositions: 0,
+          numberOfWrongPositions: 1,
+        });
+      });
+    });
+
+    describe('when 1 correct color and position', () => {
+      it('should return 1 correct position & 0 wrong position', () => {
+        expect(threeCodeMutator.getPositions(['Red', 'Green', 'Black'])).to.deep.equal({
+          numberOfCorrectPositions: 1,
+          numberOfWrongPositions: 0,
+        });
+      });
+    });
+
+    describe('when 1 correct color and position & 1 correct color but wrong position', () => {
+      it('should return 1 correct position & 1 wrong position', () => {
+        expect(threeCodeMutator.getPositions(['Red', 'Green', 'Blue'])).to.deep.equal({
+          numberOfCorrectPositions: 1,
+          numberOfWrongPositions: 1,
+        });
+      });
     });
   });
 });
