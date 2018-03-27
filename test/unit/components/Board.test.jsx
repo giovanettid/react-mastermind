@@ -9,17 +9,12 @@ describe('Board', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} colorsToGuess={['Yellow', 'Yellow']} />);
+    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} colorsToGuess={['Yellow', 'Yellow', 'Yellow', 'Yellow']} />);
   });
 
   describe('state', () => {
     it('should init boardColors with 10*4 lightgrey', () => {
       expect(wrapper.state().boardColors).to.deep.equal(new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')));
-    });
-
-    it('should init correct and wrong postions with 10 zeros', () => {
-      expect(wrapper.state().numberOfCorrectPositions).to.deep.equal(new Array(NB_ROWS).fill(0));
-      expect(wrapper.state().numberOfWrongPositions).to.deep.equal(new Array(NB_ROWS).fill(0));
     });
   });
 
@@ -36,8 +31,8 @@ describe('Board', () => {
       expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
     });
 
-    it('should render hidden Solution with 2 ColorItem', () => {
-      expect(wrapper.find('.Solution_hidden .ColorItem')).to.have.lengthOf(2);
+    it('should render hidden Solution with 4 ColorItem', () => {
+      expect(wrapper.find('.Solution_hidden .ColorItem')).to.have.lengthOf(4);
     });
   });
 

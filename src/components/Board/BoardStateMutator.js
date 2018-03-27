@@ -1,6 +1,4 @@
 
-const defaultNumberOfPositions = size => new Array(size).fill(0);
-
 const defaultColors = size => new Array(size).fill('lightgrey');
 
 const createBoardColors = (nbRows, nbCodeHoles) => Array.from({ length: nbRows },
@@ -32,8 +30,7 @@ export default class BoardStateMutator {
   getInitial() {
     return {
       boardColors: createBoardColors(this.nbRows, this.nbCodeHoles),
-      numberOfCorrectPositions: defaultNumberOfPositions(this.nbRows),
-      numberOfWrongPositions: defaultNumberOfPositions(this.nbRows),
+      positions: [],
     };
   }
 
@@ -64,7 +61,12 @@ export default class BoardStateMutator {
         : this.nextItem(prevState);
       boardColors[row - 1][item - 1] = color;
 
-      return { row, item, boardColors };
+      const positions = prevState.positions;
+      if (item === this.nbCodeHoles) {
+        positions.push(this.getPositions(boardColors[row - 1]));
+      }
+
+      return { positions, row, item, boardColors };
     };
   }
 }

@@ -16,12 +16,14 @@ export default class Board extends React.Component {
     colorsToGuess: PropTypes.arrayOf(PropTypes.string).isRequired,
   }
 
-  static stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES);
-
-  state = Board.stateMutator.getInitial();
+  constructor(props) {
+    super(props);
+    this.stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES, props.colorsToGuess);
+    this.state = this.stateMutator.getInitial();
+  }
 
   handleColorClick = (color) => {
-    this.setState(Board.stateMutator.getNext(color));
+    this.setState(this.stateMutator.getNext(color));
   }
 
   render() {
