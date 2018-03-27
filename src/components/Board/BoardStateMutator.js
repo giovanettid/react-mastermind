@@ -11,7 +11,7 @@ export default class BoardStateMutator {
     this.colorsToGuess = colorsToGuess;
   }
 
-  isPreviousRow(item) {
+  isLastItem(item) {
     return item === this.nbCodeHoles;
   }
 
@@ -54,15 +54,16 @@ export default class BoardStateMutator {
         return prevState;
       }
 
-      const boardColors = prevState.boardColors;
+      const { boardColors } = prevState;
 
-      const { row, item } = this.isPreviousRow(prevState.item)
+      const { row, item } = this.isLastItem(prevState.item)
         ? BoardStateMutator.previousRow(prevState)
         : this.nextItem(prevState);
       boardColors[row - 1][item - 1] = color;
 
-      const positions = prevState.positions;
-      if (item === this.nbCodeHoles) {
+      const { positions } = prevState;
+
+      if (this.isLastItem(item)) {
         positions.push(this.getPositions(boardColors[row - 1]));
       }
 
