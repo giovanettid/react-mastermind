@@ -85,10 +85,14 @@ describe('BoardStateMutator', () => {
     });
 
     it('should update position when choose correct position', () => {
-      const positions = { positions: [{ numberOfCorrectPositions: 1, numberOfWrongPositions: 0 }] };
-      const prev = { row: 2, item: 1, boardColors: [['lightgrey', 'lightgrey'], ['Red', 'lightgrey']] };
+      const prev = {
+        positions: [{ numberOfCorrectPositions: 1, numberOfWrongPositions: 0 }],
+        row: 2,
+        item: 1,
+        boardColors: [['lightgrey', 'lightgrey'], ['Red', 'lightgrey']],
+      };
 
-      const next = mutator.getNext('Blue')(Object.assign(prev, positions));
+      const next = mutator.getNext('Blue')(prev);
 
       expect(next.positions).to.deep.equal([
         { numberOfCorrectPositions: 1, numberOfWrongPositions: 0 },
