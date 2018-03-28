@@ -4,6 +4,8 @@ const defaultColors = size => new Array(size).fill('lightgrey');
 const createBoardColors = (nbRows, nbCodeHoles) => Array.from({ length: nbRows },
   () => defaultColors(nbCodeHoles));
 
+const identityState = prevState => prevState;
+
 export default class BoardStateMutator {
   constructor(nbRows, nbCodeHoles, colorsToGuess) {
     this.nbRows = nbRows;
@@ -28,6 +30,14 @@ export default class BoardStateMutator {
 
   nextItem() {
     this.item = this.item + 1;
+  }
+
+  move() {
+    if (this.isLastItem()) {
+      this.previousRow();
+    } else {
+      this.nextItem();
+    }
   }
 
   getInitial() {
@@ -55,18 +65,8 @@ export default class BoardStateMutator {
     };
   }
 
-  getNext(color) {
+  muteState(color) {
     return (prevState) => {
-      if (this.isLastMove()) {
-        return prevState;
-      }
-
-      if (this.isLastItem()) {
-        this.previousRow();
-      } else {
-        this.nextItem();
-      }
-
       const { boardColors, positions } = prevState;
 
       boardColors[this.row - 1][this.item - 1] = color;
@@ -77,5 +77,15 @@ export default class BoardStateMutator {
 
       return { positions, boardColors };
     };
+  }
+
+  getNext(color) {
+    if (this.isLastMove()) {
+      return identityState;
+    }
+
+    this.move();
+
+    return this.muteState(color);
   }
 }
