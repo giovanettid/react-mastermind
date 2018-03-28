@@ -41,7 +41,48 @@ describe('BoardStateMutator', () => {
     });
 
     it('should return empty initial positions', () => {
-      expect(mutator.getInitial().positions).to.deep.equal([]);
+      expect(mutator.getInitial().positions).to.be.empty;
+    });
+  });
+
+  describe('compute positions', () => {
+    const threeCodeMutator = new BoardStateMutator(1, 3, ['Red', 'Blue', 'Yellow']);
+
+    describe('getCorrectPositions', () => {
+      it('when 0 correct position then return 0', () => {
+        expect(threeCodeMutator.getCorrectPositions(['Green', 'Green', 'Black'])).to.equal(0);
+      });
+
+      it('when 1 correct & 1 wrong position then return 1', () => {
+        expect(threeCodeMutator.getCorrectPositions(['Red', 'Green', 'Blue'])).to.equal(1);
+      });
+
+      it('when 2 correct position then return 2', () => {
+        expect(threeCodeMutator.getCorrectPositions(['Red', 'Green', 'Yellow'])).to.equal(2);
+      });
+    });
+
+    describe('getWrongPositions', () => {
+      it('when none colors match then return 0', () => {
+        expect(threeCodeMutator.getWrongPositions(['Black', 'Green', 'Black'])).to.equal(0);
+      });
+
+      it('when all correct positions then return 0', () => {
+        expect(threeCodeMutator.getWrongPositions(['Red', 'Blue', 'Yellow'])).to.equal(0);
+      });
+
+      it('when 2 wrong positions then return 2', () => {
+        expect(threeCodeMutator.getWrongPositions(['Blue', 'Red', 'Black'])).to.equal(2);
+      });
+    });
+
+    describe('getPositions', () => {
+      it('should return expected positions', () => {
+        expect(threeCodeMutator.getPositions(['Red', 'Green', 'Blue'])).to.deep.equal({
+          numberOfCorrectPositions: 1,
+          numberOfWrongPositions: 1,
+        });
+      });
     });
   });
 
@@ -98,37 +139,6 @@ describe('BoardStateMutator', () => {
         { numberOfCorrectPositions: 1, numberOfWrongPositions: 0 },
         { numberOfCorrectPositions: 2, numberOfWrongPositions: 0 },
       ]);
-    });
-  });
-
-  describe('getPositions', () => {
-    const threeCodeMutator = new BoardStateMutator(1, 3, ['Red', 'Blue', 'Yellow']);
-
-    describe('when 1 correct color but wrong position', () => {
-      it('should return 1 wrong position & 0 correct position', () => {
-        expect(threeCodeMutator.getPositions(['Green', 'Red', 'Black'])).to.deep.equal({
-          numberOfCorrectPositions: 0,
-          numberOfWrongPositions: 1,
-        });
-      });
-    });
-
-    describe('when 1 correct color and position', () => {
-      it('should return 1 correct position & 0 wrong position', () => {
-        expect(threeCodeMutator.getPositions(['Red', 'Green', 'Black'])).to.deep.equal({
-          numberOfCorrectPositions: 1,
-          numberOfWrongPositions: 0,
-        });
-      });
-    });
-
-    describe('when 1 correct color and position & 1 correct color but wrong position', () => {
-      it('should return 1 correct position & 1 wrong position', () => {
-        expect(threeCodeMutator.getPositions(['Red', 'Green', 'Blue'])).to.deep.equal({
-          numberOfCorrectPositions: 1,
-          numberOfWrongPositions: 1,
-        });
-      });
     });
   });
 });
