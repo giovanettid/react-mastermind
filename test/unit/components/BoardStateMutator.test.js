@@ -1,37 +1,63 @@
 import BoardStateMutator from 'components/Board/BoardStateMutator';
 
 describe('BoardStateMutator', () => {
-  const mutator = new BoardStateMutator(2, 2, ['Red', 'Blue']);
+  let mutator;
+
+  beforeEach(() => {
+    mutator = new BoardStateMutator(2, 2, ['Red', 'Blue']);
+  });
 
   describe('isLastItem', () => {
-    it('should return true when set to last item', () => {
-      expect(mutator.isLastItem(2)).to.be.true;
+    it('should return true when current item is last item', () => {
+      mutator.item = 2;
+
+      expect(mutator.isLastItem()).to.be.true;
     });
 
-    it('should return false when set to first item', () => {
-      expect(mutator.isLastItem(1)).to.be.false;
+    it('should return false when current item is first item', () => {
+      mutator.item = 1;
+
+      expect(mutator.isLastItem()).to.be.false;
     });
   });
 
   describe('isLastMove', () => {
-    it('should return true when position is first row and last item', () => {
-      expect(mutator.isLastMove({ row: 1, item: 2 })).to.be.true;
+    it('should return true when current position is first row and last item', () => {
+      mutator.row = 1;
+      mutator.item = 2;
+
+      expect(mutator.isLastMove()).to.be.true;
     });
 
-    it('should return false when position is last row', () => {
-      expect(mutator.isLastMove({ row: 2, item: 2 })).to.be.false;
+    it('should return false when current position is last row', () => {
+      mutator.row = 2;
+      mutator.item = 2;
+
+      expect(mutator.isLastMove()).to.be.false;
     });
   });
 
   describe('previousRow', () => {
     it('should move state to previous row, first item', () => {
-      expect(BoardStateMutator.previousRow({ row: 2, item: 2 })).to.deep.equal({ row: 1, item: 1 });
+      mutator.row = 2;
+      mutator.item = 2;
+
+      mutator.previousRow();
+
+      expect(mutator.row).to.equal(1);
+      expect(mutator.item).to.equal(1);
     });
   });
 
   describe('nextItem', () => {
     it('should move state to next item, same row', () => {
-      expect(mutator.nextItem({ row: 1, item: 1 })).to.deep.equal({ row: 1, item: 2 });
+      mutator.row = 1;
+      mutator.item = 1;
+
+      mutator.nextItem();
+
+      expect(mutator.row).to.equal(1);
+      expect(mutator.item).to.equal(2);
     });
   });
 
@@ -92,33 +118,33 @@ describe('BoardStateMutator', () => {
 
       const next = mutator.getNext('Green')(prev);
 
-      expect(next.row).to.equal(2);
-      expect(next.item).to.equal(1);
       expect(next.boardColors).to.deep.equal([['lightgrey', 'lightgrey'], ['Green', 'lightgrey']]);
     });
 
     it('should move to next item', () => {
-      const prev = { positions: [], row: 2, item: 1, boardColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']] };
+      mutator.row = 2;
+      mutator.item = 1;
+      const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']] };
 
       const next = mutator.getNext('Yellow')(prev);
 
-      expect(next.row).to.equal(2);
-      expect(next.item).to.equal(2);
       expect(next.boardColors).to.deep.equal([['lightgrey', 'lightgrey'], ['Green', 'Yellow']]);
     });
 
     it('should move from last item to previous row', () => {
-      const prev = { row: 2, item: 2, boardColors: [['lightgrey', 'lightgrey'], ['Green', 'Yellow']] };
+      mutator.row = 2;
+      mutator.item = 2;
+      const prev = { boardColors: [['lightgrey', 'lightgrey'], ['Green', 'Yellow']] };
 
       const next = mutator.getNext('Red')(prev);
 
-      expect(next.row).to.equal(1);
-      expect(next.item).to.equal(1);
       expect(next.boardColors).to.deep.equal([['Red', 'lightgrey'], ['Green', 'Yellow']]);
     });
 
     it('should not move when position is first row and last item', () => {
-      const prev = { row: 1, item: 2, boardColors: [['Red', 'Red'], ['Green', 'Yellow']] };
+      mutator.row = 1;
+      mutator.item = 2;
+      const prev = { boardColors: [['Red', 'Red'], ['Green', 'Yellow']] };
 
       const next = mutator.getNext('Green')(prev);
 
@@ -126,10 +152,10 @@ describe('BoardStateMutator', () => {
     });
 
     it('should update position when choose correct position', () => {
+      mutator.row = 2;
+      mutator.item = 1;
       const prev = {
         positions: [{ numberOfCorrectPositions: 1, numberOfWrongPositions: 0 }],
-        row: 2,
-        item: 1,
         boardColors: [['lightgrey', 'lightgrey'], ['Red', 'lightgrey']],
       };
 

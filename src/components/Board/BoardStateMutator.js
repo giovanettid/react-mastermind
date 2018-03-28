@@ -9,22 +9,25 @@ export default class BoardStateMutator {
     this.nbRows = nbRows;
     this.nbCodeHoles = nbCodeHoles;
     this.colorsToGuess = colorsToGuess;
+    this.row = this.nbRows;
+    this.item = 0;
   }
 
-  isLastItem(item) {
-    return item === this.nbCodeHoles;
+  isLastItem() {
+    return this.item === this.nbCodeHoles;
   }
 
-  isLastMove({ row, item }) {
-    return row === 1 && item === this.nbCodeHoles;
+  isLastMove() {
+    return this.row === 1 && this.item === this.nbCodeHoles;
   }
 
-  static previousRow({ row }) {
-    return { row: row - 1, item: 1 };
+  previousRow() {
+    this.row = this.row - 1;
+    this.item = 1;
   }
 
-  nextItem({ row = this.nbRows, item = 0 }) {
-    return { row, item: item + 1 };
+  nextItem() {
+    this.item = this.item + 1;
   }
 
   getInitial() {
@@ -54,24 +57,25 @@ export default class BoardStateMutator {
 
   getNext(color) {
     return (prevState) => {
-      if (this.isLastMove(prevState)) {
+      if (this.isLastMove()) {
         return prevState;
       }
 
-      const { boardColors } = prevState;
-
-      const { row, item } = this.isLastItem(prevState.item)
-        ? BoardStateMutator.previousRow(prevState)
-        : this.nextItem(prevState);
-      boardColors[row - 1][item - 1] = color;
-
-      const { positions } = prevState;
-
-      if (this.isLastItem(item)) {
-        positions.push(this.getPositions(boardColors[row - 1]));
+      if (this.isLastItem()) {
+        this.previousRow();
+      } else {
+        this.nextItem();
       }
 
-      return { positions, row, item, boardColors };
+      const { boardColors, positions } = prevState;
+
+      boardColors[this.row - 1][this.item - 1] = color;
+
+      if (this.isLastItem()) {
+        positions.push(this.getPositions(boardColors[this.row - 1]));
+      }
+
+      return { positions, boardColors };
     };
   }
 }
