@@ -11,10 +11,7 @@ export default class BoardStateMutator {
     this.nbRows = nbRows;
     this.nbCodeHoles = nbCodeHoles;
     this.colorsToGuess = colorsToGuess;
-  }
-
-  isFirstMove() {
-    return this.row === undefined && this.item === undefined;
+    this.nbMove = 0;
   }
 
   isLastItem() {
@@ -22,31 +19,13 @@ export default class BoardStateMutator {
   }
 
   isLastMove() {
-    return this.row === this.nbRows - 1 && this.isLastItem();
-  }
-
-  moveFirst() {
-    this.row = 0;
-    this.item = 0;
-  }
-
-  nextRow() {
-    this.row = this.row + 1;
-    this.item = 0;
-  }
-
-  nextItem() {
-    this.item = this.item + 1;
+    return this.nbMove === this.nbRows * this.nbCodeHoles;
   }
 
   move() {
-    if (this.isFirstMove()) {
-      this.moveFirst();
-    } else if (this.isLastItem()) {
-      this.nextRow();
-    } else {
-      this.nextItem();
-    }
+    this.row = Math.floor(this.nbMove / this.nbCodeHoles);
+    this.item = this.nbMove % this.nbCodeHoles;
+    this.nbMove = this.nbMove + 1;
   }
 
   getInitial() {
