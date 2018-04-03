@@ -7,7 +7,7 @@ describe('Rows', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Rows boardColors={[['lightgrey', 'lightgrey'], ['Red', 'lightgrey']]} />);
+    wrapper = mount(<Rows boardColors={[['Red', 'lightgrey'], ['lightgrey', 'lightgrey']]} />);
   });
 
   describe('render', () => {
@@ -16,11 +16,9 @@ describe('Rows', () => {
     });
   });
 
-  describe('props', () => {
-    it('should pass non default color prop to only 1 Row', () => {
-      expect(wrapper.find(Row)
-        .map(node => node.prop('colors')).filter(colors => colors.includes('Red')))
-        .to.have.lengthOf(1);
+  describe('inverse display from boardColors', () => {
+    it('should pass Red color to last Row', () => {
+      expect(wrapper.find(Row).last().props().colors.includes('Red')).to.be.true;
     });
   });
 });

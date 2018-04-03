@@ -43,8 +43,8 @@ describe('Board', () => {
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
 
         const codeHoles = wrapper.find(Row).last().find(ColorItem);
-        expect(codeHoles.first().prop('color')).to.be.equal('Green');
-        expect(codeHoles.at(1).prop('color')).to.be.equal('Yellow');
+        expect(codeHoles.first().props().color).to.equal('Green');
+        expect(codeHoles.at(1).props().color).to.equal('Yellow');
       });
     });
 
@@ -57,7 +57,7 @@ describe('Board', () => {
         wrapper.find('.ClickableColor_color_green').simulate('click');
 
         const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(ColorItem);
-        expect(codeHoles.first().prop('color')).to.be.equal('Green');
+        expect(codeHoles.first().props().color).to.equal('Green');
       });
     });
   });

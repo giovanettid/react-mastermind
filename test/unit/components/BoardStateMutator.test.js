@@ -7,79 +7,113 @@ describe('BoardStateMutator', () => {
     mutator = new BoardStateMutator(2, 2, ['Red', 'Blue']);
   });
 
+  describe('isFirstMove', () => {
+    it('should return true when row & item undefined', () => {
+      expect(mutator.isFirstMove()).to.be.true;
+    });
+
+    it('should return false when row is not undefined', () => {
+      mutator.row = 1;
+
+      expect(mutator.isFirstMove()).to.be.false;
+    });
+
+    it('should return false when item is not undefined', () => {
+      mutator.item = 1;
+
+      expect(mutator.isFirstMove()).to.be.false;
+    });
+  });
+
   describe('isLastItem', () => {
     it('should return true when current item is last item', () => {
-      mutator.item = 2;
+      mutator.item = 1;
 
       expect(mutator.isLastItem()).to.be.true;
     });
 
     it('should return false when current item is first item', () => {
-      mutator.item = 1;
+      mutator.item = 0;
 
       expect(mutator.isLastItem()).to.be.false;
     });
   });
 
   describe('isLastMove', () => {
-    it('should return true when current position is first row and last item', () => {
+    it('should return true when current position is last row and last item', () => {
       mutator.row = 1;
-      mutator.item = 2;
+      mutator.item = 1;
 
       expect(mutator.isLastMove()).to.be.true;
     });
 
-    it('should return false when current position is last row', () => {
-      mutator.row = 2;
-      mutator.item = 2;
+    it('should return false when current position is first row', () => {
+      mutator.row = 0;
+      mutator.item = 1;
 
       expect(mutator.isLastMove()).to.be.false;
     });
   });
 
-  describe('previousRow', () => {
-    it('should move state to previous row, first item', () => {
-      mutator.row = 2;
-      mutator.item = 2;
+  describe('firstMove', () => {
+    it('should move state to first row, first item', () => {
+      mutator.moveFirst();
 
-      mutator.previousRow();
+      expect(mutator.row).to.equal(0);
+      expect(mutator.item).to.equal(0);
+    });
+  });
+
+  describe('nextRow', () => {
+    it('should move state to next row, first item', () => {
+      mutator.row = 0;
+      mutator.item = 1;
+
+      mutator.nextRow();
 
       expect(mutator.row).to.equal(1);
-      expect(mutator.item).to.equal(1);
+      expect(mutator.item).to.equal(0);
     });
   });
 
   describe('nextItem', () => {
     it('should move state to next item, same row', () => {
       mutator.row = 1;
-      mutator.item = 1;
+      mutator.item = 0;
 
       mutator.nextItem();
 
       expect(mutator.row).to.equal(1);
-      expect(mutator.item).to.equal(2);
+      expect(mutator.item).to.equal(1);
     });
   });
 
   describe('move', () => {
-    it('when last item then move to previous row & first item', () => {
-      mutator.row = 2;
-      mutator.item = 2;
+    it('when row & item undefined then move to first row & first item', () => {
+      mutator.move();
+
+      expect(mutator.row).to.equal(0);
+      expect(mutator.item).to.equal(0);
+    });
+
+    it('when last item then move to next row & first item', () => {
+      mutator.row = 0;
+      mutator.item = 1;
+
+      mutator.move();
+
+      expect(mutator.row).to.equal(1);
+      expect(mutator.item).to.equal(0);
+    });
+
+    it('when first item then move to next item', () => {
+      mutator.row = 1;
+      mutator.item = 0;
 
       mutator.move();
 
       expect(mutator.row).to.equal(1);
       expect(mutator.item).to.equal(1);
-    });
-
-    it('when first item then move to next item', () => {
-      mutator.row = 1;
-      mutator.item = 1;
-
-      mutator.move();
-
-      expect(mutator.row).to.equal(1);
-      expect(mutator.item).to.equal(2);
     });
   });
 
@@ -136,8 +170,8 @@ describe('BoardStateMutator', () => {
 
   describe('muteState', () => {
     it('should mute color at row & item indexes', () => {
-      mutator.row = 2;
-      mutator.item = 1;
+      mutator.row = 1;
+      mutator.item = 0;
       const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']] };
 
       const next = mutator.muteState('Green')(prev);
@@ -146,8 +180,8 @@ describe('BoardStateMutator', () => {
     });
 
     it('should return positions when mute last item', () => {
-      mutator.row = 2;
-      mutator.item = 2;
+      mutator.row = 1;
+      mutator.item = 1;
       const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['Red', 'lightgrey']] };
 
       const next = mutator.muteState('Blue')(prev);
@@ -159,8 +193,8 @@ describe('BoardStateMutator', () => {
     });
 
     it('should not update positions when mute first item', () => {
-      mutator.row = 2;
-      mutator.item = 1;
+      mutator.row = 1;
+      mutator.item = 0;
       const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']] };
 
       const next = mutator.muteState('Red')(prev);
@@ -171,8 +205,8 @@ describe('BoardStateMutator', () => {
 
   describe('getNext', () => {
     it('should mute state from next item', () => {
-      mutator.row = 2;
-      mutator.item = 1;
+      mutator.row = 1;
+      mutator.item = 0;
       const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']] };
 
       const next = mutator.getNext('Yellow')(prev);
@@ -180,9 +214,9 @@ describe('BoardStateMutator', () => {
       expect(next.boardColors).to.deep.equal([['lightgrey', 'lightgrey'], ['Green', 'Yellow']]);
     });
 
-    it('should not move when position is first row and last item', () => {
+    it('should not mute when position is last row and last item', () => {
       mutator.row = 1;
-      mutator.item = 2;
+      mutator.item = 1;
       const prev = { boardColors: [['Red', 'Red'], ['Green', 'Yellow']] };
 
       const next = mutator.getNext('Green')(prev);
@@ -191,8 +225,8 @@ describe('BoardStateMutator', () => {
     });
 
     it('should update position when choose correct position', () => {
-      mutator.row = 2;
-      mutator.item = 1;
+      mutator.row = 1;
+      mutator.item = 0;
       const prev = {
         positions: [{ numberOfCorrectPositions: 1, numberOfWrongPositions: 0 }],
         boardColors: [['lightgrey', 'lightgrey'], ['Red', 'lightgrey']],

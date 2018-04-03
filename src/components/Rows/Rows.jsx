@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import Row from 'components/Row/Row';
 
 const Rows = ({ boardColors }) => {
-  const rows = boardColors.map(e => <Row key={shortid.generate()} colors={e} />);
+  const rows = boardColors.map(e => <Row key={shortid.generate()} colors={e} />).reverse();
 
   return (
     <table>
