@@ -14,18 +14,19 @@ export default class BoardStateMutator {
     this.nbMove = 0;
   }
 
-  isLastItem() {
-    return this.item === this.nbCodeHoles - 1;
+  isLastColumn() {
+    return this.nbMove % this.nbCodeHoles === 0;
   }
 
   isLastMove() {
     return this.nbMove === this.nbRows * this.nbCodeHoles;
   }
 
-  move() {
-    this.row = Math.floor(this.nbMove / this.nbCodeHoles);
-    this.item = this.nbMove % this.nbCodeHoles;
-    this.nbMove = this.nbMove + 1;
+  getIndexes() {
+    return {
+      row: Math.floor((this.nbMove - 1) / this.nbCodeHoles),
+      col: (this.nbMove - 1) % this.nbCodeHoles,
+    };
   }
 
   getInitial() {
@@ -46,24 +47,26 @@ export default class BoardStateMutator {
     }).length;
   }
 
-  getPositions(codeColors) {
-    return {
-      numberOfCorrectPositions: this.getCorrectPositions(codeColors),
-      numberOfWrongPositions: this.getWrongPositions(codeColors),
-    };
+  mutePositions(positions, codeColors) {
+    return this.isLastColumn()
+      ? [...positions, {
+        numberOfCorrectPositions: this.getCorrectPositions(codeColors),
+        numberOfWrongPositions: this.getWrongPositions(codeColors),
+      }]
+      : [...positions];
   }
 
   muteState(color) {
     return (prevState) => {
-      const { boardColors, positions } = prevState;
+      const { row, col } = this.getIndexes();
 
-      boardColors[this.row][this.item] = color;
+      const boardColors = [...prevState.boardColors];
+      boardColors[row][col] = color;
 
-      if (this.isLastItem()) {
-        positions.push(this.getPositions(boardColors[this.row]));
-      }
-
-      return { positions, boardColors };
+      return {
+        boardColors,
+        positions: this.mutePositions(prevState.positions, boardColors[row]),
+      };
     };
   }
 
@@ -72,7 +75,7 @@ export default class BoardStateMutator {
       return identityState;
     }
 
-    this.move();
+    this.nbMove = this.nbMove + 1;
 
     return this.muteState(color);
   }

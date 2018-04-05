@@ -7,17 +7,17 @@ describe('BoardStateMutator', () => {
     mutator = new BoardStateMutator(2, 2, ['Red', 'Blue']);
   });
 
-  describe('isLastItem', () => {
-    it('should return true when current item is last item', () => {
-      mutator.item = 1;
+  describe('isLastColumn', () => {
+    it('should return true when current column is last column', () => {
+      mutator.nbMove = 2;
 
-      expect(mutator.isLastItem()).to.be.true;
+      expect(mutator.isLastColumn()).to.be.true;
     });
 
-    it('should return false when current item is first item', () => {
-      mutator.item = 0;
+    it('should return false when current column is first column', () => {
+      mutator.nbMove = 1;
 
-      expect(mutator.isLastItem()).to.be.false;
+      expect(mutator.isLastColumn()).to.be.false;
     });
   });
 
@@ -32,36 +32,6 @@ describe('BoardStateMutator', () => {
       mutator.nbMove = 2;
 
       expect(mutator.isLastMove()).to.be.false;
-    });
-  });
-
-  describe('move', () => {
-    it('when 0 move then should move to first row & first item', () => {
-      mutator.move();
-
-      expect(mutator.row).to.equal(0);
-      expect(mutator.item).to.equal(0);
-      expect(mutator.nbMove).to.equal(1);
-    });
-
-    it('when last item then move to next row & first item', () => {
-      mutator.nbMove = 2;
-
-      mutator.move();
-
-      expect(mutator.row).to.equal(1);
-      expect(mutator.item).to.equal(0);
-      expect(mutator.nbMove).to.equal(3);
-    });
-
-    it('when first item then move to next item', () => {
-      mutator.nbMove = 3;
-
-      mutator.move();
-
-      expect(mutator.row).to.equal(1);
-      expect(mutator.item).to.equal(1);
-      expect(mutator.nbMove).to.equal(4);
     });
   });
 
@@ -105,49 +75,50 @@ describe('BoardStateMutator', () => {
         expect(threeCodeMutator.getWrongPositions(['Blue', 'Red', 'Black'])).to.equal(2);
       });
     });
+  });
 
-    describe('getPositions', () => {
-      it('should return expected positions', () => {
-        expect(threeCodeMutator.getPositions(['Red', 'Green', 'Blue'])).to.deep.equal({
-          numberOfCorrectPositions: 1,
-          numberOfWrongPositions: 1,
-        });
-      });
+  describe('mutePositions', () => {
+    it('should leave positions empty when first move', () => {
+      mutator.nbMove = 1;
+
+      expect(mutator.mutePositions([], ['Red', 'lightgrey'])).to.be.empty;
+    });
+
+    it('should not append positions when first column', () => {
+      const positions = [{ numberOfCorrectPositions: 1, numberOfWrongPositions: 0 }];
+      mutator.nbMove = 3;
+
+      expect(mutator.mutePositions(positions, ['Red', 'Green'])).to.deep.equal(positions);
+    });
+
+    it('should append positions when last column', () => {
+      mutator.nbMove = 4;
+
+      expect(mutator.mutePositions([{ numberOfCorrectPositions: 1, numberOfWrongPositions: 0 }],
+        ['Red', 'Blue'])).to.deep.equal([
+        { numberOfCorrectPositions: 1, numberOfWrongPositions: 0 },
+        { numberOfCorrectPositions: 2, numberOfWrongPositions: 0 },
+      ]);
     });
   });
 
   describe('muteState', () => {
-    it('should mute color at row & item indexes', () => {
-      mutator.row = 1;
-      mutator.item = 0;
-      const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']] };
+    it('should mute color at row & col indexes', () => {
+      mutator.nbMove = 3;
+      const prev = { positions: [], boardColors: [['Yellow', 'Yellow'], ['lightgrey', 'lightgrey']] };
 
       const next = mutator.muteState('Green')(prev);
 
-      expect(next.boardColors).to.deep.equal([['lightgrey', 'lightgrey'], ['Green', 'lightgrey']]);
+      expect(next.boardColors).to.deep.equal([['Yellow', 'Yellow'], ['Green', 'lightgrey']]);
     });
 
-    it('should return positions when mute last item', () => {
-      mutator.row = 1;
-      mutator.item = 1;
-      const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['Red', 'lightgrey']] };
+    it('should return positions', () => {
+      mutator.nbMove = 4;
+      const prev = { positions: [], boardColors: [['Yellow', 'Yellow'], ['Red', 'lightgrey']] };
 
       const next = mutator.muteState('Blue')(prev);
 
-      expect(next.positions).to.deep.equal([{
-        numberOfCorrectPositions: 2,
-        numberOfWrongPositions: 0,
-      }]);
-    });
-
-    it('should not update positions when mute first item', () => {
-      mutator.row = 1;
-      mutator.item = 0;
-      const prev = { positions: [], boardColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']] };
-
-      const next = mutator.muteState('Red')(prev);
-
-      expect(next.positions).to.be.empty;
+      expect(next.positions).to.be.not.empty;
     });
   });
 
@@ -174,7 +145,7 @@ describe('BoardStateMutator', () => {
       mutator.nbMove = 3;
       const prev = {
         positions: [{ numberOfCorrectPositions: 1, numberOfWrongPositions: 0 }],
-        boardColors: [['lightgrey', 'lightgrey'], ['Red', 'lightgrey']],
+        boardColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
       };
 
       const next = mutator.getNext('Blue')(prev);
