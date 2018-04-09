@@ -7,10 +7,10 @@ const createBoardColors = (nbRows, nbCodeHoles) => Array.from({ length: nbRows }
 const identityState = prevState => prevState;
 
 export default class BoardStateMutator {
-  constructor(nbRows, nbCodeHoles, colorsToGuess) {
+  constructor(nbRows, nbCodeHoles, colorsDecoder) {
     this.nbRows = nbRows;
     this.nbCodeHoles = nbCodeHoles;
-    this.colorsToGuess = colorsToGuess;
+    this.colorsDecoder = colorsDecoder;
     this.nbMove = 0;
   }
 
@@ -36,22 +36,11 @@ export default class BoardStateMutator {
     };
   }
 
-  getCorrectPositions(colors) {
-    return colors.filter((color, i) => color === this.colorsToGuess[i]).length;
-  }
-
-  getWrongPositions(colors) {
-    return colors.filter((color, i) => {
-      const index = this.colorsToGuess.indexOf(color);
-      return index !== -1 && index !== i;
-    }).length;
-  }
-
   mutePositions(positions, codeColors) {
     return this.isLastColumn()
       ? [...positions, {
-        numberOfCorrectPositions: this.getCorrectPositions(codeColors),
-        numberOfWrongPositions: this.getWrongPositions(codeColors),
+        numberOfCorrectPositions: this.colorsDecoder.getCorrectPositions(codeColors),
+        numberOfWrongPositions: this.colorsDecoder.getWrongPositions(codeColors),
       }]
       : [...positions];
   }

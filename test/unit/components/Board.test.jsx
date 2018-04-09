@@ -4,12 +4,14 @@ import Board from 'components/Board/Board';
 import Row from 'components/Row/Row';
 import ColorItem from 'components/ColorItem/ColorItem';
 
+import ColorsDecoder from 'components/Colors/ColorsDecoder';
+
 describe('Board', () => {
   const NB_ROWS = 10;
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} colorsToGuess={['Yellow', 'Yellow', 'Yellow', 'Yellow']} />);
+    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} colorsDecoder={new ColorsDecoder(['Yellow', 'Yellow', 'Yellow', 'Yellow'])} />);
   });
 
   describe('state', () => {

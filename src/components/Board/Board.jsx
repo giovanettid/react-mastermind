@@ -5,6 +5,8 @@ import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 import Solution from 'components/Solution/Solution';
 
+import ColorsDecoder from 'components/Colors/ColorsDecoder';
+
 import BoardStateMutator from './BoardStateMutator';
 
 const NB_ROWS = 10;
@@ -13,12 +15,12 @@ const NB_CODE_HOLES = 4;
 export default class Board extends React.Component {
   static propTypes = {
     colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
-    colorsToGuess: PropTypes.arrayOf(PropTypes.string).isRequired,
+    colorsDecoder: PropTypes.instanceOf(ColorsDecoder).isRequired,
   }
 
   constructor(props) {
     super(props);
-    this.stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES, props.colorsToGuess);
+    this.stateMutator = new BoardStateMutator(NB_ROWS, NB_CODE_HOLES, props.colorsDecoder);
     this.state = this.stateMutator.getInitial();
   }
 
@@ -27,7 +29,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const solution = <Solution colors={this.props.colorsToGuess} />;
+    const solution = <Solution colors={this.props.colorsDecoder.colorsToGuess} />;
     const rows = <Rows boardColors={this.state.boardColors} />;
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
