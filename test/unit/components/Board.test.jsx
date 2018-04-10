@@ -4,14 +4,16 @@ import Board from 'components/Board/Board';
 import Row from 'components/Row/Row';
 import ColorItem from 'components/ColorItem/ColorItem';
 
+import BoardModel from 'components/Board/BoardModel';
 import ColorsDecoder from 'components/Colors/ColorsDecoder';
 
 describe('Board', () => {
   const NB_ROWS = 10;
+  const NB_CODE_HOLES = 4;
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} colorsDecoder={new ColorsDecoder(['Yellow', 'Yellow', 'Yellow', 'Yellow'])} />);
+    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} boardModel={new BoardModel(NB_ROWS, NB_CODE_HOLES)} colorsDecoder={new ColorsDecoder(['Yellow', 'Yellow', 'Yellow', 'Yellow'])} />);
   });
 
   describe('state', () => {
