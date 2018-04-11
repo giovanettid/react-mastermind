@@ -49,7 +49,7 @@ describe('BoardStateMutator', () => {
 
   describe('muteState', () => {
     it('should mute color at row, col indexes & return positions', () => {
-      sandbox.stub(model, 'getIndexes').returns({ row: 1, col: 0 });
+      sandbox.stub(model, 'nextIndexes').returns({ row: 1, col: 0 });
       const prev = { positions: [], boardColors: [['Yellow', 'Yellow'], ['lightgrey', 'lightgrey']] };
 
       const next = mutator.muteState('Green')(prev);

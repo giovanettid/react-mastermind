@@ -25,7 +25,7 @@ export default class BoardStateMutator {
 
   muteState(color) {
     return (prevState) => {
-      const { row, col } = this.boardModel.getIndexes();
+      const { row, col } = this.boardModel.nextIndexes();
 
       const boardColors = [...prevState.boardColors];
       boardColors[row][col] = color;
@@ -41,8 +41,6 @@ export default class BoardStateMutator {
     if (this.boardModel.isLastMove()) {
       return identityState;
     }
-
-    this.boardModel.move();
 
     return this.muteState(color);
   }

@@ -20,14 +20,11 @@ export default class BoardModel {
     return this.nbMove === this.nbRows * this.nbCodeHoles;
   }
 
-  getIndexes() {
+  nextIndexes() {
+    this.nbMove = this.nbMove + 1;
     return {
       row: Math.floor((this.nbMove - 1) / this.nbCodeHoles),
       col: (this.nbMove - 1) % this.nbCodeHoles,
     };
-  }
-
-  move() {
-    this.nbMove = this.nbMove + 1;
   }
 }

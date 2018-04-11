@@ -41,32 +41,27 @@ describe('BoardModel', () => {
     });
   });
 
-  describe('getIndexes', () => {
+  describe('nextIndexes', () => {
     it('first move should return row 0, col 0', () => {
-      model.move();
-
-      expect(model.getIndexes()).to.deep.equal({ row: 0, col: 0 });
+      expect(model.nextIndexes()).to.deep.equal({ row: 0, col: 0 });
     });
 
     it('last col move should return row 0, col 1', () => {
       model.nbMove = 1;
-      model.move();
 
-      expect(model.getIndexes()).to.deep.equal({ row: 0, col: 1 });
+      expect(model.nextIndexes()).to.deep.equal({ row: 0, col: 1 });
     });
 
     it('next row move should return row 1, col 0', () => {
       model.nbMove = 2;
-      model.move();
 
-      expect(model.getIndexes()).to.deep.equal({ row: 1, col: 0 });
+      expect(model.nextIndexes()).to.deep.equal({ row: 1, col: 0 });
     });
 
     it('last move should return row 1, col 1', () => {
       model.nbMove = 3;
-      model.move();
 
-      expect(model.getIndexes()).to.deep.equal({ row: 1, col: 1 });
+      expect(model.nextIndexes()).to.deep.equal({ row: 1, col: 1 });
     });
   });
 });
