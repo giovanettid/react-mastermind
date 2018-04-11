@@ -11,7 +11,7 @@ const Row = ({ colors }) => {
   const codeHolesRow = colors.map(e => <ColorItem key={shortid.generate()} color={e} />);
 
   const NB_KEY_HOLES = 2;
-  const keyHolesRow = keys(NB_KEY_HOLES).map(e => <KeyHole key={e} />);
+  const keyHolesRow = keys(NB_KEY_HOLES).map(e => <KeyHole key={e} color={'lightgrey'} />);
 
   return (
     <tr className="Row">
