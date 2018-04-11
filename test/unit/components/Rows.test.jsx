@@ -18,7 +18,7 @@ describe('Rows', () => {
 
   describe('inverse display from boardColors', () => {
     it('should pass Red color to last Row', () => {
-      expect(wrapper.find(Row).last().props().colors.includes('Red')).to.be.true;
+      expect(wrapper.find(Row).last().props().codeColors.includes('Red')).to.be.true;
     });
   });
 });
