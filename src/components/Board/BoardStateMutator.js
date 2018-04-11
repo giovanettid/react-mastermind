@@ -10,17 +10,19 @@ export default class BoardStateMutator {
   getInitial() {
     return {
       boardColors: this.boardModel.createBoardColors(),
-      positions: [],
+      boardKeyColors: [],
     };
   }
 
-  mutePositions(positions, codeColors) {
+  muteBoardKeyColors(boardKeyColors, codeColors) {
+    const correct = this.colorsDecoder.getCorrectPositions(codeColors);
+    const wrong = this.colorsDecoder.getWrongPositions(codeColors);
     return this.boardModel.isLastColumn()
-      ? [...positions, {
-        numberOfCorrectPositions: this.colorsDecoder.getCorrectPositions(codeColors),
-        numberOfWrongPositions: this.colorsDecoder.getWrongPositions(codeColors),
-      }]
-      : [...positions];
+      ? [...boardKeyColors,
+        [...new Array(correct).fill('Black'),
+          ...new Array(wrong).fill('White'),
+          ...new Array(this.colorsDecoder.colorsToGuess.length - correct - wrong).fill('lightgrey')]]
+      : [...boardKeyColors];
   }
 
   muteState(color) {
@@ -32,7 +34,7 @@ export default class BoardStateMutator {
 
       return {
         boardColors,
-        positions: this.mutePositions(prevState.positions, boardColors[row]),
+        boardKeyColors: this.muteBoardKeyColors(prevState.boardKeyColors, boardColors[row]),
       };
     };
   }
