@@ -10,19 +10,17 @@ export default class BoardStateMutator {
   getInitial() {
     return {
       boardCodeColors: this.boardModel.createBoardColors(),
-      boardKeyColors: [],
+      boardKeyColors: this.boardModel.createBoardColors(),
     };
   }
 
-  muteBoardKeyColors(boardKeyColors, codeColors) {
+  mapKeyColors(codeColors) {
     const correct = this.colorsDecoder.getCorrectPositions(codeColors);
     const wrong = this.colorsDecoder.getWrongPositions(codeColors);
-    return this.boardModel.isLastColumn()
-      ? [...boardKeyColors,
-        [...new Array(correct).fill('Black'),
-          ...new Array(wrong).fill('White'),
-          ...new Array(this.colorsDecoder.colorsToGuess.length - correct - wrong).fill('lightgrey')]]
-      : [...boardKeyColors];
+
+    return [...new Array(correct).fill('Black'),
+      ...new Array(wrong).fill('White'),
+      ...new Array(this.colorsDecoder.colorsToGuess.length - correct - wrong).fill('lightgrey')];
   }
 
   muteState(color) {
@@ -32,10 +30,12 @@ export default class BoardStateMutator {
       const boardCodeColors = [...prevState.boardCodeColors];
       boardCodeColors[row][col] = color;
 
-      return {
-        boardCodeColors,
-        boardKeyColors: this.muteBoardKeyColors(prevState.boardKeyColors, boardCodeColors[row]),
-      };
+      const boardKeyColors = [...prevState.boardKeyColors];
+      if (this.boardModel.isLastColumn()) {
+        boardKeyColors[row] = this.mapKeyColors(boardCodeColors[row]);
+      }
+
+      return { boardCodeColors, boardKeyColors };
     };
   }
 

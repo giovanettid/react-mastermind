@@ -19,47 +19,77 @@ describe('BoardStateMutator', () => {
   });
 
   describe('getInitial', () => {
-    it('should return initial boardCodeColors', () => {
+    it('should return initial board colors', () => {
       expect(mutator.getInitial().boardCodeColors).to.have.lengthOf(2);
-    });
-
-    it('should return empty initial boardKeyColors', () => {
-      expect(mutator.getInitial().boardKeyColors).to.be.empty;
+      expect(mutator.getInitial().boardKeyColors).to.have.lengthOf(2);
     });
   });
 
-  describe('muteBoardKeyColors', () => {
-    it('should not append boardKeyColors when first column', () => {
-      sandbox.stub(model, 'isLastColumn').returns(false);
-      const boardKeyColors = [['Black', 'White']];
-
-      expect(mutator.muteBoardKeyColors(boardKeyColors, ['Red', 'Green'])).to.deep.equal(boardKeyColors);
+  describe('mapKeyColors', () => {
+    it('should map keyColors (2 correct)', () => {
+      expect(mutator.mapKeyColors(['Red', 'Blue']))
+        .to.deep.equal(['Black', 'Black']);
     });
 
-    it('should append boardKeyColors when last column', () => {
-      sandbox.stub(model, 'isLastColumn').returns(true);
+    it('should map keyColors (2 wrong)', () => {
+      expect(mutator.mapKeyColors(['Blue', 'Red']))
+        .to.deep.equal(['White', 'White']);
+    });
 
-      expect(mutator.muteBoardKeyColors([['Black', 'White']],
-        ['Red', 'Blue'])).to.deep.equal([['Black', 'White'], ['Black', 'Black']]);
+    it('should map keyColors (0 correct, 0 wrong)', () => {
+      expect(mutator.mapKeyColors(['Yellow', 'Green']))
+        .to.deep.equal(['lightgrey', 'lightgrey']);
     });
   });
 
   describe('muteState', () => {
-    it('should mute color at row, col indexes & return boardKeyColors', () => {
-      sandbox.stub(model, 'nextIndexes').returns({ row: 1, col: 0 });
-      const prev = { boardKeyColors: [], boardCodeColors: [['Yellow', 'Yellow'], ['lightgrey', 'lightgrey']] };
+    it('should mute code color at row, col indexes', () => {
+      model.nbMove = 2;
+
+      const prev = {
+        boardKeyColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']],
+        boardCodeColors: [['Yellow', 'Yellow'], ['lightgrey', 'lightgrey']],
+      };
 
       const next = mutator.muteState('Green')(prev);
 
       expect(next.boardCodeColors).to.deep.equal([['Yellow', 'Yellow'], ['Green', 'lightgrey']]);
-      expect(next.boardKeyColors).to.be.not.empty;
+    });
+
+    it('should not mute boardKeyColors when first column', () => {
+      model.nbMove = 2;
+
+      const prev = {
+        boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
+        boardCodeColors: [['Red', 'Yellow'], ['lightgrey', 'lightgrey']],
+      };
+
+      const next = mutator.muteState('Red')(prev);
+
+      expect(next.boardKeyColors).to.deep.equal(prev.boardKeyColors);
+    });
+
+    it('should mute boardKeyColors when last column', () => {
+      model.nbMove = 3;
+
+      const prev = {
+        boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
+        boardCodeColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
+      };
+
+      const next = mutator.muteState('Blue')(prev);
+
+      expect(next.boardKeyColors).to.deep.equal([['Black', 'lightgrey'], ['Black', 'Black']]);
     });
   });
 
   describe('getNext', () => {
     it('should mute state from next item', () => {
       model.nbMove = 3;
-      const prev = { boardKeyColors: [], boardCodeColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']] };
+      const prev = {
+        boardKeyColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']],
+        boardCodeColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']],
+      };
 
       const next = mutator.getNext('Yellow')(prev);
 
@@ -79,7 +109,7 @@ describe('BoardStateMutator', () => {
       model.nbMove = 3;
 
       const prev = {
-        boardKeyColors: [['Black', 'lightgrey']],
+        boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
         boardCodeColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
       };
 

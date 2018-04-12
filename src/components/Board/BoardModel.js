@@ -2,29 +2,29 @@
 const defaultColors = size => new Array(size).fill('lightgrey');
 
 export default class BoardModel {
-  constructor(nbRows, nbCodeHoles) {
+  constructor(nbRows, nbHoles) {
     this.nbRows = nbRows;
-    this.nbCodeHoles = nbCodeHoles;
+    this.nbHoles = nbHoles;
     this.nbMove = 0;
   }
 
   createBoardColors() {
-    return Array.from({ length: this.nbRows }, () => defaultColors(this.nbCodeHoles));
+    return Array.from({ length: this.nbRows }, () => defaultColors(this.nbHoles));
   }
 
   isLastColumn() {
-    return this.nbMove % this.nbCodeHoles === 0;
+    return this.nbMove % this.nbHoles === 0;
   }
 
   isLastMove() {
-    return this.nbMove === this.nbRows * this.nbCodeHoles;
+    return this.nbMove === this.nbRows * this.nbHoles;
   }
 
   nextIndexes() {
     this.nbMove = this.nbMove + 1;
     return {
-      row: Math.floor((this.nbMove - 1) / this.nbCodeHoles),
-      col: (this.nbMove - 1) % this.nbCodeHoles,
+      row: Math.floor((this.nbMove - 1) / this.nbHoles),
+      col: (this.nbMove - 1) % this.nbHoles,
     };
   }
 }
