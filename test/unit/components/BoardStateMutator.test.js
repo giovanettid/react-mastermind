@@ -19,8 +19,8 @@ describe('BoardStateMutator', () => {
   });
 
   describe('getInitial', () => {
-    it('should return initial boardColors', () => {
-      expect(mutator.getInitial().boardColors).to.have.lengthOf(2);
+    it('should return initial boardCodeColors', () => {
+      expect(mutator.getInitial().boardCodeColors).to.have.lengthOf(2);
     });
 
     it('should return empty initial boardKeyColors', () => {
@@ -47,11 +47,11 @@ describe('BoardStateMutator', () => {
   describe('muteState', () => {
     it('should mute color at row, col indexes & return boardKeyColors', () => {
       sandbox.stub(model, 'nextIndexes').returns({ row: 1, col: 0 });
-      const prev = { boardKeyColors: [], boardColors: [['Yellow', 'Yellow'], ['lightgrey', 'lightgrey']] };
+      const prev = { boardKeyColors: [], boardCodeColors: [['Yellow', 'Yellow'], ['lightgrey', 'lightgrey']] };
 
       const next = mutator.muteState('Green')(prev);
 
-      expect(next.boardColors).to.deep.equal([['Yellow', 'Yellow'], ['Green', 'lightgrey']]);
+      expect(next.boardCodeColors).to.deep.equal([['Yellow', 'Yellow'], ['Green', 'lightgrey']]);
       expect(next.boardKeyColors).to.be.not.empty;
     });
   });
@@ -59,16 +59,16 @@ describe('BoardStateMutator', () => {
   describe('getNext', () => {
     it('should mute state from next item', () => {
       model.nbMove = 3;
-      const prev = { boardKeyColors: [], boardColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']] };
+      const prev = { boardKeyColors: [], boardCodeColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']] };
 
       const next = mutator.getNext('Yellow')(prev);
 
-      expect(next.boardColors).to.deep.equal([['lightgrey', 'lightgrey'], ['Green', 'Yellow']]);
+      expect(next.boardCodeColors).to.deep.equal([['lightgrey', 'lightgrey'], ['Green', 'Yellow']]);
     });
 
     it('should not mute when already last move', () => {
       sandbox.stub(model, 'isLastMove').returns(true);
-      const prev = { boardColors: [['Red', 'Red'], ['Green', 'Yellow']] };
+      const prev = { boardCodeColors: [['Red', 'Red'], ['Green', 'Yellow']] };
 
       const next = mutator.getNext('Green')(prev);
 
@@ -80,7 +80,7 @@ describe('BoardStateMutator', () => {
 
       const prev = {
         boardKeyColors: [['Black', 'lightgrey']],
-        boardColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
+        boardCodeColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
       };
 
       const next = mutator.getNext('Blue')(prev);

@@ -9,7 +9,7 @@ export default class BoardStateMutator {
 
   getInitial() {
     return {
-      boardColors: this.boardModel.createBoardColors(),
+      boardCodeColors: this.boardModel.createBoardColors(),
       boardKeyColors: [],
     };
   }
@@ -29,12 +29,12 @@ export default class BoardStateMutator {
     return (prevState) => {
       const { row, col } = this.boardModel.nextIndexes();
 
-      const boardColors = [...prevState.boardColors];
-      boardColors[row][col] = color;
+      const boardCodeColors = [...prevState.boardCodeColors];
+      boardCodeColors[row][col] = color;
 
       return {
-        boardColors,
-        boardKeyColors: this.muteBoardKeyColors(prevState.boardKeyColors, boardColors[row]),
+        boardCodeColors,
+        boardKeyColors: this.muteBoardKeyColors(prevState.boardKeyColors, boardCodeColors[row]),
       };
     };
   }

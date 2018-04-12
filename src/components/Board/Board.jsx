@@ -29,7 +29,7 @@ export default class Board extends React.Component {
 
   render() {
     const solution = <Solution colors={this.props.colorsDecoder.colorsToGuess} />;
-    const rows = <Rows boardColors={this.state.boardColors} />;
+    const rows = <Rows boardColors={this.state.boardCodeColors} />;
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
       onColorClick={this.handleColorClick}

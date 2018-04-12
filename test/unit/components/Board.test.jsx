@@ -17,8 +17,8 @@ describe('Board', () => {
   });
 
   describe('state', () => {
-    it('should init boardColors with 10*4 lightgrey', () => {
-      expect(wrapper.state().boardColors).to.deep.equal(new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')));
+    it('should init boardCodeColors with 10*4 lightgrey', () => {
+      expect(wrapper.state().boardCodeColors).to.deep.equal(new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')));
     });
   });
 
