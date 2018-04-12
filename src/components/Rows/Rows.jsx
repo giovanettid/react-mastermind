@@ -4,10 +4,9 @@ import shortid from 'shortid';
 
 import Row from 'components/Row/Row';
 
-const Rows = ({ boardColors }) => {
-  const keys = new Array(4).fill('lightgrey');
-  const rows = boardColors
-    .map(e => <Row key={shortid.generate()} codeColors={e} keyColors={keys} />)
+const Rows = ({ boardCodeColors, boardKeyColors }) => {
+  const rows = boardCodeColors
+    .map((e, i) => <Row key={shortid.generate()} codeColors={e} keyColors={boardKeyColors[i]} />)
     .reverse();
 
   return (
@@ -18,7 +17,8 @@ const Rows = ({ boardColors }) => {
 };
 
 Rows.propTypes = {
-  boardColors: PropTypes.arrayOf(PropTypes.array).isRequired,
+  boardCodeColors: PropTypes.arrayOf(PropTypes.array).isRequired,
+  boardKeyColors: PropTypes.arrayOf(PropTypes.array).isRequired,
 };
 
 export default Rows;

@@ -7,7 +7,10 @@ describe('Rows', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Rows boardColors={[['Red', 'lightgrey'], ['lightgrey', 'lightgrey']]} />);
+    wrapper = mount(<Rows
+      boardCodeColors={[['Red', 'Blue'], ['lightgrey', 'lightgrey']]}
+      boardKeyColors={[['White', 'lightgrey'], ['lightgrey', 'lightgrey']]}
+    />);
   });
 
   describe('render', () => {
@@ -17,8 +20,12 @@ describe('Rows', () => {
   });
 
   describe('inverse display from boardColors', () => {
-    it('should pass Red color to last Row', () => {
+    it('should pass Red code color to last Row', () => {
       expect(wrapper.find(Row).last().props().codeColors.includes('Red')).to.be.true;
+    });
+
+    it('should pass Withe key color to last Row', () => {
+      expect(wrapper.find(Row).last().props().keyColors.includes('White')).to.be.true;
     });
   });
 });

@@ -3,6 +3,7 @@ import React from 'react';
 import Board from 'components/Board/Board';
 import Row from 'components/Row/Row';
 import ColorItem from 'components/ColorItem/ColorItem';
+import KeyHole from 'components/KeyHole/KeyHole';
 
 import BoardModel from 'components/Board/BoardModel';
 import ColorsDecoder from 'components/Colors/ColorsDecoder';
@@ -13,7 +14,11 @@ describe('Board', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<Board colorsToPick={['Yellow', 'Green']} boardModel={new BoardModel(NB_ROWS, NB_CODE_HOLES)} colorsDecoder={new ColorsDecoder(['Yellow', 'Yellow', 'Yellow', 'Yellow'])} />);
+    wrapper = mount(<Board
+      colorsToPick={['Yellow', 'Green']}
+      boardModel={new BoardModel(NB_ROWS, NB_CODE_HOLES)}
+      colorsDecoder={new ColorsDecoder(['Yellow', 'Yellow', 'Yellow', 'Yellow'])}
+    />);
   });
 
   describe('state', () => {
@@ -62,6 +67,16 @@ describe('Board', () => {
 
         const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(ColorItem);
         expect(codeHoles.first().props().color).to.equal('Green');
+      });
+
+      it('should pass correct color to first KeyHole on the last Row', () => {
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+
+        const codeHoles = wrapper.find(Row).at(NB_ROWS - 1).find(KeyHole);
+        expect(codeHoles.first().props().color).to.equal('Black');
       });
     });
   });
