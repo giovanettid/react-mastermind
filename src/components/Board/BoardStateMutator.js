@@ -15,8 +15,8 @@ export default class BoardStateMutator {
   }
 
   mapKeyColors(codeColors) {
-    const correct = this.colorsDecoder.getCorrectPositions(codeColors);
-    const wrong = this.colorsDecoder.getWrongPositions(codeColors);
+    const correct = this.colorsDecoder.getNbCorrectPositions(codeColors);
+    const wrong = this.colorsDecoder.getNbWrongPositions(codeColors);
 
     return [...new Array(correct).fill('Black'),
       ...new Array(wrong).fill('White'),
