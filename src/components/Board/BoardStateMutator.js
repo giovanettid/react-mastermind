@@ -15,12 +15,11 @@ export default class BoardStateMutator {
   }
 
   mapKeyColors(codeColors) {
-    const correct = this.colorsDecoder.getNbCorrectPositions(codeColors);
-    const wrong = this.colorsDecoder.getNbWrongPositions(codeColors);
+    const { correct, wrong, rest } = this.colorsDecoder.getNbPositions(codeColors);
 
     return [...new Array(correct).fill('Black'),
       ...new Array(wrong).fill('White'),
-      ...new Array(this.colorsDecoder.colorsToGuess.length - correct - wrong).fill('lightgrey')];
+      ...new Array(rest).fill('lightgrey')];
   }
 
   muteState(color) {

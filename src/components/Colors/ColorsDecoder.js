@@ -17,38 +17,37 @@ export default class ColorsDecoder {
     return colors.filter((color, i) => !positions.includes(i));
   }
 
-  getCorrectPositions(colors) {
+  static getNbWrongPositions(colorsToGuess, colors) {
+    const wrongColors = colors
+      .filter((color, i) => ColorsDecoder.hasWrongPosition(colorsToGuess, color, i));
+
+    return [...new Set(wrongColors)]
+      .map(color => ColorsDecoder.nbOccurences(colorsToGuess, color))
+      .reduce((sum, val) => sum + val, 0);
+  }
+
+  static getCorrectPositions(colorsToGuess, colors) {
     return colors
-      .map((color, i) => ({ correct: this.hasCorrectPosition(color, i), position: i }))
+      .map((color, i) => ({ correct: color === colorsToGuess[i], position: i }))
       .filter(item => item.correct)
       .map(({ position }) => position);
   }
 
-  getNbCorrectPositions(colors) {
-    return this.getCorrectPositions(colors).length;
-  }
-
-  getNbWrongPositions(colors) {
-    const correctPositions = this.getCorrectPositions(colors);
+  getNbPositions(colors) {
+    const correctPositions = ColorsDecoder.getCorrectPositions(this.colorsToGuess, colors);
 
     const colorsToGuessWithoutCorrect = ColorsDecoder
       .excludePositions(this.colorsToGuess, correctPositions);
-
     const colorsWithoutCorrect = ColorsDecoder.excludePositions(colors, correctPositions);
 
-    const wrongColors = colorsWithoutCorrect
-      .filter((color, i) => ColorsDecoder.hasWrongPosition(colorsToGuessWithoutCorrect, color, i));
+    const correct = correctPositions.length;
+    const wrong = ColorsDecoder
+      .getNbWrongPositions(colorsToGuessWithoutCorrect, colorsWithoutCorrect);
 
-    const dedupeWrongColors = [...new Set(wrongColors)];
-
-    return dedupeWrongColors.length
-      ? dedupeWrongColors
-        .map(color => ColorsDecoder.nbOccurences(colorsToGuessWithoutCorrect, color))
-        .reduce((sum, val) => sum + val)
-      : 0;
-  }
-
-  hasCorrectPosition(color, position) {
-    return color === this.colorsToGuess[position];
+    return {
+      correct,
+      wrong,
+      rest: this.colorsToGuess.length - correct - wrong,
+    };
   }
 }
