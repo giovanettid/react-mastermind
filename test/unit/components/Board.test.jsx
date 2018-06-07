@@ -1,12 +1,14 @@
 import React from 'react';
 
+import ColorsDecoder from 'components/Colors/ColorsDecoder';
+
 import Board from 'components/Board/Board';
+import BoardModel from 'components/Board/BoardModel';
+import BoardStateMutator from 'components/Board/BoardStateMutator';
+
 import Row from 'components/Row/Row';
 import ColorItem from 'components/ColorItem/ColorItem';
 import KeyHole from 'components/KeyHole/KeyHole';
-
-import BoardModel from 'components/Board/BoardModel';
-import ColorsDecoder from 'components/Colors/ColorsDecoder';
 
 describe('Board', () => {
   const NB_ROWS = 10;
@@ -14,10 +16,15 @@ describe('Board', () => {
   let wrapper;
 
   beforeEach(() => {
+    const model = new BoardModel(NB_ROWS, NB_CODE_HOLES);
+    const colorsToGuess = ['Yellow', 'Yellow', 'Yellow', 'Yellow'];
+    const colorsDecoder = new ColorsDecoder(colorsToGuess);
+    const stateMutator = new BoardStateMutator(model, colorsDecoder);
+
     wrapper = mount(<Board
       colorsToPick={['Yellow', 'Green']}
-      boardModel={new BoardModel(NB_ROWS, NB_CODE_HOLES)}
-      colorsDecoder={new ColorsDecoder(['Yellow', 'Yellow', 'Yellow', 'Yellow'])}
+      colorsToGuess={colorsToGuess}
+      stateMutator={stateMutator}
     />);
   });
 
