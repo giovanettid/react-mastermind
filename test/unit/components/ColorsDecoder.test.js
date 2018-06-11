@@ -65,68 +65,45 @@ describe('ColorsDecoder', () => {
 
   describe('getCorrectPositions', () => {
     it('when 0 correct position then return empty array', () => {
-      expect(ColorsDecoder.getCorrectPositions(
-        ['Red', 'Blue', 'Yellow'],
-        ['Green', 'Green', 'Black'],
-      )).to.deep.equal([]);
+      expect(decoder.getCorrectPositions(['Green', 'Green', 'Black'])).to.deep.equal([]);
     });
 
     it('when 1 correct & 1 wrong position then return index 0', () => {
-      expect(ColorsDecoder.getCorrectPositions(
-        ['Red', 'Blue', 'Yellow'],
-        ['Red', 'Green', 'Blue'],
-      )).to.deep.equal([0]);
+      expect(decoder.getCorrectPositions(['Red', 'Green', 'Blue'])).to.deep.equal([0]);
     });
 
     it('when 2 correct position then return indexes 0 and 2', () => {
-      expect(ColorsDecoder.getCorrectPositions(
-        ['Red', 'Blue', 'Yellow'],
-        ['Red', 'Green', 'Yellow'],
-      )).to.deep.equal([0, 2]);
+      expect(decoder.getCorrectPositions(['Red', 'Green', 'Yellow'])).to.deep.equal([0, 2]);
     });
   });
 
   describe('getNbWrongPositions', () => {
     it('when none colors match then return 0', () => {
       expect(ColorsDecoder.getNbWrongPositions(
-        ['Red', 'Blue', 'Yellow'],
         ['Black', 'Green', 'Black'],
+        ['Red', 'Blue', 'Yellow'],
       )).to.equal(0);
     });
 
     it('when 2 wrong positions then return 2', () => {
       expect(ColorsDecoder.getNbWrongPositions(
-        ['Red', 'Blue', 'Yellow'],
         ['Blue', 'Red', 'Black'],
+        ['Red', 'Blue', 'Yellow'],
       )).to.equal(2);
     });
 
     it('when same color has 2 wrong position but only once to decode then return 1', () => {
       expect(ColorsDecoder.getNbWrongPositions(
-        ['Red', 'Blue', 'Red'],
         ['Blue', 'Yellow', 'Blue'],
+        ['Red', 'Blue', 'Red'],
       )).to.equal(1);
     });
 
     it('when same color has 3 wrong position but only once to decode then return 1', () => {
       expect(ColorsDecoder.getNbWrongPositions(
-        ['Red', 'Blue', 'Green', 'Yellow'],
         ['Black', 'Red', 'Red', 'Red'],
+        ['Red', 'Blue', 'Green', 'Yellow'],
       )).to.equal(1);
-    });
-  });
-
-  describe('hasWrongPosition', () => {
-    it('when color has wrong position then return true', () => {
-      expect(ColorsDecoder.hasWrongPosition(['Red', 'Blue', 'Yellow'], 'Red', 1)).to.be.true;
-    });
-
-    it('when color is not present then return false', () => {
-      expect(ColorsDecoder.hasWrongPosition(['Red', 'Blue', 'Yellow'], 'Green', 2)).to.be.false;
-    });
-
-    it('when color has correct position then return false', () => {
-      expect(ColorsDecoder.hasWrongPosition(['Red', 'Blue', 'Yellow'], 'Red', 0)).to.be.false;
     });
   });
 });
