@@ -7,7 +7,7 @@ export default class ColorsPredicates {
   }
 
   static exclude(positions) {
-    return (color, position) => !positions.includes(position);
+    return (_, position) => !positions.includes(position);
   }
 
   static same(colorToFind) {
