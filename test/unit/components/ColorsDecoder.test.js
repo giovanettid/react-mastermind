@@ -79,31 +79,21 @@ describe('ColorsDecoder', () => {
 
   describe('getNbWrongPositions', () => {
     it('when none colors match then return 0', () => {
-      expect(ColorsDecoder.getNbWrongPositions(
-        ['Black', 'Green', 'Black'],
-        ['Red', 'Blue', 'Yellow'],
-      )).to.equal(0);
+      expect(decoder.getNbWrongPositions(() => true)(['Black', 'Green', 'Black'])).to.equal(0);
     });
 
     it('when 2 wrong positions then return 2', () => {
-      expect(ColorsDecoder.getNbWrongPositions(
-        ['Blue', 'Red', 'Black'],
-        ['Red', 'Blue', 'Yellow'],
-      )).to.equal(2);
+      expect(decoder.getNbWrongPositions(() => true)(['Blue', 'Red', 'Black'])).to.equal(2);
     });
 
     it('when same color has 2 wrong position but only once to decode then return 1', () => {
-      expect(ColorsDecoder.getNbWrongPositions(
-        ['Blue', 'Yellow', 'Blue'],
-        ['Red', 'Blue', 'Red'],
-      )).to.equal(1);
+      decoder = new ColorsDecoder(['Red', 'Blue', 'Red']);
+      expect(decoder.getNbWrongPositions(() => true)(['Blue', 'Yellow', 'Blue'])).to.equal(1);
     });
 
     it('when same color has 3 wrong position but only once to decode then return 1', () => {
-      expect(ColorsDecoder.getNbWrongPositions(
-        ['Black', 'Red', 'Red', 'Red'],
-        ['Red', 'Blue', 'Green', 'Yellow'],
-      )).to.equal(1);
+      decoder = new ColorsDecoder(['Red', 'Blue', 'Green', 'Yellow']);
+      expect(decoder.getNbWrongPositions(() => true)(['Black', 'Red', 'Red', 'Red'])).to.equal(1);
     });
   });
 });
