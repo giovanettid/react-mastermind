@@ -1,9 +1,9 @@
 
-const isWrong = (position, index) => index !== -1 && index !== position;
+const foundButNotMatch = (position, index) => index !== -1 && index !== position;
 
 export default class ColorsPredicates {
   static wrong(colors) {
-    return (color, position) => isWrong(position, colors.indexOf(color));
+    return (color, position) => foundButNotMatch(position, colors.indexOf(color));
   }
 
   static exclude(positions) {
