@@ -5,17 +5,17 @@ describe('ColorsMappers', () => {
     const predicate = () => color => color === 'Black';
 
     it('when color has no occurences the return 0', () => {
-      expect(ColorsMappers.nbOccurences(['Yellow', 'Green'], predicate)('Black'))
+      expect(ColorsMappers.nbOccurences(predicate)(['Yellow', 'Green'])('Black'))
         .to.equal(0);
     });
 
     it('when color has 1 occurence the return 1', () => {
-      expect(ColorsMappers.nbOccurences(['Black', 'Green'], predicate)('Black'))
+      expect(ColorsMappers.nbOccurences(predicate)(['Black', 'Green'])('Black'))
         .to.equal(1);
     });
 
     it('when color has 2 occurences the return 2', () => {
-      expect(ColorsMappers.nbOccurences(['Black', 'Black'], predicate)('Black'))
+      expect(ColorsMappers.nbOccurences(predicate)(['Black', 'Black'])('Black'))
         .to.equal(2);
     });
   });

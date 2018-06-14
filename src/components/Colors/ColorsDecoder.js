@@ -2,6 +2,11 @@
 import ColorsPredicates from './ColorsPredicates';
 import ColorsMappers from './ColorsMappers';
 
+const nbOccurences = colors => ColorsMappers.nbOccurences(ColorsPredicates.same)(colors);
+
+const minNbOccurences = (colorsToGuess, colors) =>
+  color => Math.min(nbOccurences(colorsToGuess)(color), nbOccurences(colors)(color));
+
 export default class ColorsDecoder {
   constructor(colorsToGuess) {
     this.colorsToGuess = colorsToGuess;
@@ -12,7 +17,7 @@ export default class ColorsDecoder {
     return colors => [...new Set(
       colors.filter(predicate)
         .filter(ColorsPredicates.wrong(colorsToGuess)))]
-      .map(ColorsMappers.nbOccurences(colorsToGuess, ColorsPredicates.same))
+      .map(minNbOccurences(colorsToGuess, colors))
       .reduce((sum, val) => sum + val, 0);
   }
 
