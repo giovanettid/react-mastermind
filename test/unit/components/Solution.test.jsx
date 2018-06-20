@@ -18,5 +18,13 @@ describe('Solution', () => {
     it('should has Solution_hidden class', () => {
       expect(wrapper.find('tr.Solution').hasClass('Solution_hidden')).to.be.true;
     });
+
+    describe('decoded solution', () => {
+      it('should not have Solution_hidden class', () => {
+        const decodedWrapper = mount(<Solution colors={['Yellow', 'Green', 'Green']} decoded />);
+
+        expect(decodedWrapper.find('tr.Solution').hasClass('Solution_hidden')).to.be.false;
+      });
+    });
   });
 });
