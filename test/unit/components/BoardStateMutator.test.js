@@ -56,30 +56,56 @@ describe('BoardStateMutator', () => {
       expect(next.boardCodeColors).to.deep.equal([['Yellow', 'Yellow'], ['Green', 'lightgrey']]);
     });
 
-    it('should not mute boardKeyColors when first column', () => {
-      model.nbMove = 2;
-
+    describe('first column', () => {
       const prev = {
         boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
         boardCodeColors: [['Red', 'Yellow'], ['lightgrey', 'lightgrey']],
       };
 
-      const next = mutator.muteState('Red')(prev);
+      beforeEach(() => {
+        model.nbMove = 2;
+      });
 
-      expect(next.boardKeyColors).to.deep.equal(prev.boardKeyColors);
+      it('should not mute boardKeyColors', () => {
+        const next = mutator.muteState('Red')(prev);
+
+        expect(next.boardKeyColors).to.deep.equal(prev.boardKeyColors);
+      });
+
+      it('should not be decoded', () => {
+        const next = mutator.muteState('Red')(prev);
+
+        expect(next.isDecoded).to.be.false;
+      });
     });
 
-    it('should mute boardKeyColors when last column', () => {
-      model.nbMove = 3;
-
+    describe('last column', () => {
       const prev = {
         boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
         boardCodeColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
       };
 
-      const next = mutator.muteState('Blue')(prev);
+      beforeEach(() => {
+        model.nbMove = 3;
+      });
 
-      expect(next.boardKeyColors).to.deep.equal([['Black', 'lightgrey'], ['Black', 'Black']]);
+      it('should mute boardKeyColors', () => {
+        const next = mutator.muteState('Blue')(prev);
+
+        expect(next.boardKeyColors).to.deep.equal([['Black', 'lightgrey'], ['Black', 'Black']]);
+      });
+
+      it('should not be decoded when boardKeyColors are not all Black', () => {
+        const next = mutator.muteState('Yellow')(prev);
+
+        expect(next.isDecoded).to.be.false;
+      });
+
+      it('should be decoded when boardKeyColors are all Black', () => {
+        const next = mutator.muteState('Blue')(prev);
+
+        expect(next.isDecoded).to.be.true;
+      });
     });
   });
 

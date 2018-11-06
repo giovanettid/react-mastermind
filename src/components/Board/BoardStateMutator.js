@@ -27,14 +27,17 @@ export default class BoardStateMutator {
       const { row, col } = this.boardModel.nextIndexes();
 
       const boardCodeColors = [...prevState.boardCodeColors];
-      boardCodeColors[row][col] = color;
+      const lastRowCodeColors = boardCodeColors[row];
+      lastRowCodeColors[col] = color;
 
       const boardKeyColors = [...prevState.boardKeyColors];
+      let isDecoded = false;
       if (this.boardModel.isLastColumn()) {
-        boardKeyColors[row] = this.mapKeyColors(boardCodeColors[row]);
+        boardKeyColors[row] = this.mapKeyColors(lastRowCodeColors);
+        isDecoded = this.colorsDecoder.isAllCorrect(lastRowCodeColors);
       }
-      // TODO : evaluate 4 correct colors
-      return { boardCodeColors, boardKeyColors };
+
+      return { boardCodeColors, boardKeyColors, isDecoded };
     };
   }
 
