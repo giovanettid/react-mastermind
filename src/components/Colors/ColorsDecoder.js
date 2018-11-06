@@ -40,4 +40,8 @@ export default class ColorsDecoder {
       rest: this.colorsToGuess.length - correct - wrong,
     };
   }
+
+  isAllCorrect(colors) {
+    return this.getCorrectPositions(colors).length === this.colorsToGuess.length;
+  }
 }

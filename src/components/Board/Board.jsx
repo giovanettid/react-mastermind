@@ -24,6 +24,7 @@ export default class Board extends React.Component {
   }
 
   render() {
+    // TODO : pass decoded to Solution
     const solution = <Solution colors={this.props.colorsToGuess} />;
     const rows = (<Rows
       boardCodeColors={this.state.boardCodeColors}

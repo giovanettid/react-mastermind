@@ -33,7 +33,7 @@ export default class BoardStateMutator {
       if (this.boardModel.isLastColumn()) {
         boardKeyColors[row] = this.mapKeyColors(boardCodeColors[row]);
       }
-
+      // TODO : evaluate 4 correct colors
       return { boardCodeColors, boardKeyColors };
     };
   }

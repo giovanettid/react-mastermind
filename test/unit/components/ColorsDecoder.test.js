@@ -9,6 +9,20 @@ describe('ColorsDecoder', () => {
     decoder = new ColorsDecoder(['Red', 'Blue', 'Yellow']);
   });
 
+  describe('isAllCorrect', () => {
+    it('should return true when all correct positions', () => {
+      expect(decoder.isAllCorrect(['Red', 'Blue', 'Yellow'])).to.be.true;
+    });
+
+    it('should return false when has wrong positions', () => {
+      expect(decoder.isAllCorrect(['Blue', 'Red', 'Yellow'])).to.be.false;
+    });
+
+    it('should return false when has no match position', () => {
+      expect(decoder.isAllCorrect(['Red', 'Blue', 'Black'])).to.be.false;
+    });
+  });
+
   describe('getNbPositions', () => {
     describe('none colors match', () => {
       it('should return 0 correct and 0 wrong', () => {
