@@ -75,7 +75,7 @@ describe('BoardStateMutator', () => {
       it('should not be decoded', () => {
         const next = mutator.muteState('Red')(prev);
 
-        expect(next.isDecoded).to.be.false;
+        expect(next.decoded).to.be.false;
       });
     });
 
@@ -98,13 +98,13 @@ describe('BoardStateMutator', () => {
       it('should not be decoded when boardKeyColors are not all Black', () => {
         const next = mutator.muteState('Yellow')(prev);
 
-        expect(next.isDecoded).to.be.false;
+        expect(next.decoded).to.be.false;
       });
 
       it('should be decoded when boardKeyColors are all Black', () => {
         const next = mutator.muteState('Blue')(prev);
 
-        expect(next.isDecoded).to.be.true;
+        expect(next.decoded).to.be.true;
       });
     });
   });

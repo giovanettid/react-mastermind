@@ -31,13 +31,13 @@ export default class BoardStateMutator {
       lastRowCodeColors[col] = color;
 
       const boardKeyColors = [...prevState.boardKeyColors];
-      let isDecoded = false;
+      let decoded = false;
       if (this.boardModel.isLastColumn()) {
         boardKeyColors[row] = this.mapKeyColors(lastRowCodeColors);
-        isDecoded = this.colorsDecoder.isAllCorrect(lastRowCodeColors);
+        decoded = this.colorsDecoder.isAllCorrect(lastRowCodeColors);
       }
 
-      return { boardCodeColors, boardKeyColors, isDecoded };
+      return { boardCodeColors, boardKeyColors, decoded };
     };
   }
 

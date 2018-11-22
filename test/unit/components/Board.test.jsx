@@ -76,14 +76,29 @@ describe('Board', () => {
         expect(codeHoles.first().props().color).to.equal('Green');
       });
 
-      it('should pass correct color to first KeyHole on the last Row', () => {
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
-        wrapper.find('.ClickableColor_color_green').simulate('click');
-        wrapper.find('.ClickableColor_color_green').simulate('click');
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+      describe('click 4 ClickableColor', () => {
+        it('should pass correct color to first KeyHole on the last Row', () => {
+          wrapper.find('.ClickableColor_color_yellow').simulate('click');
+          wrapper.find('.ClickableColor_color_green').simulate('click');
+          wrapper.find('.ClickableColor_color_green').simulate('click');
+          wrapper.find('.ClickableColor_color_yellow').simulate('click');
 
-        const codeHoles = wrapper.find(Row).at(NB_ROWS - 1).find(KeyHole);
-        expect(codeHoles.first().props().color).to.equal('Black');
+          const codeHoles = wrapper.find(Row).at(NB_ROWS - 1).find(KeyHole);
+          expect(codeHoles.first().props().color).to.equal('Black');
+        });
+
+        describe('click all correct colors', () => {
+          it('should show Solution', () => {
+            expect(wrapper.find('.Solution_hidden').exists()).to.be.true;
+
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+
+            expect(wrapper.find('.Solution_hidden').exists()).to.be.false;
+          });
+        });
       });
     });
   });
