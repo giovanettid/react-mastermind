@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 import Solution from 'components/Solution/Solution';
+import Status from 'components/Status/Status';
 
 import BoardStateMutator from './BoardStateMutator';
 
@@ -44,6 +45,8 @@ export default class Board extends React.Component {
         {rows}
         <br />
         {picker}
+        <br />
+        <Status />
       </div>
     );
   }

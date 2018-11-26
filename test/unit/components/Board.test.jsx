@@ -50,6 +50,10 @@ describe('Board', () => {
     it('should render hidden Solution with 4 ColorItem', () => {
       expect(wrapper.find('.Solution_hidden .ColorItem')).to.have.lengthOf(4);
     });
+
+    it('should display Status', () => {
+      expect(wrapper.find('.Status')).to.have.lengthOf(1);
+    });
   });
 
   describe('click ClickableColor(s)', () => {
