@@ -11,11 +11,7 @@ const Status = ({ message }) =>
   </table>);
 
 Status.propTypes = {
-  message: PropTypes.string,
-};
-
-Status.defaultProps = {
-  message: '',
+  message: PropTypes.string.isRequired,
 };
 
 export default Status;

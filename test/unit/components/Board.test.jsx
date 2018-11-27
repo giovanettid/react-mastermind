@@ -51,8 +51,8 @@ describe('Board', () => {
       expect(wrapper.find('.Solution_hidden .ColorItem')).to.have.lengthOf(4);
     });
 
-    it('should display Status', () => {
-      expect(wrapper.find('.Status')).to.have.lengthOf(1);
+    it('should not display Status', () => {
+      expect(wrapper.find('.Status').exists()).to.be.false;
     });
   });
 
@@ -92,15 +92,27 @@ describe('Board', () => {
         });
 
         describe('click all correct colors', () => {
+          const simulateWin = () => {
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+          };
+
           it('should show Solution', () => {
             expect(wrapper.find('.Solution_hidden').exists()).to.be.true;
 
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
+            simulateWin();
 
             expect(wrapper.find('.Solution_hidden').exists()).to.be.false;
+          });
+
+          it('should display win status message', () => {
+            expect(wrapper.find('.Status').exists()).to.be.false;
+
+            simulateWin();
+
+            expect(wrapper.find('.Status').text()).to.equal('You win');
           });
         });
       });

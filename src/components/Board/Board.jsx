@@ -46,7 +46,7 @@ export default class Board extends React.Component {
         <br />
         {picker}
         <br />
-        <Status />
+        { this.state.decoded && <Status message={'You win'} /> }
       </div>
     );
   }
