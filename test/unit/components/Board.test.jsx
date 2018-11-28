@@ -11,7 +11,7 @@ import ColorItem from 'components/ColorItem/ColorItem';
 import KeyHole from 'components/KeyHole/KeyHole';
 
 describe('Board', () => {
-  const NB_ROWS = 10;
+  const NB_ROWS = 2;
   const NB_CODE_HOLES = 4;
   let wrapper;
 
@@ -29,7 +29,7 @@ describe('Board', () => {
   });
 
   describe('state', () => {
-    it('should init boardCodeColors with 10*4 lightgrey', () => {
+    it('should init boardCodeColors with nb_rows*4 lightgrey', () => {
       expect(wrapper.state().boardCodeColors).to.deep.equal(new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')));
     });
   });
@@ -57,6 +57,20 @@ describe('Board', () => {
   });
 
   describe('click ClickableColor(s)', () => {
+    const simulateLoose = () => {
+      wrapper.find('.ClickableColor_color_green').simulate('click');
+      wrapper.find('.ClickableColor_color_green').simulate('click');
+      wrapper.find('.ClickableColor_color_green').simulate('click');
+      wrapper.find('.ClickableColor_color_green').simulate('click');
+    };
+
+    const simulateWin = () => {
+      wrapper.find('.ClickableColor_color_yellow').simulate('click');
+      wrapper.find('.ClickableColor_color_yellow').simulate('click');
+      wrapper.find('.ClickableColor_color_yellow').simulate('click');
+      wrapper.find('.ClickableColor_color_yellow').simulate('click');
+    };
+
     describe('click 2 ClickableColor', () => {
       it('should pass correct color to first and second ColorItem on the last Row', () => {
         wrapper.find('.ClickableColor_color_green').simulate('click');
@@ -79,41 +93,54 @@ describe('Board', () => {
         const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(ColorItem);
         expect(codeHoles.first().props().color).to.equal('Green');
       });
+    });
 
-      describe('click 4 ClickableColor', () => {
-        it('should pass correct color to first KeyHole on the last Row', () => {
-          wrapper.find('.ClickableColor_color_yellow').simulate('click');
-          wrapper.find('.ClickableColor_color_green').simulate('click');
-          wrapper.find('.ClickableColor_color_green').simulate('click');
-          wrapper.find('.ClickableColor_color_yellow').simulate('click');
+    describe('click 4 ClickableColor', () => {
+      it('should pass correct color to first KeyHole on the last Row', () => {
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_green').simulate('click');
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
 
-          const codeHoles = wrapper.find(Row).at(NB_ROWS - 1).find(KeyHole);
-          expect(codeHoles.first().props().color).to.equal('Black');
+        const codeHoles = wrapper.find(Row).at(NB_ROWS - 1).find(KeyHole);
+        expect(codeHoles.first().props().color).to.equal('Black');
+      });
+
+      describe('click all correct colors', () => {
+        it('should show Solution', () => {
+          expect(wrapper.find('.Solution_hidden').exists()).to.be.true;
+
+          simulateWin();
+
+          expect(wrapper.find('.Solution_hidden').exists()).to.be.false;
         });
 
-        describe('click all correct colors', () => {
-          const simulateWin = () => {
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
-            wrapper.find('.ClickableColor_color_yellow').simulate('click');
-          };
+        it('should display win status message', () => {
+          expect(wrapper.find('.Status').exists()).to.be.false;
 
-          it('should show Solution', () => {
-            expect(wrapper.find('.Solution_hidden').exists()).to.be.true;
+          simulateWin();
 
-            simulateWin();
+          expect(wrapper.find('.Status').text()).to.equal('You win');
+        });
+      });
+    });
 
-            expect(wrapper.find('.Solution_hidden').exists()).to.be.false;
-          });
+    describe('click all colors', () => {
+      describe('not guess correct colors', () => {
+        it('should display loose status message', () => {
+          simulateLoose();
+          simulateLoose();
 
-          it('should display win status message', () => {
-            expect(wrapper.find('.Status').exists()).to.be.false;
+          expect(wrapper.find('.Status').text()).to.equal('You loose');
+        });
+      });
 
-            simulateWin();
+      describe('guess correct colors', () => {
+        it('should display win status message', () => {
+          simulateLoose();
+          simulateWin();
 
-            expect(wrapper.find('.Status').text()).to.equal('You win');
-          });
+          expect(wrapper.find('.Status').text()).to.equal('You win');
         });
       });
     });

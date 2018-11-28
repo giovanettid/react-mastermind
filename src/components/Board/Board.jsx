@@ -38,6 +38,9 @@ export default class Board extends React.Component {
       onColorClick={this.handleColorClick}
     />);
 
+    const endOfGame = this.state.decoded || this.state.gameOver;
+    const message = this.state.gameOver ? 'You loose' : 'You win';
+
     return (
       <div className="Board">
         {solution}
@@ -46,7 +49,7 @@ export default class Board extends React.Component {
         <br />
         {picker}
         <br />
-        { this.state.decoded && <Status message={'You win'} /> }
+        { endOfGame && <Status message={message} /> }
       </div>
     );
   }
