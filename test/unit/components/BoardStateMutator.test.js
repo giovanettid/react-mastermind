@@ -101,10 +101,23 @@ describe('BoardStateMutator', () => {
         expect(next.decoded).to.be.false;
       });
 
+      it('should be gameOver when last move and not decoded', () => {
+        const next = mutator.muteState('Yellow')(prev);
+
+        expect(next.gameOver).to.be.true;
+      });
+
       it('should be decoded when boardKeyColors are all Black', () => {
         const next = mutator.muteState('Blue')(prev);
 
         expect(next.decoded).to.be.true;
+      });
+
+      it('should not be gameOver when decoded', () => {
+        const next = mutator.muteState('Blue')(prev);
+
+        expect(next.decoded).to.be.true;
+        expect(next.gameOver).to.be.false;
       });
     });
   });

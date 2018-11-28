@@ -32,12 +32,15 @@ export default class BoardStateMutator {
 
       const boardKeyColors = [...prevState.boardKeyColors];
       let decoded = false;
+      let gameOver = false;
+
       if (this.boardModel.isLastColumn()) {
         boardKeyColors[row] = this.mapKeyColors(lastRowCodeColors);
         decoded = this.colorsDecoder.isAllCorrect(lastRowCodeColors);
+        gameOver = this.boardModel.isLastMove() && !decoded;
       }
 
-      return { boardCodeColors, boardKeyColors, decoded };
+      return { boardCodeColors, boardKeyColors, decoded, gameOver };
     };
   }
 
