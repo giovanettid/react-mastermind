@@ -25,7 +25,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const solution = this.state.decoded && <Solution colors={this.props.colorsToGuess} />;
+    const solution = this.state.endOfGame && <Solution colors={this.props.colorsToGuess} />;
 
     const rows = (<Rows
       boardCodeColors={this.state.boardCodeColors}

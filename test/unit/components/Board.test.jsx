@@ -129,6 +129,13 @@ describe('Board', () => {
 
           expect(wrapper.find('.Status').text()).to.equal('You loose');
         });
+
+        it('should show Solution', () => {
+          simulateLoose();
+          simulateLoose();
+
+          expect(wrapper.find('.Solution').exists()).to.be.true;
+        });
       });
 
       describe('guess correct colors', () => {
