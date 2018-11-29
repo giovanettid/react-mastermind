@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 import Solution from 'components/Solution/Solution';
-import Status from 'components/Status/Status';
+import StatusFactory from 'components/Status/StatusFactory';
 
 import BoardStateMutator from './BoardStateMutator';
 
@@ -38,9 +38,6 @@ export default class Board extends React.Component {
       onColorClick={this.handleColorClick}
     />);
 
-    const endOfGame = this.state.decoded || this.state.gameOver;
-    const message = this.state.gameOver ? 'You loose' : 'You win';
-
     return (
       <div className="Board">
         {solution}
@@ -49,7 +46,7 @@ export default class Board extends React.Component {
         <br />
         {picker}
         <br />
-        { endOfGame && <Status message={message} /> }
+        { this.state.endOfGame && StatusFactory.create(this.state.decoded) }
       </div>
     );
   }
