@@ -25,18 +25,19 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const solution = (<Solution
-      colors={this.props.colorsToGuess}
-      decoded={this.state.decoded}
-    />);
+    const solution = this.state.decoded && <Solution colors={this.props.colorsToGuess} />;
+
     const rows = (<Rows
       boardCodeColors={this.state.boardCodeColors}
       boardKeyColors={this.state.boardKeyColors}
     />);
+
     const picker = (<ColorPicker
       colors={this.props.colorsToPick}
       onColorClick={this.handleColorClick}
     />);
+
+    const status = this.state.endOfGame && StatusFactory.create(this.state.decoded);
 
     return (
       <div className="Board">
@@ -46,7 +47,7 @@ export default class Board extends React.Component {
         <br />
         {picker}
         <br />
-        { this.state.endOfGame && StatusFactory.create(this.state.decoded) }
+        {status}
       </div>
     );
   }

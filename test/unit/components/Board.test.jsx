@@ -47,10 +47,6 @@ describe('Board', () => {
       expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
     });
 
-    it('should render hidden Solution with 4 ColorItem', () => {
-      expect(wrapper.find('.Solution_hidden .ColorItem')).to.have.lengthOf(4);
-    });
-
     it('should not display Status', () => {
       expect(wrapper.find('.Status').exists()).to.be.false;
     });
@@ -108,11 +104,11 @@ describe('Board', () => {
 
       describe('click all correct colors', () => {
         it('should show Solution', () => {
-          expect(wrapper.find('.Solution_hidden').exists()).to.be.true;
+          expect(wrapper.find('.Solution').exists()).to.be.false;
 
           simulateWin();
 
-          expect(wrapper.find('.Solution_hidden').exists()).to.be.false;
+          expect(wrapper.find('.Solution').exists()).to.be.true;
         });
 
         it('should display win status message', () => {

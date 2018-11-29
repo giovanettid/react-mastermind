@@ -15,8 +15,4 @@ describe('Game', () => {
   it('should display ColorPicker with 6 ClickableColor', () => {
     expect(wrapper.find('.ColorPicker .ClickableColor')).to.have.lengthOf(6);
   });
-
-  it('should render hidden Solution with 4 ColorItem', () => {
-    expect(wrapper.find('.Solution_hidden .ColorItem')).to.have.lengthOf(4);
-  });
 });
