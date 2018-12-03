@@ -13,6 +13,7 @@ export default class Board extends React.Component {
     colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
     colorsToGuess: PropTypes.arrayOf(PropTypes.string).isRequired,
     stateMutator: PropTypes.instanceOf(BoardStateMutator).isRequired,
+    onResetClick: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -39,6 +40,8 @@ export default class Board extends React.Component {
 
     const status = this.state.endOfGame && StatusFactory.create(this.state.decoded);
 
+    const reset = <button className="Reset" onClick={this.props.onResetClick}>New game</button>;
+
     return (
       <div className="Board">
         {solution}
@@ -48,6 +51,8 @@ export default class Board extends React.Component {
         {picker}
         <br />
         {status}
+        <br />
+        {reset}
       </div>
     );
   }

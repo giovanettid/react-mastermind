@@ -15,7 +15,13 @@ describe('Board', () => {
   const NB_CODE_HOLES = 4;
   let wrapper;
 
+  let sandbox;
+  let spyClick;
+
   beforeEach(() => {
+    sandbox = sinon.sandbox.create();
+    spyClick = sandbox.spy();
+
     const model = new BoardModel(NB_ROWS, NB_CODE_HOLES);
     const colorsToGuess = ['Yellow', 'Yellow', 'Yellow', 'Yellow'];
     const colorsDecoder = new ColorsDecoder(colorsToGuess);
@@ -25,7 +31,12 @@ describe('Board', () => {
       colorsToPick={['Yellow', 'Green']}
       colorsToGuess={colorsToGuess}
       stateMutator={stateMutator}
+      onResetClick={spyClick}
     />);
+  });
+
+  afterEach(() => {
+    sandbox.restore();
   });
 
   describe('state', () => {
@@ -49,6 +60,18 @@ describe('Board', () => {
 
     it('should not display Status', () => {
       expect(wrapper.find('.Status').exists()).to.be.false;
+    });
+
+    it('should display reset button', () => {
+      expect(wrapper.find('button.Reset').exists()).to.be.true;
+    });
+  });
+
+  describe('on button reset click', () => {
+    it('should call onResetClick once', () => {
+      wrapper.find('button.Reset').simulate('click');
+
+      expect(spyClick.calledOnce).to.be.true;
     });
   });
 
