@@ -67,7 +67,7 @@ describe('Board', () => {
     });
   });
 
-  describe('on button reset click', () => {
+  describe('on click reset button', () => {
     it('should call onResetClick once', () => {
       wrapper.find('button.Reset').simulate('click');
 
@@ -126,7 +126,7 @@ describe('Board', () => {
       });
 
       describe('click all correct colors', () => {
-        it('should show Solution', () => {
+        it('should display Solution', () => {
           expect(wrapper.find('.Solution').exists()).to.be.false;
 
           simulateWin();
@@ -153,7 +153,7 @@ describe('Board', () => {
           expect(wrapper.find('.Status').text()).to.equal('You loose');
         });
 
-        it('should show Solution', () => {
+        it('should display Solution', () => {
           simulateLoose();
           simulateLoose();
 
@@ -167,6 +167,26 @@ describe('Board', () => {
           simulateWin();
 
           expect(wrapper.find('.Status').text()).to.equal('You win');
+        });
+      });
+
+      describe('on click reset button', () => {
+        it('should hide Solution', () => {
+          simulateLoose();
+          simulateWin();
+
+          wrapper.find('button.Reset').simulate('click');
+
+          expect(wrapper.find('.Solution').exists()).to.be.false;
+        });
+
+        it('should hide Status', () => {
+          simulateLoose();
+          simulateWin();
+
+          wrapper.find('button.Reset').simulate('click');
+
+          expect(wrapper.find('.Status').exists()).to.be.false;
         });
       });
     });

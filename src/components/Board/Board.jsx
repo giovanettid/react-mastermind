@@ -25,6 +25,11 @@ export default class Board extends React.Component {
     this.setState(this.props.stateMutator.getNext(color));
   }
 
+  handleResetClick = () => {
+    this.props.onResetClick();
+    this.setState(this.props.stateMutator.getInitial());
+  }
+
   render() {
     const solution = this.state.endOfGame && <Solution colors={this.props.colorsToGuess} />;
 
@@ -40,7 +45,7 @@ export default class Board extends React.Component {
 
     const status = this.state.endOfGame && StatusFactory.create(this.state.decoded);
 
-    const reset = <button className="Reset" onClick={this.props.onResetClick}>New game</button>;
+    const reset = <button className="Reset" onClick={this.handleResetClick}>New game</button>;
 
     return (
       <div className="Board">

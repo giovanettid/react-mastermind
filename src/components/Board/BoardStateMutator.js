@@ -11,6 +11,8 @@ export default class BoardStateMutator {
     return {
       boardCodeColors: this.boardModel.createBoardColors(),
       boardKeyColors: this.boardModel.createBoardColors(),
+      decoded: false,
+      endOfGame: false,
     };
   }
 

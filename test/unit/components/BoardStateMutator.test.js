@@ -23,6 +23,14 @@ describe('BoardStateMutator', () => {
       expect(mutator.getInitial().boardCodeColors).to.have.lengthOf(2);
       expect(mutator.getInitial().boardKeyColors).to.have.lengthOf(2);
     });
+
+    it('should return initial decoded false', () => {
+      expect(mutator.getInitial().decoded).to.be.false;
+    });
+
+    it('should return initial endOfGame false', () => {
+      expect(mutator.getInitial().endOfGame).to.be.false;
+    });
   });
 
   describe('mapKeyColors', () => {
