@@ -4,7 +4,7 @@ import Game from 'components/Game/Game';
 import GameConfiguration from 'components/Game/GameConfiguration';
 
 describe('Game', () => {
-  const configuration = new GameConfiguration();
+  const configuration = () => ({ ...new GameConfiguration() });
 
   let wrapper;
 

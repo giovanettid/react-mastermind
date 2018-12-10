@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 
 import Board from 'components/Board/Board';
 
-import GameConfiguration from './GameConfiguration';
-
 import './Game.scss';
 
 export default class Game extends React.Component {
   static propTypes = {
-    configuration: PropTypes.instanceOf(GameConfiguration).isRequired,
+    configuration: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
-    this.state = Object.assign({}, this.props.configuration);
+    this.state = this.props.configuration();
   }
 
   handleResetClick = () => {
-    this.setState(Object.assign({}, new GameConfiguration()));
+    this.setState(this.props.configuration());
   }
 
   render() {

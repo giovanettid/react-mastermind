@@ -7,6 +7,6 @@ import GameConfiguration from 'components/Game/GameConfiguration';
 import 'styles/main.scss';
 
 ReactDOM.render(
-  <Game configuration={new GameConfiguration()} />,
+  <Game configuration={() => ({ ...new GameConfiguration() })} />,
   document.getElementById('root'),
 );
