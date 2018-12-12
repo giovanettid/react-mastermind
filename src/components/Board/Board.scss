@@ -1,0 +1,22 @@
+@import 'variables';
+
+.Board {
+  margin: auto;
+  padding-top: 20px;
+  width: 250px;
+}
+
+.Reset {
+  margin: auto;
+  width: 120px;
+
+  button {
+    background-color: map-get($colors, 'green');
+    border-color: map-get($colors, 'green');
+    border-radius: 5px;
+    border-width: 2px;
+    color: map-get($colors, 'white');
+    width: 120px;
+  }
+}
+

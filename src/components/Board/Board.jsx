@@ -8,6 +8,8 @@ import StatusFactory from 'components/Status/StatusFactory';
 
 import BoardStateMutator from './BoardStateMutator';
 
+import './Board.scss';
+
 export default class Board extends React.Component {
   static propTypes = {
     colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -45,7 +47,7 @@ export default class Board extends React.Component {
 
     const status = this.state.endOfGame && StatusFactory.create(this.state.decoded);
 
-    const reset = <button className="Reset" onClick={this.handleResetClick}>New game</button>;
+    const reset = <div className="Reset"><button onClick={this.handleResetClick}>New game</button></div>;
 
     return (
       <div className="Board">

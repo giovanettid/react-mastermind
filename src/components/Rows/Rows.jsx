@@ -4,15 +4,19 @@ import shortid from 'shortid';
 
 import Row from 'components/Row/Row';
 
+import './Rows.scss';
+
 const Rows = ({ boardCodeColors, boardKeyColors }) => {
   const rows = boardCodeColors
     .map((e, i) => <Row key={shortid.generate()} codeColors={e} keyColors={boardKeyColors[i]} />)
     .reverse();
 
   return (
-    <table>
-      <tbody className="Rows">{rows}</tbody>
-    </table>
+    <div className="Rows">
+      <table>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
   );
 };
 

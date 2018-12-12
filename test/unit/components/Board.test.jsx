@@ -51,7 +51,7 @@ describe('Board', () => {
     });
 
     it('should display ColorPicker', () => {
-      expect(wrapper.find('tr.ColorPicker')).to.have.lengthOf(1);
+      expect(wrapper.find('.ColorPicker')).to.have.lengthOf(1);
     });
 
     it('should display 2 ClickableColor', () => {
@@ -63,13 +63,13 @@ describe('Board', () => {
     });
 
     it('should display reset button', () => {
-      expect(wrapper.find('button.Reset').exists()).to.be.true;
+      expect(wrapper.find('.Reset button').exists()).to.be.true;
     });
   });
 
   describe('on click reset button', () => {
     it('should call onResetClick once', () => {
-      wrapper.find('button.Reset').simulate('click');
+      wrapper.find('.Reset button').simulate('click');
 
       expect(spyClick.calledOnce).to.be.true;
     });
@@ -175,7 +175,7 @@ describe('Board', () => {
           simulateLoose();
           simulateWin();
 
-          wrapper.find('button.Reset').simulate('click');
+          wrapper.find('.Reset button').simulate('click');
 
           expect(wrapper.find('.Solution').exists()).to.be.false;
         });
@@ -184,7 +184,7 @@ describe('Board', () => {
           simulateLoose();
           simulateWin();
 
-          wrapper.find('button.Reset').simulate('click');
+          wrapper.find('.Reset button').simulate('click');
 
           expect(wrapper.find('.Status').exists()).to.be.false;
         });

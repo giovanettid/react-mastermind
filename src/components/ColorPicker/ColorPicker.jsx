@@ -3,16 +3,20 @@ import PropTypes from 'prop-types';
 
 import ClickableColor from 'components/ClickableColor/ClickableColor';
 
+import './ColorPicker.scss';
+
 const ColorPicker = ({ colors, onColorClick }) => {
   const items = colors
     .map(color => <ClickableColor key={color} color={color} onColorClick={onColorClick} />);
 
   return (
-    <table>
-      <tbody>
-        <tr className="ColorPicker">{items}</tr>
-      </tbody>
-    </table>
+    <div className="ColorPicker">
+      <table>
+        <tbody>
+          <tr>{items}</tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

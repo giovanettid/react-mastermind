@@ -5,16 +5,20 @@ import shortid from 'shortid';
 
 import ColorItem from 'components/ColorItem/ColorItem';
 
+import './Solution.scss';
+
 const Solution = ({ colors }) => {
   const items = colors
     .map(color => <ColorItem key={shortid.generate()} color={color} />);
 
   return (
-    <table>
-      <tbody>
-        <tr className="Solution">{items}</tr>
-      </tbody>
-    </table>
+    <div className="Solution">
+      <table>
+        <tbody>
+          <tr>{items}</tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

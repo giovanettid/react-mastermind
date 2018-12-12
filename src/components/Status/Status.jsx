@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './Status.scss';
+
 const Status = ({ message }) =>
-  (<table>
-    <tbody>
-      <tr>
-        <td className="Status">{message}</td>
-      </tr>
-    </tbody>
-  </table>);
+  (<div className="Status">
+    <table>
+      <tbody>
+        <tr>
+          <td>{message}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>);
 
 Status.propTypes = {
   message: PropTypes.string.isRequired,

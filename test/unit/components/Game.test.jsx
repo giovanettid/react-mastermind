@@ -28,7 +28,7 @@ describe('Game', () => {
       wrapper.find('button.ClickableColor').first().simulate('click');
       expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(39);
 
-      wrapper.find('button.Reset').simulate('click');
+      wrapper.find('.Reset button').simulate('click');
 
       expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(40);
       expect(wrapper.state()).to.not.equal(initialState);

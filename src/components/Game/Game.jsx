@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import Board from 'components/Board/Board';
 
-import './Game.scss';
-
 export default class Game extends React.Component {
   static propTypes = {
     configuration: PropTypes.func.isRequired,
