@@ -10,7 +10,8 @@ module.exports = {
     "sinon": false,
     "shallow": false,
     "mount": false,
-    "browser": false
+    "browser": false,
+    "$": false
   },
   "rules": {
     "no-unused-expressions": "off"
