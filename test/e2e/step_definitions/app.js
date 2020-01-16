@@ -1,11 +1,9 @@
-import { defineSupportCode } from 'cucumber';
+import { When, Then } from 'cucumber';
 
-defineSupportCode(({ When, Then }) => {
-  When(/^Go js starter$/, () => {
-    browser.url('/');
-  });
+When(/^Go js starter$/, () => {
+  browser.url('/');
+});
 
-  Then(/^Says "(.*)"$/, (starter) => {
-    expect(browser.getText('.starter')).to.equal(starter);
-  });
+Then(/^Says "(.*)"$/, (starter) => {
+  expect($('.starter').getText()).to.equal(starter);
 });
