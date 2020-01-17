@@ -25,9 +25,9 @@
 ## Starter features
 * see [CHANGELOG](CHANGELOG.md)
 
-## Pré requis
-* npm 5
-* node 8
+## Testé avec
+* npm 6
+* node 12
 
 ## Installation
 

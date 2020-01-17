@@ -15,6 +15,9 @@ coverage
 # Report directories
 report
 
+# Screenshot directories
+errorShots
+
 # Dependency directories
 node_modules/
 
