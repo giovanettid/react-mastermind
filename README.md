@@ -13,10 +13,10 @@
   * functional: [cucumber](https://cucumber.io)
   * e2e: [webdriverio](http://webdriver.io)
 * tooling
-  * package manager: npm 5
+  * package manager: npm 6
   * tasks: npm scripts
   * transpiler: [babel](https://babeljs.io)
-  * bundler: [webpack 3](https://webpack.js.org)
+  * bundler: [webpack 4](https://webpack.js.org)
   * linters: [eslint](https://eslint.org), [sass-lint](https://github.com/sasstools/sass-lint)
   * quality: [es6-plato](https://github.com/the-simian/es6-plato)
   * git hooks: [husky](https://github.com/typicode/husky)
