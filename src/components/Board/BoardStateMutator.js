@@ -1,5 +1,5 @@
 
-const identityState = prevState => prevState;
+const identityState = (prevState) => prevState;
 
 export default class BoardStateMutator {
   constructor(boardModel, colorsDecoder) {
@@ -42,7 +42,9 @@ export default class BoardStateMutator {
         endOfGame = this.boardModel.isLastMove() || decoded;
       }
 
-      return { boardCodeColors, boardKeyColors, decoded, endOfGame };
+      return {
+        boardCodeColors, boardKeyColors, decoded, endOfGame,
+      };
     };
   }
 

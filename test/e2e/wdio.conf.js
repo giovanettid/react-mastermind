@@ -127,7 +127,7 @@ exports.config = {
   cucumberOpts: {
     require: glob.sync('test/e2e/step_definitions/**/*.js'), // <string[]> (file/dir) require files before executing features
     backtrace: false, // <boolean> show full backtrace for errors
-    requireModule: ['babel-register'],
+    requireModule: ['@babel/register'],
     dryRun: false, // <boolean> invoke formatters without executing steps
     failFast: false, // <boolean> abort the run on first failure
     format: ['pretty'], // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)

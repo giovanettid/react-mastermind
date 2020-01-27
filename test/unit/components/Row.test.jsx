@@ -4,9 +4,12 @@ import Row from 'components/Row/Row';
 
 describe('Row', () => {
   const wrapper = mount(
-    <table><tbody>
-      <Row codeColors={['Yellow', 'lightgrey']} keyColors={['Black', 'White', 'lightgrey', 'lightgrey']} />
-    </tbody></table>);
+    <table>
+      <tbody>
+        <Row codeColors={['Yellow', 'lightgrey']} keyColors={['Black', 'White', 'lightgrey', 'lightgrey']} />
+      </tbody>
+    </table>,
+  );
 
   describe('render', () => {
     it('should display a Row with 2 ColorItem', () => {

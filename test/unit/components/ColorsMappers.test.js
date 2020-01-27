@@ -2,19 +2,19 @@ import ColorsMappers from 'components/Colors/ColorsMappers';
 
 describe('ColorsMappers', () => {
   describe('nbOccurences', () => {
-    const predicate = () => color => color === 'Black';
+    const predicate = () => (color) => color === 'Black';
 
-    it('when color has no occurences the return 0', () => {
+    it('when color has no occurences then return 0', () => {
       expect(ColorsMappers.nbOccurences(predicate)(['Yellow', 'Green'])('Black'))
         .to.equal(0);
     });
 
-    it('when color has 1 occurence the return 1', () => {
+    it('when color has 1 occurence then return 1', () => {
       expect(ColorsMappers.nbOccurences(predicate)(['Black', 'Green'])('Black'))
         .to.equal(1);
     });
 
-    it('when color has 2 occurences the return 2', () => {
+    it('when color has 2 occurences then return 2', () => {
       expect(ColorsMappers.nbOccurences(predicate)(['Black', 'Black'])('Black'))
         .to.equal(2);
     });

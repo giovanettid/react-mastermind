@@ -4,25 +4,29 @@ import PropTypes from 'prop-types';
 import Board from 'components/Board/Board';
 
 export default class Game extends React.Component {
-  static propTypes = {
-    configuration: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
-    this.state = this.props.configuration();
+    this.state = props.configuration();
   }
 
   handleResetClick = () => {
-    this.setState(this.props.configuration());
+    const { configuration } = this.props;
+    this.setState(configuration());
   }
 
   render() {
-    return (<Board
-      colorsToPick={this.state.colorsToPick}
-      colorsToGuess={this.state.colorsToGuess}
-      stateMutator={this.state.stateMutator}
-      onResetClick={this.handleResetClick}
-    />);
+    const { colorsToPick, colorsToGuess, stateMutator } = this.state;
+    return (
+      <Board
+        colorsToPick={colorsToPick}
+        colorsToGuess={colorsToGuess}
+        stateMutator={stateMutator}
+        onResetClick={this.handleResetClick}
+      />
+    );
   }
 }
+
+Game.propTypes = {
+  configuration: PropTypes.func.isRequired,
+};

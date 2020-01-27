@@ -13,7 +13,7 @@ module.exports = {
       "jsx": true
     }
   },
-  settings: {
+  "settings": {
     "import/resolver": {
       "node" : {
         "moduleDirectory": ["node_modules", "src", "test/unit", "test/e2e"]

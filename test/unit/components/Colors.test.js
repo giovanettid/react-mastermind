@@ -7,7 +7,7 @@ describe('Colors', () => {
 
   const expectedColors = ['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black'];
 
-  const checkColor = color => expect(color).to.be.oneOf(expectedColors);
+  const checkColor = (color) => expect(color).to.be.oneOf(expectedColors);
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();

@@ -3,7 +3,7 @@ import ColorsDecoder from 'components/Colors/ColorsDecoder';
 describe('ColorsDecoder', () => {
   let decoder;
 
-  const createDecoder = colors => new ColorsDecoder(colors);
+  const createDecoder = (colors) => new ColorsDecoder(colors);
 
   beforeEach(() => {
     decoder = new ColorsDecoder(['Red', 'Blue', 'Yellow']);
