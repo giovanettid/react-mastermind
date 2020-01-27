@@ -2,10 +2,11 @@
 import ColorsPredicates from './ColorsPredicates';
 import ColorsMappers from './ColorsMappers';
 
-const nbOccurences = colors => ColorsMappers.nbOccurences(ColorsPredicates.same)(colors);
+const nbOccurences = (colors) => ColorsMappers.nbOccurences(ColorsPredicates.same)(colors);
 
-const minNbOccurences = (colorsToGuess, colors) =>
-  color => Math.min(nbOccurences(colorsToGuess)(color), nbOccurences(colors)(color));
+const minNbOccurences = (colorsToGuess, colors) => (
+  (color) => Math.min(nbOccurences(colorsToGuess)(color), nbOccurences(colors)(color))
+);
 
 export default class ColorsDecoder {
   constructor(colorsToGuess) {
@@ -14,9 +15,10 @@ export default class ColorsDecoder {
 
   getNbWrongPositions(predicate) {
     const colorsToGuess = this.colorsToGuess.filter(predicate);
-    return colors => [...new Set(
+    return (colors) => [...new Set(
       colors.filter(predicate)
-        .filter(ColorsPredicates.wrong(colorsToGuess)))]
+        .filter(ColorsPredicates.wrong(colorsToGuess)),
+    )]
       .map(minNbOccurences(colorsToGuess, colors))
       .reduce((sum, val) => sum + val, 0);
   }
@@ -24,7 +26,7 @@ export default class ColorsDecoder {
   getCorrectPositions(colors) {
     return colors
       .map(ColorsMappers.correctPosition(this.colorsToGuess))
-      .filter(item => item.correct)
+      .filter((item) => item.correct)
       .map(({ position }) => position);
   }
 

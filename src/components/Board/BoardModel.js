@@ -1,5 +1,5 @@
 
-const defaultColors = size => new Array(size).fill('lightgrey');
+const defaultColors = (size) => new Array(size).fill('lightgrey');
 
 export default class BoardModel {
   constructor(nbRows, nbHoles) {
@@ -21,7 +21,7 @@ export default class BoardModel {
   }
 
   nextIndexes() {
-    this.nbMove = this.nbMove + 1;
+    this.nbMove += 1;
     return {
       row: Math.floor((this.nbMove - 1) / this.nbHoles),
       col: (this.nbMove - 1) % this.nbHoles,

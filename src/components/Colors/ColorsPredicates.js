@@ -11,6 +11,6 @@ export default class ColorsPredicates {
   }
 
   static same(colorToFind) {
-    return color => color === colorToFind;
+    return (color) => color === colorToFind;
   }
 }

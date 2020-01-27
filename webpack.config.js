@@ -13,7 +13,6 @@ const config = {
   mode: process.env.NODE_ENV || 'development',
   devtool: false,
   entry: {
-    polyfill: ['babel-polyfill'],
     app: [`./${sourceDir}/components/main.jsx`],
   },
   output: {
@@ -55,8 +54,12 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react'],
-            plugins: ['transform-class-properties'],
+            presets: [['@babel/env', {
+              useBuiltIns: 'usage',
+              corejs: 3,
+              debug: true,
+            }], '@babel/react'],
+            plugins: ['@babel/plugin-proposal-class-properties'],
           },
         },
       },
@@ -103,7 +106,6 @@ const config = {
 if (devMode) {
   config.plugins.push(new webpack.SourceMapDevToolPlugin({
     filename: '[file].map',
-    exclude: /polyfill.*\.js$/,
   }));
 }
 

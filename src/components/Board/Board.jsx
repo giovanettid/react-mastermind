@@ -11,43 +11,50 @@ import BoardStateMutator from './BoardStateMutator';
 import './Board.scss';
 
 export default class Board extends React.Component {
-  static propTypes = {
-    colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
-    colorsToGuess: PropTypes.arrayOf(PropTypes.string).isRequired,
-    stateMutator: PropTypes.instanceOf(BoardStateMutator).isRequired,
-    onResetClick: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
-    this.state = this.props.stateMutator.getInitial();
+    this.state = props.stateMutator.getInitial();
   }
 
   handleColorClick = (color) => {
-    this.setState(this.props.stateMutator.getNext(color));
+    const { stateMutator } = this.props;
+    this.setState(stateMutator.getNext(color));
   }
 
   handleResetClick = () => {
-    this.props.onResetClick();
-    this.setState(this.props.stateMutator.getInitial());
+    const { onResetClick, stateMutator } = this.props;
+    onResetClick();
+    this.setState(stateMutator.getInitial());
   }
 
   render() {
-    const solution = this.state.endOfGame && <Solution colors={this.props.colorsToGuess} />;
+    const {
+      endOfGame, boardCodeColors, boardKeyColors, decoded,
+    } = this.state;
+    const { colorsToGuess, colorsToPick } = this.props;
+    const solution = endOfGame && <Solution colors={colorsToGuess} />;
 
-    const rows = (<Rows
-      boardCodeColors={this.state.boardCodeColors}
-      boardKeyColors={this.state.boardKeyColors}
-    />);
+    const rows = (
+      <Rows
+        boardCodeColors={boardCodeColors}
+        boardKeyColors={boardKeyColors}
+      />
+    );
 
-    const picker = (<ColorPicker
-      colors={this.props.colorsToPick}
-      onColorClick={this.handleColorClick}
-    />);
+    const picker = (
+      <ColorPicker
+        colors={colorsToPick}
+        onColorClick={this.handleColorClick}
+      />
+    );
 
-    const status = this.state.endOfGame && StatusFactory.create(this.state.decoded);
+    const status = endOfGame && StatusFactory.create(decoded);
 
-    const reset = <div className="Reset"><button onClick={this.handleResetClick}>New game</button></div>;
+    const reset = (
+      <div className="Reset">
+        <button type="button" onClick={this.handleResetClick}>New game</button>
+      </div>
+    );
 
     return (
       <div className="Board">
@@ -64,3 +71,10 @@ export default class Board extends React.Component {
     );
   }
 }
+
+Board.propTypes = {
+  colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
+  colorsToGuess: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stateMutator: PropTypes.instanceOf(BoardStateMutator).isRequired,
+  onResetClick: PropTypes.func.isRequired,
+};

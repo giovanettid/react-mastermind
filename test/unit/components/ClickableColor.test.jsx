@@ -10,7 +10,7 @@ describe('ClickableColor', () => {
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
     spyClick = sandbox.spy();
-    wrapper = shallow(<ClickableColor color={'Red'} onColorClick={spyClick} />);
+    wrapper = shallow(<ClickableColor color="Red" onColorClick={spyClick} />);
   });
 
   afterEach(() => {

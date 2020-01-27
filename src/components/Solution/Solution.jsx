@@ -9,7 +9,7 @@ import './Solution.scss';
 
 const Solution = ({ colors }) => {
   const items = colors
-    .map(color => <ColorItem key={shortid.generate()} color={color} />);
+    .map((color) => <ColorItem key={shortid.generate()} color={color} />);
 
   return (
     <div className="Solution">

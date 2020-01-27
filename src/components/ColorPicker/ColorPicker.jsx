@@ -7,7 +7,7 @@ import './ColorPicker.scss';
 
 const ColorPicker = ({ colors, onColorClick }) => {
   const items = colors
-    .map(color => <ClickableColor key={color} color={color} onColorClick={onColorClick} />);
+    .map((color) => <ClickableColor key={color} color={color} onColorClick={onColorClick} />);
 
   return (
     <div className="ColorPicker">
