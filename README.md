@@ -17,10 +17,10 @@
   * tasks: npm scripts
   * transpiler: [babel](https://babeljs.io)
   * bundler: [webpack 4](https://webpack.js.org)
-  * linters: [eslint](https://eslint.org), [sass-lint](https://github.com/sasstools/sass-lint)
+  * linters: [eslint](https://eslint.org), [stylelint](https://stylelint.io)
   * quality: [es6-plato](https://github.com/the-simian/es6-plato)
   * git hooks: [husky](https://github.com/typicode/husky)
- 
+
 
 ## Starter features
 * see [CHANGELOG](CHANGELOG.md)
@@ -36,32 +36,32 @@
 ## Démarrage
 
  ``` npm start```
- 
+
 ## Linters
 
  ``` npm run lint```
- 
+
 ## Tests
 
  ``` npm run test```
-  
+
 ## Tests with coverage
 
  ``` npm run coverage```
-   
+
 ## Tests End to end
 
  ``` npm run e2e```
-    
+
 ## Code analysis
 
  ``` npm run quality```
- 
+
 ## Build in production mode
- 
+
  ``` npm run build```
- 
+
 ## Serve in production mode
- 
+
  ``` npm run server:build```
 
