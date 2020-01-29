@@ -13,13 +13,13 @@ import KeyHole from 'components/KeyHole/KeyHole';
 describe('Board', () => {
   const NB_ROWS = 2;
   const NB_CODE_HOLES = 4;
-  let wrapper;
 
-  let sandbox;
+  const sandbox = sinon.createSandbox();
+
+  let wrapper;
   let spyClick;
 
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
     spyClick = sandbox.spy();
 
     const model = new BoardModel(NB_ROWS, NB_CODE_HOLES);

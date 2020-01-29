@@ -4,12 +4,12 @@ import BoardModel from 'components/Board/BoardModel';
 import ColorsDecoder from 'components/Colors/ColorsDecoder';
 
 describe('BoardStateMutator', () => {
-  let sandbox;
+  const sandbox = sinon.createSandbox();
+
   let mutator;
   let model;
 
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
     model = new BoardModel(2, 2);
     mutator = new BoardStateMutator(model, new ColorsDecoder(['Red', 'Blue']));
   });

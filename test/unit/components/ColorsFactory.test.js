@@ -2,11 +2,7 @@ import ColorsFactory from 'components/Colors/ColorsFactory';
 import Colors from 'components/Colors/Colors';
 
 describe('ColorsFactory', () => {
-  let sandbox;
-
-  beforeEach(() => {
-    sandbox = sinon.sandbox.create();
-  });
+  const sandbox = sinon.createSandbox();
 
   afterEach(() => {
     sandbox.restore();

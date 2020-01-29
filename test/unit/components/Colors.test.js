@@ -1,7 +1,8 @@
 import Colors from 'components/Colors/Colors';
 
 describe('Colors', () => {
-  let sandbox;
+  const sandbox = sinon.createSandbox();
+
   let stubApplyRandom;
   let colors;
 
@@ -10,7 +11,6 @@ describe('Colors', () => {
   const checkColor = (color) => expect(color).to.be.oneOf(expectedColors);
 
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
     stubApplyRandom = sandbox.stub().returns('0.9');
     colors = new Colors(stubApplyRandom);
   });
