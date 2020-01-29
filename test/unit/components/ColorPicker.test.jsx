@@ -3,12 +3,12 @@ import React from 'react';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
 
 describe('ColorPicker', () => {
-  let sandbox;
+  const sandbox = sinon.createSandbox();
+
   let spyClick;
   let wrapper;
 
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
     spyClick = sandbox.spy();
     wrapper = mount(<ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />);
   });

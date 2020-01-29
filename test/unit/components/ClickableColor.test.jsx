@@ -3,12 +3,12 @@ import React from 'react';
 import ClickableColor from 'components/ClickableColor/ClickableColor';
 
 describe('ClickableColor', () => {
-  let sandbox;
+  const sandbox = sinon.createSandbox();
+
   let spyClick;
   let wrapper;
 
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
     spyClick = sandbox.spy();
     wrapper = shallow(<ClickableColor color="Red" onColorClick={spyClick} />);
   });

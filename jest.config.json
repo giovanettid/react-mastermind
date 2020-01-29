@@ -4,7 +4,7 @@
     "src/components/**/*.js?(x)",
     "!src/components/main.jsx"
   ],
-  "setupTestFrameworkScriptFile": "<rootDir>/test/unit/setup-test-framework-script.js",
+  "setupFilesAfterEnv": ["<rootDir>/test/unit/setup-test-framework-script.js"],
   "coverageThreshold": {
     "global": {
       "branches": 100,
