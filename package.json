@@ -35,10 +35,10 @@
     "shortid": "^2.2.8"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@babel/register": "^7.8.3",
     "@wdio/cli": "^5.18.5",
@@ -80,7 +80,7 @@
     "sinon": "^8.1.1",
     "stylelint": "^12.0.1",
     "stylelint-config-sass-guidelines": "^6.2.0",
-    "stylelint-scss": "^3.14.0",
+    "stylelint-scss": "^3.14.2",
     "uuid": "^3.4.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
