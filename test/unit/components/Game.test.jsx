@@ -21,8 +21,6 @@ describe('Game', () => {
 
   describe('on click reset button', () => {
     it('should reset game', () => {
-      const initialState = wrapper.state();
-
       expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(40);
 
       wrapper.find('button.ClickableColor').first().simulate('click');
@@ -31,7 +29,6 @@ describe('Game', () => {
       wrapper.find('.Reset button').simulate('click');
 
       expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(40);
-      expect(wrapper.state()).to.not.equal(initialState);
     });
   });
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Rows from 'components/Rows/Rows';
@@ -10,67 +10,59 @@ import BoardStateMutator from './BoardStateMutator';
 
 import './Board.scss';
 
-export default class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props.stateMutator.getInitial();
-  }
+const Board = ({
+  colorsToPick, colorsToGuess, stateMutator, onResetClick,
+}) => {
+  const [state, setState] = useState(stateMutator.getInitial());
 
-  handleColorClick = (color) => {
-    const { stateMutator } = this.props;
-    this.setState(stateMutator.getNext(color));
-  }
+  const handleColorClick = (color) => setState(stateMutator.getNext(color));
 
-  handleResetClick = () => {
-    const { onResetClick, stateMutator } = this.props;
+  const handleResetClick = () => {
     onResetClick();
-    this.setState(stateMutator.getInitial());
-  }
+    setState(stateMutator.getInitial());
+  };
 
-  render() {
-    const {
-      endOfGame, boardCodeColors, boardKeyColors, decoded,
-    } = this.state;
-    const { colorsToGuess, colorsToPick } = this.props;
-    const solution = endOfGame && <Solution colors={colorsToGuess} />;
+  const {
+    endOfGame, boardCodeColors, boardKeyColors, decoded,
+  } = state;
+  const solution = endOfGame && <Solution colors={colorsToGuess} />;
 
-    const rows = (
-      <Rows
-        boardCodeColors={boardCodeColors}
-        boardKeyColors={boardKeyColors}
-      />
-    );
+  const rows = (
+    <Rows
+      boardCodeColors={boardCodeColors}
+      boardKeyColors={boardKeyColors}
+    />
+  );
 
-    const picker = (
-      <ColorPicker
-        colors={colorsToPick}
-        onColorClick={this.handleColorClick}
-      />
-    );
+  const picker = (
+    <ColorPicker
+      colors={colorsToPick}
+      onColorClick={handleColorClick}
+    />
+  );
 
-    const status = endOfGame && StatusFactory.create(decoded);
+  const status = endOfGame && StatusFactory(decoded);
 
-    const reset = (
-      <div className="Reset">
-        <button type="button" onClick={this.handleResetClick}>New game</button>
-      </div>
-    );
+  const reset = (
+    <div className="Reset">
+      <button type="button" onClick={handleResetClick}>New game</button>
+    </div>
+  );
 
-    return (
-      <div className="Board">
-        {solution}
-        <br />
-        {rows}
-        <br />
-        {picker}
-        <br />
-        {status}
-        <br />
-        {reset}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="Board">
+      {solution}
+      <br />
+      {rows}
+      <br />
+      {picker}
+      <br />
+      {status}
+      <br />
+      {reset}
+    </div>
+  );
+};
 
 Board.propTypes = {
   colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -78,3 +70,5 @@ Board.propTypes = {
   stateMutator: PropTypes.instanceOf(BoardStateMutator).isRequired,
   onResetClick: PropTypes.func.isRequired,
 };
+
+export default Board;
