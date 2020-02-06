@@ -39,15 +39,13 @@ describe('Board', () => {
     sandbox.restore();
   });
 
-  describe('state', () => {
-    it('should init boardCodeColors with nb_rows*4 lightgrey', () => {
-      expect(wrapper.state().boardCodeColors).to.deep.equal(new Array(NB_ROWS).fill(new Array(4).fill('lightgrey')));
-    });
-  });
-
   describe('render', () => {
     it('should display Rows', () => {
       expect(wrapper.find('.Rows')).to.have.lengthOf(1);
+    });
+
+    it('should display nb rows*4 lightgrey ColorItem', () => {
+      expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(NB_ROWS * NB_CODE_HOLES);
     });
 
     it('should display ColorPicker', () => {
