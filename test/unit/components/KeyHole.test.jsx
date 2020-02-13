@@ -4,8 +4,16 @@ import KeyHole from 'components/KeyHole/KeyHole';
 
 describe('KeyHole', () => {
   it('should display KeyHole with correct color', () => {
-    const wrapper = shallow(<KeyHole color="Black" />);
+    const wrapper = mount(
+      <table>
+        <tbody>
+          <tr>
+            <KeyHole color="Black" />
+          </tr>
+        </tbody>
+      </table>,
+    );
 
-    expect(wrapper.find('td.KeyHole').hasClass('KeyHole_color_black')).to.be.true;
+    expect(wrapper.find('.KeyHole').hasClass('KeyHole_color_black')).to.be.true;
   });
 });

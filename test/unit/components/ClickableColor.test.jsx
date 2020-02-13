@@ -10,7 +10,15 @@ describe('ClickableColor', () => {
 
   beforeEach(() => {
     spyClick = sandbox.spy();
-    wrapper = shallow(<ClickableColor color="Red" onColorClick={spyClick} />);
+    wrapper = mount(
+      <table>
+        <tbody>
+          <tr>
+            <ClickableColor color="Red" onColorClick={spyClick} />
+          </tr>
+        </tbody>
+      </table>,
+    );
   });
 
   afterEach(() => {

@@ -94,33 +94,33 @@ describe('Board', () => {
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
 
         const codeHoles = wrapper.find(Row).last().find(ColorItem);
-        expect(codeHoles.first().props().color).to.equal('Green');
-        expect(codeHoles.at(1).props().color).to.equal('Yellow');
+        expect(codeHoles.first().childAt(0).hasClass('ColorItem_color_green')).to.be.true;
+        expect(codeHoles.at(1).childAt(0).hasClass('ColorItem_color_yellow')).to.be.true;
       });
     });
 
     describe('click 5 ClickableColor', () => {
-      it('should pass correct color to first ColorItem on the 9th Row', () => {
-        wrapper.find('.ClickableColor_color_green').simulate('click');
+      it('should pass correct color to first ColorItem on the second Row', () => {
+        wrapper.find('.ClickableColor_color_yellow').simulate('click');
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
         wrapper.find('.ClickableColor_color_green').simulate('click');
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
         wrapper.find('.ClickableColor_color_green').simulate('click');
 
         const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(ColorItem);
-        expect(codeHoles.first().props().color).to.equal('Green');
+        expect(codeHoles.first().childAt(0).hasClass('ColorItem_color_green')).to.be.true;
       });
     });
 
     describe('click 4 ClickableColor', () => {
-      it('should pass correct color to first KeyHole on the last Row', () => {
+      it('should pass correct color to first KeyHole on the first Row', () => {
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
         wrapper.find('.ClickableColor_color_green').simulate('click');
         wrapper.find('.ClickableColor_color_green').simulate('click');
         wrapper.find('.ClickableColor_color_yellow').simulate('click');
 
         const codeHoles = wrapper.find(Row).at(NB_ROWS - 1).find(KeyHole);
-        expect(codeHoles.first().props().color).to.equal('Black');
+        expect(codeHoles.first().childAt(0).hasClass('KeyHole_color_black')).to.be.true;
       });
 
       describe('click all correct colors', () => {
