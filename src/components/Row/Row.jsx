@@ -1,11 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
 import ColorItem from 'components/ColorItem/ColorItem';
 import KeyHole from 'components/KeyHole/KeyHole';
 
-const Row = ({ codeColors, keyColors }) => {
+function Row({ codeColors, keyColors }) {
   const codeHolesRow = codeColors.map((e) => <ColorItem key={shortid.generate()} color={e} />);
 
   const keyHolesRow = keyColors.map((e) => <KeyHole key={shortid.generate()} color={e} />);
@@ -14,7 +13,7 @@ const Row = ({ codeColors, keyColors }) => {
   const keyHolesSecondRow = keyHolesRow.slice(2, 4);
 
   return (
-    <tr className="Row">
+    <tr aria-label="Row" className="Row">
       <td>
         <table>
           <tbody>
@@ -32,7 +31,7 @@ const Row = ({ codeColors, keyColors }) => {
       </td>
     </tr>
   );
-};
+}
 
 Row.propTypes = {
   codeColors: PropTypes.arrayOf(PropTypes.string).isRequired,

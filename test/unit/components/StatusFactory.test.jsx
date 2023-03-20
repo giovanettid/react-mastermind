@@ -1,16 +1,22 @@
 import StatusFactory from 'components/Status/StatusFactory';
 
+import { render, screen } from '@testing-library/react';
+
 describe('StatusFactory', () => {
   describe('render', () => {
     describe('isWin true', () => {
       it('should display win message', () => {
-        expect(mount(StatusFactory(true)).find('.Status').text()).to.equal('You win');
+        render(StatusFactory(true));
+
+        expect(screen.getByText('You win')).toBeInTheDocument();
       });
     });
 
     describe('isWin false', () => {
       it('should display loose message', () => {
-        expect(mount(StatusFactory(false)).find('.Status').text()).to.equal('You loose');
+        render(StatusFactory(false));
+
+        expect(screen.getByText('You loose')).toBeInTheDocument();
       });
     });
   });

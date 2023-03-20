@@ -1,4 +1,3 @@
-
 export default class ColorsMappers {
   static nbOccurences(predicate) {
     return (colors) => (color) => colors.filter(predicate(color)).length;

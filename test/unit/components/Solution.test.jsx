@@ -1,18 +1,20 @@
-import React from 'react';
-
 import Solution from 'components/Solution/Solution';
 
-describe('Solution', () => {
-  const wrapper = mount(<Solution colors={['Yellow', 'Green', 'Green']} />);
+import { render, screen } from '@testing-library/react';
 
+describe('Solution', () => {
   describe('render', () => {
+    render(<Solution colors={['Yellow', 'Green', 'Green']} />);
+    const items = screen.getAllByRole('cell');
+
     it('should display a Solution with 3 ColorItem', () => {
-      expect(wrapper.find('.ColorItem')).to.have.lengthOf(3);
+      expect(items).toHaveLength(3);
     });
 
     it('should display a Solution with 1 yellow ColorItem and 2 Green', () => {
-      expect(wrapper.find('.ColorItem_color_yellow')).to.have.lengthOf(1);
-      expect(wrapper.find('.ColorItem_color_green')).to.have.lengthOf(2);
+      expect(items[0]).toHaveClass('ColorItem_color_yellow');
+      expect(items[1]).toHaveClass('ColorItem_color_green');
+      expect(items[2]).toHaveClass('ColorItem_color_green');
     });
   });
 });

@@ -16,7 +16,7 @@ const config = {
     app: [`./${sourceDir}/components/main.jsx`],
   },
   output: {
-    filename: '[name].[hash].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, buildDir),
   },
   module: {
@@ -25,9 +25,6 @@ const config = {
         test: /\.scss$/,
         use: [{
           loader: MiniCssExtractPlugin.loader,
-          options: {
-            hmr: devMode,
-          },
         }, {
           loader: 'css-loader',
           options: {
@@ -59,26 +56,21 @@ const config = {
               corejs: 3,
               debug: true,
             }], '@babel/react'],
-            plugins: ['@babel/plugin-proposal-class-properties'],
           },
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[hash].[ext]',
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[contenthash][ext]',
         },
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'images/[name].[hash].[ext]',
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name].[contenthash][ext]',
         },
       },
     ],
@@ -88,7 +80,10 @@ const config = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
-    contentBase: path.join(__dirname, sourceDir),
+    hot: true,
+    static: {
+      directory: path.join(__dirname, sourceDir),
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -98,7 +93,7 @@ const config = {
       template: `./${sourceDir}/index.ejs`,
     }),
     new MiniCssExtractPlugin({
-      filename: `styles.bundle${devMode ? '' : '.[hash]'}.css`,
+      filename: `styles.bundle${devMode ? '' : '.[contenthash]'}.css`,
     }),
   ],
 };

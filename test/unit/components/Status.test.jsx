@@ -1,13 +1,13 @@
-import React from 'react';
-
 import Status from 'components/Status/Status';
 
-describe('Status', () => {
-  const wrapper = mount(<Status message="You win" />);
+import { render, screen } from '@testing-library/react';
 
+describe('Status', () => {
   describe('render', () => {
+    render(<Status message="You win" />);
+
     it('should display message', () => {
-      expect(wrapper.find('.Status').text()).to.equal('You win');
+      expect(screen.getByText('You win')).toBeInTheDocument();
     });
   });
 });

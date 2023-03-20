@@ -1,4 +1,3 @@
-
 const foundButNotMatch = (position, index) => index !== -1 && index !== position;
 
 export default class ColorsPredicates {

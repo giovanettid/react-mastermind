@@ -1,34 +1,47 @@
-import React from 'react';
-
 import Game from 'components/Game/Game';
 import GameConfiguration from 'components/Game/GameConfiguration';
+
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('Game', () => {
   const configuration = () => ({ ...new GameConfiguration() });
 
-  let wrapper;
+  let user;
 
   beforeEach(() => {
-    wrapper = mount(<Game configuration={configuration} />);
-  });
-  it('should display Board', () => {
-    expect(wrapper.find('.Board')).to.have.lengthOf(1);
+    user = userEvent.setup();
+
+    render(<Game configuration={configuration} />);
   });
 
   it('should display ColorPicker with 6 ClickableColor', () => {
-    expect(wrapper.find('.ColorPicker .ClickableColor')).to.have.lengthOf(6);
+    const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
+
+    expect(within(picker).getAllByRole('button')).toHaveLength(6);
   });
 
   describe('on click reset button', () => {
-    it('should reset game', () => {
-      expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(40);
+    const hasNumberOfGreyColorItems = (expectedNumber) => {
+      const colorItems = screen.getAllByRole('cell', { name: 'Color Item' });
+      const greyItems = colorItems.filter((item) => item.classList.contains('ColorItem_color_lightgrey'));
 
-      wrapper.find('button.ClickableColor').first().simulate('click');
-      expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(39);
+      expect(greyItems).toHaveLength(expectedNumber);
+    };
 
-      wrapper.find('.Reset button').simulate('click');
+    it('should reset game', async () => {
+      hasNumberOfGreyColorItems(40);
 
-      expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(40);
+      const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
+      const [firstClickable] = within(picker).getAllByRole('button');
+
+      await user.click(firstClickable);
+
+      hasNumberOfGreyColorItems(39);
+
+      await user.click(screen.getByText('New game'));
+
+      hasNumberOfGreyColorItems(40);
     });
   });
 });

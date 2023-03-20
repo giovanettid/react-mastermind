@@ -1,4 +1,3 @@
-
 import ColorsPredicates from './ColorsPredicates';
 import ColorsMappers from './ColorsMappers';
 

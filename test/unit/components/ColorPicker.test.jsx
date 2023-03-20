@@ -1,16 +1,19 @@
-import React from 'react';
-
 import ColorPicker from 'components/ColorPicker/ColorPicker';
+
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('ColorPicker', () => {
   const sandbox = sinon.createSandbox();
 
+  let user;
   let spyClick;
-  let wrapper;
 
   beforeEach(() => {
+    user = userEvent.setup();
+
     spyClick = sandbox.spy();
-    wrapper = mount(<ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />);
+    render(<ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />);
   });
 
   afterEach(() => {
@@ -19,17 +22,21 @@ describe('ColorPicker', () => {
 
   describe('render', () => {
     it('should display ColorPicker with n ClickableColor', () => {
-      expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
-      expect(wrapper.find('.ClickableColor_color_yellow').exists()).to.be.true;
-      expect(wrapper.find('.ClickableColor_color_black').exists()).to.be.true;
+      const buttons = screen.getAllByRole('button');
+
+      expect(buttons).toHaveLength(2);
+      expect(buttons[0]).toHaveClass('ClickableColor_color_yellow', { exact: false });
+      expect(buttons[1]).toHaveClass('ClickableColor_color_black', { exact: false });
     });
   });
 
   describe('click a ClickableColor', () => {
-    it('should call onColorClick once', () => {
-      wrapper.find('.ClickableColor_color_black').simulate('click');
+    it('should call onColorClick once', async () => {
+      const buttons = screen.getAllByRole('button');
 
-      expect(spyClick.calledOnce).to.be.true;
+      await user.click(buttons[0]);
+
+      expect(spyClick.calledOnce).toBeTruthy();
     });
   });
 });

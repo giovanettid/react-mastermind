@@ -1,12 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
+import { createRoot } from 'react-dom/client';
 import Game from 'components/Game/Game';
 import GameConfiguration from 'components/Game/GameConfiguration';
 
-import 'styles/main.scss';
-
-ReactDOM.render(
-  <Game configuration={() => ({ ...new GameConfiguration() })} />,
-  document.getElementById('root'),
-);
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<Game configuration={() => ({ ...new GameConfiguration() })} />);

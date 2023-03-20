@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import 'variables';
 
 .Board {
@@ -11,11 +12,11 @@
   width: 120px;
 
   button {
-    background-color: map-get($colors, 'green');
-    border-color: map-get($colors, 'green');
+    background-color: map.get($colors, 'green');
+    border-color: map.get($colors, 'green');
     border-radius: 5px;
     border-width: 2px;
-    color: map-get($colors, 'white');
+    color: map.get($colors, 'white');
     width: 120px;
   }
 }

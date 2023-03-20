@@ -1,4 +1,3 @@
-
 export default class Colors {
   constructor(applyRandom) {
     this.applyRandom = applyRandom;

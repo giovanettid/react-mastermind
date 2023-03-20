@@ -1,13 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import './KeyHole.scss';
 
-const KeyHole = ({ color }) => {
+function KeyHole({ color }) {
   const className = `KeyHole KeyHole_color_${color.toLowerCase()}`;
 
-  return <td className={className} />;
-};
+  return <td aria-label="Key Hole" className={className} />;
+}
 
 KeyHole.propTypes = {
   color: PropTypes.string.isRequired,

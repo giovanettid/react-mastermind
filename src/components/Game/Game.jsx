@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Board from 'components/Board/Board';
 
-const Game = ({ configuration }) => {
+function Game({ configuration }) {
   const [state, setState] = useState(configuration());
 
   const handleResetClick = () => setState(configuration());
@@ -17,7 +17,7 @@ const Game = ({ configuration }) => {
       onResetClick={handleResetClick}
     />
   );
-};
+}
 
 Game.propTypes = {
   configuration: PropTypes.func.isRequired,

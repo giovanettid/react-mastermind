@@ -1,4 +1,3 @@
-
 import ColorsFactory from 'components/Colors/ColorsFactory';
 import ColorsDecoder from 'components/Colors/ColorsDecoder';
 
