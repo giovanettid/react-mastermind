@@ -23,19 +23,19 @@ describe('Row', () => {
     });
 
     it('should display a Row with 1 yellow ColorItem and 1 lightgrey', () => {
-      const items = screen.getAllByRole('cell', { name: 'Color Item' });
+      const [yellow, grey] = screen.getAllByRole('cell', { name: 'Color Item' });
 
-      expect(items[0]).toHaveClass('ColorItem_color_yellow');
-      expect(items[1]).toHaveClass('ColorItem_color_lightgrey');
+      expect(yellow).toHaveClass('ColorItem_color_yellow');
+      expect(grey).toHaveClass('ColorItem_color_lightgrey');
     });
 
     it('should display a Row with 1 black KeyHole, 1 white KeyHole & 2 lightgrey', () => {
-      const keys = screen.getAllByRole('cell', { name: 'Key Hole' });
+      const [black, white, firstGrey, lastGrey] = screen.getAllByRole('cell', { name: 'Key Hole' });
 
-      expect(keys[0]).toHaveClass('KeyHole_color_black');
-      expect(keys[1]).toHaveClass('KeyHole_color_white');
-      expect(keys[2]).toHaveClass('KeyHole_color_lightgrey');
-      expect(keys[3]).toHaveClass('KeyHole_color_lightgrey');
+      expect(black).toHaveClass('KeyHole_color_black');
+      expect(white).toHaveClass('KeyHole_color_white');
+      expect(firstGrey).toHaveClass('KeyHole_color_lightgrey');
+      expect(lastGrey).toHaveClass('KeyHole_color_lightgrey');
     });
   });
 });

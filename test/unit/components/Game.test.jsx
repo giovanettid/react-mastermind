@@ -8,16 +8,16 @@ describe('Game', () => {
   const configuration = () => ({ ...new GameConfiguration() });
 
   let user;
+  let picker;
 
   beforeEach(() => {
     user = userEvent.setup();
 
     render(<Game configuration={configuration} />);
+    picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
   });
 
   it('should display ColorPicker with 6 ClickableColor', () => {
-    const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
-
     expect(within(picker).getAllByRole('button')).toHaveLength(6);
   });
 
@@ -32,9 +32,7 @@ describe('Game', () => {
     it('should reset game', async () => {
       hasNumberOfGreyColorItems(40);
 
-      const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
       const [firstClickable] = within(picker).getAllByRole('button');
-
       await user.click(firstClickable);
 
       hasNumberOfGreyColorItems(39);

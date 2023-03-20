@@ -21,13 +21,15 @@ describe('Rows', () => {
 
   describe('inverse display from boardColors', () => {
     it('should pass Red code color to last Row', () => {
-      const [firstItem] = within(rows[1]).getAllByRole('cell', { name: 'Color Item' });
+      const [, lastRow] = rows;
+      const [firstItem] = within(lastRow).getAllByRole('cell', { name: 'Color Item' });
 
       expect(firstItem).toHaveClass('ColorItem_color_red');
     });
 
     it('should pass Withe key color to last Row', () => {
-      const [firstKey] = within(rows[1]).getAllByRole('cell', { name: 'Key Hole' });
+      const [, lastRow] = rows;
+      const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key Hole' });
 
       expect(firstKey).toHaveClass('KeyHole_color_white');
     });

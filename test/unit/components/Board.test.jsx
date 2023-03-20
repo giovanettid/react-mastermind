@@ -15,6 +15,7 @@ describe('Board', () => {
 
   let user;
   let spyClick;
+  let picker;
 
   beforeEach(() => {
     user = userEvent.setup();
@@ -31,6 +32,7 @@ describe('Board', () => {
       stateMutator={stateMutator}
       onResetClick={spyClick}
     />);
+    picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
   });
 
   afterEach(() => {
@@ -51,8 +53,6 @@ describe('Board', () => {
     });
 
     it('should display 2 ClickableColor', () => {
-      const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
-
       expect(within(picker).getAllByRole('button')).toHaveLength(2);
     });
 
@@ -74,33 +74,22 @@ describe('Board', () => {
   });
 
   describe('click ClickableColor(s)', () => {
-    const simulateLoose = async () => {
-      const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
-      const [, green] = within(picker).getAllByRole('button');
+    const clickColors = (colors) => Promise.all(colors.map((color) => user.click(color)));
 
-      await user.click(green);
-      await user.click(green);
-      await user.click(green);
-      await user.click(green);
+    const simulateLoose = async () => {
+      const [, green] = within(picker).getAllByRole('button');
+      await clickColors(Array(4).fill(green));
     };
 
     const simulateWin = async () => {
-      const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
       const [yellow] = within(picker).getAllByRole('button');
-
-      await user.click(yellow);
-      await user.click(yellow);
-      await user.click(yellow);
-      await user.click(yellow);
+      await clickColors(Array(4).fill(yellow));
     };
 
     describe('click 2 ClickableColor', () => {
       it('should pass correct color to first and second ColorItem on the last Row (bottom of the screen)', async () => {
-        const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
-
         const [yellow, green] = within(picker).getAllByRole('button');
-        await user.click(green);
-        await user.click(yellow);
+        await clickColors([green, yellow]);
 
         const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
         const [firstCode, lastCode] = within(lastRow).getAllByRole('cell', { name: 'Color Item' });
@@ -112,14 +101,8 @@ describe('Board', () => {
 
     describe('click 5 ClickableColor', () => {
       it('should pass correct color to first ColorItem on the first Row (top of the screen)', async () => {
-        const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
-
         const [yellow, green] = within(picker).getAllByRole('button');
-        await user.click(yellow);
-        await user.click(yellow);
-        await user.click(green);
-        await user.click(yellow);
-        await user.click(green);
+        await clickColors([yellow, yellow, green, yellow, green]);
 
         const [firstRow] = screen.getAllByRole('row', { name: 'Row' });
         const [firstCode] = within(firstRow).getAllByRole('cell', { name: 'Color Item' });
@@ -130,13 +113,8 @@ describe('Board', () => {
 
     describe('click 4 ClickableColor', () => {
       it('should pass correct color to first KeyHole on the last Row', async () => {
-        const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
-
         const [yellow, green] = within(picker).getAllByRole('button');
-        await user.click(yellow);
-        await user.click(green);
-        await user.click(green);
-        await user.click(yellow);
+        await clickColors([yellow, green, green, yellow]);
 
         const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
         const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key Hole' });
