@@ -6,17 +6,22 @@ import userEvent from '@testing-library/user-event';
 describe('ColorPicker', () => {
   const sandbox = sinon.createSandbox();
 
-  let user;
   let spyClick;
 
-  let buttons;
+  const setup = () => {
+    const user = userEvent.setup();
+    const utils = render(<ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />);
+    const buttons = screen.getAllByRole('button');
+
+    return {
+      ...utils,
+      buttons,
+      user,
+    };
+  };
 
   beforeEach(() => {
-    user = userEvent.setup();
-
     spyClick = sandbox.spy();
-    render(<ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />);
-    buttons = screen.getAllByRole('button');
   });
 
   afterEach(() => {
@@ -25,6 +30,7 @@ describe('ColorPicker', () => {
 
   describe('render', () => {
     it('should display ColorPicker with n ClickableColor', () => {
+      const { buttons } = setup();
       const [yellow, black] = buttons;
 
       expect(buttons).toHaveLength(2);
@@ -35,6 +41,7 @@ describe('ColorPicker', () => {
 
   describe('click a ClickableColor', () => {
     it('should call onColorClick once', async () => {
+      const { buttons, user } = setup();
       const [yellow] = buttons;
 
       await user.click(yellow);

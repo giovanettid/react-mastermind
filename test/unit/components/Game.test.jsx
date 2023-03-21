@@ -7,39 +7,43 @@ import userEvent from '@testing-library/user-event';
 describe('Game', () => {
   const configuration = () => ({ ...new GameConfiguration() });
 
-  let user;
-  let picker;
+  const setup = () => {
+    const user = userEvent.setup();
+    const utils = render(<Game configuration={configuration} />);
+    const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
 
-  beforeEach(() => {
-    user = userEvent.setup();
-
-    render(<Game configuration={configuration} />);
-    picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
-  });
+    return {
+      ...utils,
+      user,
+      picker,
+    };
+  };
 
   it('should display ColorPicker with 6 ClickableColor', () => {
+    const { picker } = setup();
+
     expect(within(picker).getAllByRole('button')).toHaveLength(6);
   });
 
   describe('on click reset button', () => {
-    const hasNumberOfGreyColorItems = (expectedNumber) => {
+    const greyColorItems = () => {
       const colorItems = screen.getAllByRole('cell', { name: 'Color Item' });
-      const greyItems = colorItems.filter((item) => item.classList.contains('ColorItem_color_lightgrey'));
-
-      expect(greyItems).toHaveLength(expectedNumber);
+      return colorItems.filter((item) => item.classList.contains('ColorItem_color_lightgrey'));
     };
 
     it('should reset game', async () => {
-      hasNumberOfGreyColorItems(40);
+      const { user, picker } = setup();
+
+      expect(greyColorItems()).toHaveLength(40);
 
       const [firstClickable] = within(picker).getAllByRole('button');
       await user.click(firstClickable);
 
-      hasNumberOfGreyColorItems(39);
+      expect(greyColorItems()).toHaveLength(39);
 
       await user.click(screen.getByText('New game'));
 
-      hasNumberOfGreyColorItems(40);
+      expect(greyColorItems()).toHaveLength(40);
     });
   });
 });

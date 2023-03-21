@@ -8,8 +8,6 @@ describe('Colors', () => {
 
   const expectedColors = ['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black'];
 
-  const checkColor = (color) => expect(expectedColors).toContain(color);
-
   beforeEach(() => {
     stubApplyRandom = sandbox.stub().returns('0.9');
     colors = new Colors(stubApplyRandom);
@@ -33,7 +31,7 @@ describe('Colors', () => {
     });
 
     it('should contains all correct colors', () => {
-      colors.shuffle().every(checkColor);
+      colors.shuffle().every((color) => expect(expectedColors.includes(color)).toBeTruthy());
     });
 
     it('should pick 4 colors', () => {
@@ -49,7 +47,7 @@ describe('Colors', () => {
     });
 
     it('should return a correct color', () => {
-      checkColor(colors.pick());
+      expect(expectedColors.includes(colors.pick())).toBeTruthy();
     });
   });
 });

@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: ['airbnb', 'plugin:react-hooks/recommended', 'plugin:jsx-a11y/recommended'],
   globals: {
     document: false,
   },
@@ -7,7 +7,7 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
   },
-  plugins: ['import', 'react', 'react-hooks', 'jsx-a11y', 'jest'],
+  plugins: ['react-hooks', 'jsx-a11y'],
   parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {

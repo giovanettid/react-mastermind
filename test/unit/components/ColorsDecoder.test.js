@@ -48,7 +48,7 @@ describe('ColorsDecoder', () => {
       });
     });
 
-    describe('same color has correct & wrong position but only once to decode ', () => {
+    describe('same color has correct & wrong position but only once to decode', () => {
       it('should return 1 correct and 0 wrong', () => {
         expect(decoder.getNbPositions(['Red', 'Red', 'Black'])).toEqual({
           correct: 1, wrong: 0, rest: 2,

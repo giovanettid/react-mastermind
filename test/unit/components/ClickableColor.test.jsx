@@ -6,14 +6,11 @@ import userEvent from '@testing-library/user-event';
 describe('ClickableColor', () => {
   const sandbox = sinon.createSandbox();
 
-  let user;
   let spyClick;
 
-  beforeEach(() => {
-    user = userEvent.setup();
-
-    spyClick = sandbox.spy();
-    render(
+  const setup = () => {
+    const user = userEvent.setup();
+    const utils = render(
       <table>
         <tbody>
           <tr>
@@ -22,6 +19,15 @@ describe('ClickableColor', () => {
         </tbody>
       </table>,
     );
+
+    return {
+      ...utils,
+      user,
+    };
+  };
+
+  beforeEach(() => {
+    spyClick = sandbox.spy();
   });
 
   afterEach(() => {
@@ -30,18 +36,21 @@ describe('ClickableColor', () => {
 
   describe('render', () => {
     it('should display ClickableColor with a color', () => {
+      setup();
       expect(screen.getByRole('button')).toHaveClass('ClickableColor_color_red');
     });
   });
 
   describe('on click', () => {
     it('should call onColorClick once', async () => {
+      const { user } = setup();
       await user.click(screen.getByRole('button'));
 
       expect(spyClick.calledOnce).toBeTruthy();
     });
 
     it('should call onColorClick with color prop', async () => {
+      const { user } = setup();
       await user.click(screen.getByRole('button'));
 
       expect(spyClick.calledWith('Red')).toBeTruthy();
