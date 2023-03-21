@@ -10,7 +10,7 @@ describe('ColorsFactory', () => {
 
   describe('create', () => {
     it('should return instance of Colors', () => {
-      expect(ColorsFactory.create()).to.be.an.instanceof(Colors);
+      expect(ColorsFactory.create()).toBeInstanceOf(Colors);
     });
 
     it('should use Math.random when shuffle', () => {
@@ -18,7 +18,7 @@ describe('ColorsFactory', () => {
 
       ColorsFactory.create().shuffle();
 
-      expect(spy.called).to.be.true;
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

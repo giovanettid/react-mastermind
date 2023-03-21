@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Rows from 'components/Rows/Rows';
@@ -10,9 +10,9 @@ import BoardStateMutator from './BoardStateMutator';
 
 import './Board.scss';
 
-const Board = ({
+function Board({
   colorsToPick, colorsToGuess, stateMutator, onResetClick,
-}) => {
+}) {
   const [state, setState] = useState(stateMutator.getInitial());
 
   const handleColorClick = (color) => setState(stateMutator.getNext(color));
@@ -62,7 +62,7 @@ const Board = ({
       {reset}
     </div>
   );
-};
+}
 
 Board.propTypes = {
   colorsToPick: PropTypes.arrayOf(PropTypes.string).isRequired,

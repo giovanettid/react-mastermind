@@ -1,4 +1,3 @@
-
 const identityState = (prevState) => prevState;
 
 export default class BoardStateMutator {

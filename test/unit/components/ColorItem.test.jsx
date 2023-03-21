@@ -1,10 +1,10 @@
-import React from 'react';
-
 import ColorItem from 'components/ColorItem/ColorItem';
+
+import { render, screen } from '@testing-library/react';
 
 describe('ColorItem', () => {
   it('should display ColorItem with correct color', () => {
-    const wrapper = mount(
+    render(
       <table>
         <tbody>
           <tr>
@@ -14,6 +14,6 @@ describe('ColorItem', () => {
       </table>,
     );
 
-    expect(wrapper.find('.ColorItem').hasClass('ColorItem_color_green')).to.be.true;
+    expect(screen.getByRole('cell')).toHaveClass('ColorItem_color_green');
   });
 });

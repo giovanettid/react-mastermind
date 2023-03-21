@@ -1,16 +1,16 @@
-import React from 'react';
-
 import ClickableColor from 'components/ClickableColor/ClickableColor';
+
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('ClickableColor', () => {
   const sandbox = sinon.createSandbox();
 
   let spyClick;
-  let wrapper;
 
-  beforeEach(() => {
-    spyClick = sandbox.spy();
-    wrapper = mount(
+  const setup = () => {
+    const user = userEvent.setup();
+    const utils = render(
       <table>
         <tbody>
           <tr>
@@ -19,6 +19,15 @@ describe('ClickableColor', () => {
         </tbody>
       </table>,
     );
+
+    return {
+      ...utils,
+      user,
+    };
+  };
+
+  beforeEach(() => {
+    spyClick = sandbox.spy();
   });
 
   afterEach(() => {
@@ -27,21 +36,24 @@ describe('ClickableColor', () => {
 
   describe('render', () => {
     it('should display ClickableColor with a color', () => {
-      expect(wrapper.find('button.ClickableColor').hasClass('ClickableColor_color_red')).to.be.true;
+      setup();
+      expect(screen.getByRole('button')).toHaveClass('ClickableColor_color_red');
     });
   });
 
   describe('on click', () => {
-    it('should call onColorClick once', () => {
-      wrapper.find('button').simulate('click');
+    it('should call onColorClick once', async () => {
+      const { user } = setup();
+      await user.click(screen.getByRole('button'));
 
-      expect(spyClick.calledOnce).to.be.true;
+      expect(spyClick).toHaveBeenCalledOnce();
     });
 
-    it('should call onColorClick with color prop', () => {
-      wrapper.find('button').simulate('click');
+    it('should call onColorClick with color prop', async () => {
+      const { user } = setup();
+      await user.click(screen.getByRole('button'));
 
-      expect(spyClick.calledWith('Red')).to.be.true;
+      expect(spyClick).toHaveBeenCalledWith('Red');
     });
   });
 });

@@ -4,36 +4,35 @@
 * sources
   * fwk: [reactjs](https://reactjs.org)
   * language: es next
-  * style: [sass](http://sass-lang.com)
+  * style: [sass](https://sass-lang.com)
 * tests
   * runner: [jest](https://facebook.github.io/jest/)
-  * react utils: [enzyme](http://airbnb.io/enzyme/)
-  * assertions: [chai](http://chaijs.com)
-  * doubles: [sinon](http://sinonjs.org)
+  * react dom utils: [react testing library](https://testing-library.com/docs/react-testing-library/intro/)
+  * doubles: [sinon](https://sinonjs.org)
   * functional: [cucumber](https://cucumber.io)
-  * e2e: [webdriverio](http://webdriver.io)
+  * e2e: [webdriverio](https://webdriver.io)
+  * e2e report: [multiple-cucumber-html-reporter](https://github.com/wswebcreation/multiple-cucumber-html-reporter)
 * tooling
-  * package manager: npm 6
+  * package manager: npm 9
   * tasks: npm scripts
   * transpiler: [babel](https://babeljs.io)
-  * bundler: [webpack 4](https://webpack.js.org)
+  * bundler: [webpack 5](https://webpack.js.org)
   * linters: [eslint](https://eslint.org), [stylelint](https://stylelint.io)
-  * quality: [es6-plato](https://github.com/the-simian/es6-plato)
   * git hooks: [husky](https://github.com/typicode/husky)
 
 
 ## Starter features
 * see [CHANGELOG](CHANGELOG.md)
 
-## Testé avec
-* npm 6
-* node 12
+## Tested with
+* npm 9
+* node 18
 
 ## Installation
 
-``` npm i```
+ ``` npm i```
 
-## Démarrage
+## Start
 
  ``` npm start```
 
@@ -49,13 +48,9 @@
 
  ``` npm run coverage```
 
-## Tests End to end
+## End to end tests
 
  ``` npm run e2e```
-
-## Code analysis
-
- ``` npm run quality```
 
 ## Build in production mode
 
@@ -64,4 +59,3 @@
 ## Serve in production mode
 
  ``` npm run server:build```
-

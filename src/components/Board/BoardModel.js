@@ -1,4 +1,3 @@
-
 const defaultColors = (size) => new Array(size).fill('lightgrey');
 
 export default class BoardModel {

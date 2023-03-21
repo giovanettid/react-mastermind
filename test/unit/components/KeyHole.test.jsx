@@ -1,10 +1,10 @@
-import React from 'react';
-
 import KeyHole from 'components/KeyHole/KeyHole';
+
+import { render, screen } from '@testing-library/react';
 
 describe('KeyHole', () => {
   it('should display KeyHole with correct color', () => {
-    const wrapper = mount(
+    render(
       <table>
         <tbody>
           <tr>
@@ -14,6 +14,6 @@ describe('KeyHole', () => {
       </table>,
     );
 
-    expect(wrapper.find('.KeyHole').hasClass('KeyHole_color_black')).to.be.true;
+    expect(screen.getByRole('cell')).toHaveClass('KeyHole_color_black');
   });
 });

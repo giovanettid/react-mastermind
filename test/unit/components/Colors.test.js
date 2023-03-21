@@ -8,8 +8,6 @@ describe('Colors', () => {
 
   const expectedColors = ['Red', 'Blue', 'Yellow', 'Green', 'White', 'Black'];
 
-  const checkColor = (color) => expect(color).to.be.oneOf(expectedColors);
-
   beforeEach(() => {
     stubApplyRandom = sandbox.stub().returns('0.9');
     colors = new Colors(stubApplyRandom);
@@ -21,7 +19,7 @@ describe('Colors', () => {
 
   describe('set atribute', () => {
     it('should equal to all correct colors', () => {
-      expect(colors.set).to.deep.equal(expectedColors);
+      expect(colors.set).toEqual(expectedColors);
     });
   });
 
@@ -29,15 +27,15 @@ describe('Colors', () => {
     it('should use applyRandom 4 times', () => {
       colors.shuffle();
 
-      expect(stubApplyRandom.callCount).to.equal(4);
+      expect(stubApplyRandom).toHaveBeenCalledTimes(4);
     });
 
     it('should contains all correct colors', () => {
-      colors.shuffle().every(checkColor);
+      colors.shuffle().every((color) => expect(expectedColors.includes(color)).toBeTruthy());
     });
 
     it('should pick 4 colors', () => {
-      expect(colors.shuffle()).to.have.lengthOf(4);
+      expect(colors.shuffle()).toHaveLength(4);
     });
   });
 
@@ -45,11 +43,11 @@ describe('Colors', () => {
     it('should use applyRandom', () => {
       colors.pick();
 
-      expect(stubApplyRandom.calledOnce).to.be.true;
+      expect(stubApplyRandom).toHaveBeenCalledOnce();
     });
 
     it('should return a correct color', () => {
-      checkColor(colors.pick());
+      expect(expectedColors.includes(colors.pick())).toBeTruthy();
     });
   });
 });

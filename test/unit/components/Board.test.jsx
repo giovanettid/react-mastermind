@@ -1,14 +1,11 @@
-import React from 'react';
-
 import ColorsDecoder from 'components/Colors/ColorsDecoder';
 
 import Board from 'components/Board/Board';
 import BoardModel from 'components/Board/BoardModel';
 import BoardStateMutator from 'components/Board/BoardStateMutator';
 
-import Row from 'components/Row/Row';
-import ColorItem from 'components/ColorItem/ColorItem';
-import KeyHole from 'components/KeyHole/KeyHole';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('Board', () => {
   const NB_ROWS = 2;
@@ -16,23 +13,33 @@ describe('Board', () => {
 
   const sandbox = sinon.createSandbox();
 
-  let wrapper;
   let spyClick;
 
-  beforeEach(() => {
-    spyClick = sandbox.spy();
+  const setup = () => {
+    const user = userEvent.setup();
 
     const model = new BoardModel(NB_ROWS, NB_CODE_HOLES);
     const colorsToGuess = ['Yellow', 'Yellow', 'Yellow', 'Yellow'];
     const colorsDecoder = new ColorsDecoder(colorsToGuess);
     const stateMutator = new BoardStateMutator(model, colorsDecoder);
 
-    wrapper = mount(<Board
+    const utils = render(<Board
       colorsToPick={['Yellow', 'Green']}
       colorsToGuess={colorsToGuess}
       stateMutator={stateMutator}
       onResetClick={spyClick}
     />);
+    const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
+
+    return {
+      ...utils,
+      user,
+      picker,
+    };
+  };
+
+  beforeEach(() => {
+    spyClick = sandbox.spy();
   });
 
   afterEach(() => {
@@ -41,150 +48,183 @@ describe('Board', () => {
 
   describe('render', () => {
     it('should display Rows', () => {
-      expect(wrapper.find('.Rows')).to.have.lengthOf(1);
+      setup();
+
+      expect(screen.getByRole('rowgroup', { name: 'Rows' })).toBeInTheDocument();
     });
 
     it('should display nb rows*4 lightgrey ColorItem', () => {
-      expect(wrapper.find('.ColorItem_color_lightgrey')).to.have.lengthOf(NB_ROWS * NB_CODE_HOLES);
+      setup();
+
+      expect(screen.getAllByRole('cell', { name: 'Color Item' })).toHaveLength(NB_ROWS * NB_CODE_HOLES);
     });
 
     it('should display ColorPicker', () => {
-      expect(wrapper.find('.ColorPicker')).to.have.lengthOf(1);
+      setup();
+
+      expect(screen.getByRole('rowgroup', { name: 'Color Picker' })).toBeInTheDocument();
     });
 
     it('should display 2 ClickableColor', () => {
-      expect(wrapper.find('.ClickableColor')).to.have.lengthOf(2);
+      const { picker } = setup();
+
+      expect(within(picker).getAllByRole('button')).toHaveLength(2);
     });
 
     it('should not display Status', () => {
-      expect(wrapper.find('.Status').exists()).to.be.false;
+      setup();
+
+      expect(screen.queryByRole('rowgroup', { name: 'Status' })).not.toBeInTheDocument();
     });
 
     it('should display reset button', () => {
-      expect(wrapper.find('.Reset button').exists()).to.be.true;
+      setup();
+
+      expect(screen.getByText('New game')).toBeInTheDocument();
     });
   });
 
   describe('on click reset button', () => {
-    it('should call onResetClick once', () => {
-      wrapper.find('.Reset button').simulate('click');
+    it('should call onResetClick once', async () => {
+      const { user } = setup();
 
-      expect(spyClick.calledOnce).to.be.true;
+      await user.click(screen.getByText('New game'));
+
+      expect(spyClick).toHaveBeenCalledOnce();
     });
   });
 
   describe('click ClickableColor(s)', () => {
-    const simulateLoose = () => {
-      wrapper.find('.ClickableColor_color_green').simulate('click');
-      wrapper.find('.ClickableColor_color_green').simulate('click');
-      wrapper.find('.ClickableColor_color_green').simulate('click');
-      wrapper.find('.ClickableColor_color_green').simulate('click');
+    const clickColors = (user, colors) => Promise.all(colors.map((color) => user.click(color)));
+
+    const simulateLoose = async (user, picker) => {
+      const [, green] = within(picker).getAllByRole('button');
+      await clickColors(user, Array(4).fill(green));
     };
 
-    const simulateWin = () => {
-      wrapper.find('.ClickableColor_color_yellow').simulate('click');
-      wrapper.find('.ClickableColor_color_yellow').simulate('click');
-      wrapper.find('.ClickableColor_color_yellow').simulate('click');
-      wrapper.find('.ClickableColor_color_yellow').simulate('click');
+    const simulateWin = async (user, picker) => {
+      const [yellow] = within(picker).getAllByRole('button');
+      await clickColors(user, Array(4).fill(yellow));
     };
 
     describe('click 2 ClickableColor', () => {
-      it('should pass correct color to first and second ColorItem on the last Row', () => {
-        wrapper.find('.ClickableColor_color_green').simulate('click');
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+      it('should pass correct color to first and second ColorItem on the last Row (bottom of the screen)', async () => {
+        const { user, picker } = setup();
 
-        const codeHoles = wrapper.find(Row).last().find(ColorItem);
-        expect(codeHoles.first().childAt(0).hasClass('ColorItem_color_green')).to.be.true;
-        expect(codeHoles.at(1).childAt(0).hasClass('ColorItem_color_yellow')).to.be.true;
+        const [yellow, green] = within(picker).getAllByRole('button');
+        await clickColors(user, [green, yellow]);
+
+        const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
+        const [firstCode, lastCode] = within(lastRow).getAllByRole('cell', { name: 'Color Item' });
+
+        expect(firstCode).toHaveClass('ColorItem_color_green');
+        expect(lastCode).toHaveClass('ColorItem_color_yellow');
       });
     });
 
     describe('click 5 ClickableColor', () => {
-      it('should pass correct color to first ColorItem on the second Row', () => {
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
-        wrapper.find('.ClickableColor_color_green').simulate('click');
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
-        wrapper.find('.ClickableColor_color_green').simulate('click');
+      it('should pass correct color to first ColorItem on the first Row (top of the screen)', async () => {
+        const { user, picker } = setup();
 
-        const codeHoles = wrapper.find(Row).at(NB_ROWS - 2).find(ColorItem);
-        expect(codeHoles.first().childAt(0).hasClass('ColorItem_color_green')).to.be.true;
+        const [yellow, green] = within(picker).getAllByRole('button');
+        await clickColors(user, [yellow, yellow, green, yellow, green]);
+
+        const [firstRow] = screen.getAllByRole('row', { name: 'Row' });
+        const [firstCode] = within(firstRow).getAllByRole('cell', { name: 'Color Item' });
+
+        expect(firstCode).toHaveClass('ColorItem_color_green');
       });
     });
 
     describe('click 4 ClickableColor', () => {
-      it('should pass correct color to first KeyHole on the first Row', () => {
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
-        wrapper.find('.ClickableColor_color_green').simulate('click');
-        wrapper.find('.ClickableColor_color_green').simulate('click');
-        wrapper.find('.ClickableColor_color_yellow').simulate('click');
+      it('should pass correct color to first KeyHole on the last Row', async () => {
+        const { user, picker } = setup();
 
-        const codeHoles = wrapper.find(Row).at(NB_ROWS - 1).find(KeyHole);
-        expect(codeHoles.first().childAt(0).hasClass('KeyHole_color_black')).to.be.true;
+        const [yellow, green] = within(picker).getAllByRole('button');
+        await clickColors(user, [yellow, green, green, yellow]);
+
+        const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
+        const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key Hole' });
+
+        expect(firstKey).toHaveClass('KeyHole_color_black');
       });
 
       describe('click all correct colors', () => {
-        it('should display Solution', () => {
-          expect(wrapper.find('.Solution').exists()).to.be.false;
+        it('should display Solution', async () => {
+          const { user, picker } = setup();
 
-          simulateWin();
+          expect(screen.queryByRole('rowgroup', { name: 'Solution' })).not.toBeInTheDocument();
 
-          expect(wrapper.find('.Solution').exists()).to.be.true;
+          await simulateWin(user, picker);
+
+          expect(screen.getByRole('rowgroup', { name: 'Solution' })).toBeInTheDocument();
         });
 
-        it('should display win status message', () => {
-          expect(wrapper.find('.Status').exists()).to.be.false;
+        it('should display win status message', async () => {
+          const { user, picker } = setup();
 
-          simulateWin();
+          expect(screen.queryByRole('rowgroup', { name: 'Status' })).not.toBeInTheDocument();
 
-          expect(wrapper.find('.Status').text()).to.equal('You win');
+          await simulateWin(user, picker);
+
+          expect(screen.getByText('You win')).toBeInTheDocument();
         });
       });
     });
 
     describe('click all colors', () => {
       describe('not guess correct colors', () => {
-        it('should display loose status message', () => {
-          simulateLoose();
-          simulateLoose();
+        it('should display loose status message', async () => {
+          const { user, picker } = setup();
 
-          expect(wrapper.find('.Status').text()).to.equal('You loose');
+          await simulateLoose(user, picker);
+          await simulateLoose(user, picker);
+
+          expect(screen.getByText('You loose')).toBeInTheDocument();
         });
 
-        it('should display Solution', () => {
-          simulateLoose();
-          simulateLoose();
+        it('should display Solution', async () => {
+          const { user, picker } = setup();
 
-          expect(wrapper.find('.Solution').exists()).to.be.true;
+          await simulateLoose(user, picker);
+          await simulateLoose(user, picker);
+
+          expect(screen.getByRole('rowgroup', { name: 'Solution' })).toBeInTheDocument();
         });
       });
 
       describe('guess correct colors', () => {
-        it('should display win status message', () => {
-          simulateLoose();
-          simulateWin();
+        it('should display win status message', async () => {
+          const { user, picker } = setup();
 
-          expect(wrapper.find('.Status').text()).to.equal('You win');
+          await simulateLoose(user, picker);
+          await simulateWin(user, picker);
+
+          expect(screen.getByText('You win')).toBeInTheDocument();
         });
       });
 
       describe('on click reset button', () => {
-        it('should hide Solution', () => {
-          simulateLoose();
-          simulateWin();
+        it('should hide Solution', async () => {
+          const { user, picker } = setup();
 
-          wrapper.find('.Reset button').simulate('click');
+          await simulateLoose(user, picker);
+          await simulateWin(user, picker);
 
-          expect(wrapper.find('.Solution').exists()).to.be.false;
+          await user.click(screen.getByText('New game'));
+
+          expect(screen.queryByRole('rowgroup', { name: 'Solution' })).not.toBeInTheDocument();
         });
 
-        it('should hide Status', () => {
-          simulateLoose();
-          simulateWin();
+        it('should hide Status', async () => {
+          const { user, picker } = setup();
 
-          wrapper.find('.Reset button').simulate('click');
+          await simulateLoose(user, picker);
+          await simulateWin(user, picker);
 
-          expect(wrapper.find('.Status').exists()).to.be.false;
+          await user.click(screen.getByText('New game'));
+
+          expect(screen.queryByRole('rowgroup', { name: 'Status' })).not.toBeInTheDocument();
         });
       });
     });

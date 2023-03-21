@@ -9,11 +9,9 @@ pids
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
-coverage
+# Reports directory
+reports
 
-# Report directories
-report
 
 # Screenshot directories
 errorShots
@@ -29,3 +27,6 @@ build/
 
 # IDE
 .idea
+
+# macOS files
+**/.DS_Store

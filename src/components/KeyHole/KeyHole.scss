@@ -1,9 +1,10 @@
+@use 'sass:map';
 @import 'variables';
 
 @each $name, $code in $colors {
   .KeyHole_color_#{$name} {
     background: #{$code};
-    border: 1px solid map-get($colors, 'black');
+    border: 1px solid map.get($colors, 'black');
     border-radius: 100%;
     height: 8px;
     width: 8px;
