@@ -90,7 +90,7 @@ describe('Board', () => {
 
       await user.click(screen.getByText('New game'));
 
-      expect(spyClick.calledOnce).toBeTruthy();
+      expect(spyClick).toHaveBeenCalledOnce();
     });
   });
 

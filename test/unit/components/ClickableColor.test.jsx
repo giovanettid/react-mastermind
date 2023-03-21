@@ -46,14 +46,14 @@ describe('ClickableColor', () => {
       const { user } = setup();
       await user.click(screen.getByRole('button'));
 
-      expect(spyClick.calledOnce).toBeTruthy();
+      expect(spyClick).toHaveBeenCalledOnce();
     });
 
     it('should call onColorClick with color prop', async () => {
       const { user } = setup();
       await user.click(screen.getByRole('button'));
 
-      expect(spyClick.calledWith('Red')).toBeTruthy();
+      expect(spyClick).toHaveBeenCalledWith('Red');
     });
   });
 });

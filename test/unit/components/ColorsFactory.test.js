@@ -18,7 +18,7 @@ describe('ColorsFactory', () => {
 
       ColorsFactory.create().shuffle();
 
-      expect(spy.called).toBeTruthy();
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

@@ -27,7 +27,7 @@ describe('Colors', () => {
     it('should use applyRandom 4 times', () => {
       colors.shuffle();
 
-      expect(stubApplyRandom.callCount).toBe(4);
+      expect(stubApplyRandom).toHaveBeenCalledTimes(4);
     });
 
     it('should contains all correct colors', () => {
@@ -43,7 +43,7 @@ describe('Colors', () => {
     it('should use applyRandom', () => {
       colors.pick();
 
-      expect(stubApplyRandom.calledOnce).toBeTruthy();
+      expect(stubApplyRandom).toHaveBeenCalledOnce();
     });
 
     it('should return a correct color', () => {

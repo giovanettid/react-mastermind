@@ -46,7 +46,7 @@ describe('ColorPicker', () => {
 
       await user.click(yellow);
 
-      expect(spyClick.calledOnce).toBeTruthy();
+      expect(spyClick).toHaveBeenCalledOnce();
     });
   });
 });
