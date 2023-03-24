@@ -4,8 +4,9 @@ import './ColorItem.scss';
 
 function ColorItem({ color }) {
   const className = `ColorItem ColorItem_color_${color.toLowerCase()}`;
+  const ariaLabel = `Color item ${color}`;
 
-  return <td aria-label="Color Item" className={className} />;
+  return <td aria-label={ariaLabel} className={className} />;
 }
 
 ColorItem.propTypes = {

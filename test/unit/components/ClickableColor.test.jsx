@@ -37,7 +37,7 @@ describe('ClickableColor', () => {
   describe('render', () => {
     it('should display ClickableColor with a color', () => {
       setup();
-      expect(screen.getByRole('button')).toHaveClass('ClickableColor_color_red');
+      expect(screen.getByRole('button', { name: 'Click color Red' })).toBeInTheDocument();
     });
   });
 

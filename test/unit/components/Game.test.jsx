@@ -26,10 +26,7 @@ describe('Game', () => {
   });
 
   describe('on click reset button', () => {
-    const greyColorItems = () => {
-      const colorItems = screen.getAllByRole('cell', { name: 'Color Item' });
-      return colorItems.filter((item) => item.classList.contains('ColorItem_color_lightgrey'));
-    };
+    const greyColorItems = () => screen.getAllByRole('cell', { name: 'Color item lightgrey' });
 
     it('should reset game', async () => {
       const { user, picker } = setup();

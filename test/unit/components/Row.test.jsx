@@ -14,30 +14,28 @@ describe('Row', () => {
 
     it('should display a Row with 2 ColorItem', () => {
       setup();
-      expect(screen.getAllByRole('cell', { name: 'Color Item' })).toHaveLength(2);
+      expect(screen.getAllByLabelText('Color Item', { exact: false })).toHaveLength(2);
     });
 
     it('should display a Row with 4 Key Hole', () => {
       setup();
-      expect(screen.getAllByRole('cell', { name: 'Key Hole' })).toHaveLength(4);
+      expect(screen.getAllByLabelText('Key Hole', { exact: false })).toHaveLength(4);
     });
 
     it('should display a Row with 1 yellow ColorItem and 1 lightgrey', () => {
       setup();
-      const [yellow, grey] = screen.getAllByRole('cell', { name: 'Color Item' });
+      const [yellow, grey] = screen.getAllByLabelText('Color Item', { exact: false });
 
-      expect(yellow).toHaveClass('ColorItem_color_yellow');
-      expect(grey).toHaveClass('ColorItem_color_lightgrey');
+      expect(yellow).toHaveAccessibleName('Color item Yellow');
+      expect(grey).toHaveAccessibleName('Color item lightgrey');
     });
 
     it('should display a Row with 1 black KeyHole, 1 white KeyHole & 2 lightgrey', () => {
       setup();
-      const [black, white, firstGrey, lastGrey] = screen.getAllByRole('cell', { name: 'Key Hole' });
 
-      expect(black).toHaveClass('KeyHole_color_black');
-      expect(white).toHaveClass('KeyHole_color_white');
-      expect(firstGrey).toHaveClass('KeyHole_color_lightgrey');
-      expect(lastGrey).toHaveClass('KeyHole_color_lightgrey');
+      expect(screen.getByRole('cell', { name: 'Key hole Black' })).toBeInTheDocument();
+      expect(screen.getByRole('cell', { name: 'Key hole White' })).toBeInTheDocument();
+      expect(screen.getAllByRole('cell', { name: 'Key hole lightgrey' })).toHaveLength(2);
     });
   });
 });
