@@ -6,9 +6,11 @@ function ClickableColor({ onColorClick, color }) {
   const handleClick = () => onColorClick(color);
 
   const className = `ClickableColor ClickableColor_color_${color.toLowerCase()}`;
+  const ariaLabel = `Click color ${color}`;
+
   return (
     <td>
-      <button type="button" aria-label="Click color" className={className} onClick={handleClick} />
+      <button type="button" aria-label={ariaLabel} className={className} onClick={handleClick} />
     </td>
   );
 }

@@ -14,6 +14,6 @@ describe('KeyHole', () => {
       </table>,
     );
 
-    expect(screen.getByRole('cell')).toHaveClass('KeyHole_color_black');
+    expect(screen.getByRole('cell', { name: 'Key hole Black' })).toBeInTheDocument();
   });
 });

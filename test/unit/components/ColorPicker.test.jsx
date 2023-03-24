@@ -34,8 +34,8 @@ describe('ColorPicker', () => {
       const [yellow, black] = buttons;
 
       expect(buttons).toHaveLength(2);
-      expect(yellow).toHaveClass('ClickableColor_color_yellow', { exact: false });
-      expect(black).toHaveClass('ClickableColor_color_black', { exact: false });
+      expect(yellow).toHaveAccessibleName('Click color Yellow');
+      expect(black).toHaveAccessibleName('Click color Black');
     });
   });
 

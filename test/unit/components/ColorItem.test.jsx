@@ -14,6 +14,6 @@ describe('ColorItem', () => {
       </table>,
     );
 
-    expect(screen.getByRole('cell')).toHaveClass('ColorItem_color_green');
+    expect(screen.getByRole('cell', { name: 'Color item Green' })).toBeInTheDocument();
   });
 });

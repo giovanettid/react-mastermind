@@ -56,7 +56,7 @@ describe('Board', () => {
     it('should display nb rows*4 lightgrey ColorItem', () => {
       setup();
 
-      expect(screen.getAllByRole('cell', { name: 'Color Item' })).toHaveLength(NB_ROWS * NB_CODE_HOLES);
+      expect(screen.getAllByRole('cell', { name: 'Color item lightgrey' })).toHaveLength(NB_ROWS * NB_CODE_HOLES);
     });
 
     it('should display ColorPicker', () => {
@@ -115,10 +115,10 @@ describe('Board', () => {
         await clickColors(user, [green, yellow]);
 
         const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
-        const [firstCode, lastCode] = within(lastRow).getAllByRole('cell', { name: 'Color Item' });
+        const [firstCode, lastCode] = within(lastRow).getAllByLabelText('Color Item', { exact: false });
 
-        expect(firstCode).toHaveClass('ColorItem_color_green');
-        expect(lastCode).toHaveClass('ColorItem_color_yellow');
+        expect(firstCode).toHaveAccessibleName('Color item Green');
+        expect(lastCode).toHaveAccessibleName('Color item Yellow');
       });
     });
 
@@ -130,9 +130,9 @@ describe('Board', () => {
         await clickColors(user, [yellow, yellow, green, yellow, green]);
 
         const [firstRow] = screen.getAllByRole('row', { name: 'Row' });
-        const [firstCode] = within(firstRow).getAllByRole('cell', { name: 'Color Item' });
+        const [firstCode] = within(firstRow).getAllByLabelText('Color Item', { exact: false });
 
-        expect(firstCode).toHaveClass('ColorItem_color_green');
+        expect(firstCode).toHaveAccessibleName('Color item Green');
       });
     });
 
@@ -144,9 +144,9 @@ describe('Board', () => {
         await clickColors(user, [yellow, green, green, yellow]);
 
         const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
-        const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key Hole' });
+        const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key hole Black' });
 
-        expect(firstKey).toHaveClass('KeyHole_color_black');
+        expect(firstKey).toBeInTheDocument();
       });
 
       describe('click all correct colors', () => {

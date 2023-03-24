@@ -29,18 +29,18 @@ describe('Rows', () => {
       const { rows } = setup();
 
       const [, lastRow] = rows;
-      const [firstItem] = within(lastRow).getAllByRole('cell', { name: 'Color Item' });
+      const [firstItem] = within(lastRow).getAllByLabelText('Color item', { exact: false });
 
-      expect(firstItem).toHaveClass('ColorItem_color_red');
+      expect(firstItem).toHaveAccessibleName('Color item Red');
     });
 
     it('should pass Withe key color to last Row', () => {
       const { rows } = setup();
 
       const [, lastRow] = rows;
-      const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key Hole' });
+      const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key hole White' });
 
-      expect(firstKey).toHaveClass('KeyHole_color_white');
+      expect(firstKey).toBeInTheDocument();
     });
   });
 });
