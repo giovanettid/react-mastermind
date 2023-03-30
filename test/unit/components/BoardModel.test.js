@@ -9,7 +9,10 @@ describe('BoardModel', () => {
 
   describe('createBoardColors', () => {
     it('should return lightgrey board', () => {
-      expect(model.createBoardColors()).toEqual([['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']]);
+      expect(model.createBoardColors()).toEqual([
+        ['lightgrey', 'lightgrey'],
+        ['lightgrey', 'lightgrey'],
+      ]);
     });
   });
 

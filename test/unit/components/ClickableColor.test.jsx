@@ -17,7 +17,7 @@ describe('ClickableColor', () => {
             <ClickableColor color="Red" onColorClick={spyClick} />
           </tr>
         </tbody>
-      </table>,
+      </table>
     );
 
     return {
@@ -37,7 +37,9 @@ describe('ClickableColor', () => {
   describe('render', () => {
     it('should display ClickableColor with a color', () => {
       setup();
-      expect(screen.getByRole('button', { name: 'Click color Red' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Click color Red' })
+      ).toBeInTheDocument();
     });
   });
 

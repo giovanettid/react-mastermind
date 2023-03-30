@@ -8,7 +8,9 @@ export default class BoardModel {
   }
 
   createBoardColors() {
-    return Array.from({ length: this.nbRows }, () => defaultColors(this.nbHoles));
+    return Array.from({ length: this.nbRows }, () =>
+      defaultColors(this.nbHoles)
+    );
   }
 
   isLastColumn() {

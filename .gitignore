@@ -10,17 +10,17 @@ pids
 *.pid.lock
 
 # Reports directory
-reports
+/reports
 
 
 # Screenshot directories
 errorShots
 
 # Dependency directories
-node_modules/
+node_modules
 
 # Build directories
-build/
+/build
 
 # Optional npm cache directory
 .npm
@@ -29,4 +29,4 @@ build/
 .idea
 
 # macOS files
-**/.DS_Store
+.DS_Store

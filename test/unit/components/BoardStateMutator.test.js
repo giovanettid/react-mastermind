@@ -35,18 +35,18 @@ describe('BoardStateMutator', () => {
 
   describe('mapKeyColors', () => {
     it('should map keyColors (2 correct)', () => {
-      expect(mutator.mapKeyColors(['Red', 'Blue']))
-        .toEqual(['Black', 'Black']);
+      expect(mutator.mapKeyColors(['Red', 'Blue'])).toEqual(['Black', 'Black']);
     });
 
     it('should map keyColors (2 wrong)', () => {
-      expect(mutator.mapKeyColors(['Blue', 'Red']))
-        .toEqual(['White', 'White']);
+      expect(mutator.mapKeyColors(['Blue', 'Red'])).toEqual(['White', 'White']);
     });
 
     it('should map keyColors (0 correct, 0 wrong)', () => {
-      expect(mutator.mapKeyColors(['Yellow', 'Green']))
-        .toEqual(['lightgrey', 'lightgrey']);
+      expect(mutator.mapKeyColors(['Yellow', 'Green'])).toEqual([
+        'lightgrey',
+        'lightgrey',
+      ]);
     });
   });
 
@@ -55,19 +55,34 @@ describe('BoardStateMutator', () => {
       model.nbMove = 2;
 
       const prev = {
-        boardKeyColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']],
-        boardCodeColors: [['Yellow', 'Yellow'], ['lightgrey', 'lightgrey']],
+        boardKeyColors: [
+          ['lightgrey', 'lightgrey'],
+          ['lightgrey', 'lightgrey'],
+        ],
+        boardCodeColors: [
+          ['Yellow', 'Yellow'],
+          ['lightgrey', 'lightgrey'],
+        ],
       };
 
       const next = mutator.muteState('Green')(prev);
 
-      expect(next.boardCodeColors).toEqual([['Yellow', 'Yellow'], ['Green', 'lightgrey']]);
+      expect(next.boardCodeColors).toEqual([
+        ['Yellow', 'Yellow'],
+        ['Green', 'lightgrey'],
+      ]);
     });
 
     describe('first column', () => {
       const prev = {
-        boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
-        boardCodeColors: [['Red', 'Yellow'], ['lightgrey', 'lightgrey']],
+        boardKeyColors: [
+          ['Black', 'lightgrey'],
+          ['lightgrey', 'lightgrey'],
+        ],
+        boardCodeColors: [
+          ['Red', 'Yellow'],
+          ['lightgrey', 'lightgrey'],
+        ],
       };
 
       beforeEach(() => {
@@ -89,8 +104,14 @@ describe('BoardStateMutator', () => {
 
     describe('last column', () => {
       const prev = {
-        boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
-        boardCodeColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
+        boardKeyColors: [
+          ['Black', 'lightgrey'],
+          ['lightgrey', 'lightgrey'],
+        ],
+        boardCodeColors: [
+          ['Red', 'Yellow'],
+          ['Red', 'lightgrey'],
+        ],
       };
 
       beforeEach(() => {
@@ -100,7 +121,10 @@ describe('BoardStateMutator', () => {
       it('should mute boardKeyColors', () => {
         const next = mutator.muteState('Blue')(prev);
 
-        expect(next.boardKeyColors).toEqual([['Black', 'lightgrey'], ['Black', 'Black']]);
+        expect(next.boardKeyColors).toEqual([
+          ['Black', 'lightgrey'],
+          ['Black', 'Black'],
+        ]);
       });
 
       it('should not be decoded when boardKeyColors are not all Black', () => {
@@ -134,18 +158,32 @@ describe('BoardStateMutator', () => {
     it('should mute state from next item', () => {
       model.nbMove = 3;
       const prev = {
-        boardKeyColors: [['lightgrey', 'lightgrey'], ['lightgrey', 'lightgrey']],
-        boardCodeColors: [['lightgrey', 'lightgrey'], ['Green', 'lightgrey']],
+        boardKeyColors: [
+          ['lightgrey', 'lightgrey'],
+          ['lightgrey', 'lightgrey'],
+        ],
+        boardCodeColors: [
+          ['lightgrey', 'lightgrey'],
+          ['Green', 'lightgrey'],
+        ],
       };
 
       const next = mutator.getNext('Yellow')(prev);
 
-      expect(next.boardCodeColors).toEqual([['lightgrey', 'lightgrey'], ['Green', 'Yellow']]);
+      expect(next.boardCodeColors).toEqual([
+        ['lightgrey', 'lightgrey'],
+        ['Green', 'Yellow'],
+      ]);
     });
 
     it('should not mute when already last move', () => {
       sandbox.stub(model, 'isLastMove').returns(true);
-      const prev = { boardCodeColors: [['Red', 'Red'], ['Green', 'Yellow']] };
+      const prev = {
+        boardCodeColors: [
+          ['Red', 'Red'],
+          ['Green', 'Yellow'],
+        ],
+      };
 
       const next = mutator.getNext('Green')(prev);
 
@@ -156,13 +194,22 @@ describe('BoardStateMutator', () => {
       model.nbMove = 3;
 
       const prev = {
-        boardKeyColors: [['Black', 'lightgrey'], ['lightgrey', 'lightgrey']],
-        boardCodeColors: [['Red', 'Yellow'], ['Red', 'lightgrey']],
+        boardKeyColors: [
+          ['Black', 'lightgrey'],
+          ['lightgrey', 'lightgrey'],
+        ],
+        boardCodeColors: [
+          ['Red', 'Yellow'],
+          ['Red', 'lightgrey'],
+        ],
       };
 
       const next = mutator.getNext('Blue')(prev);
 
-      expect(next.boardKeyColors).toEqual([['Black', 'lightgrey'], ['Black', 'Black']]);
+      expect(next.boardKeyColors).toEqual([
+        ['Black', 'lightgrey'],
+        ['Black', 'Black'],
+      ]);
     });
   });
 });

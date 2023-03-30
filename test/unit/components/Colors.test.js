@@ -31,7 +31,9 @@ describe('Colors', () => {
     });
 
     it('should contains all correct colors', () => {
-      colors.shuffle().every((color) => expect(expectedColors.includes(color)).toBeTruthy());
+      colors
+        .shuffle()
+        .every((color) => expect(expectedColors.includes(color)).toBeTruthy());
     });
 
     it('should pick 4 colors', () => {

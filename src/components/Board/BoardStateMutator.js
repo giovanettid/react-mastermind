@@ -16,11 +16,14 @@ export default class BoardStateMutator {
   }
 
   mapKeyColors(codeColors) {
-    const { correct, wrong, rest } = this.colorsDecoder.getNbPositions(codeColors);
+    const { correct, wrong, rest } =
+      this.colorsDecoder.getNbPositions(codeColors);
 
-    return [...new Array(correct).fill('Black'),
+    return [
+      ...new Array(correct).fill('Black'),
       ...new Array(wrong).fill('White'),
-      ...new Array(rest).fill('lightgrey')];
+      ...new Array(rest).fill('lightgrey'),
+    ];
   }
 
   muteState(color) {
@@ -42,7 +45,10 @@ export default class BoardStateMutator {
       }
 
       return {
-        boardCodeColors, boardKeyColors, decoded, endOfGame,
+        boardCodeColors,
+        boardKeyColors,
+        decoded,
+        endOfGame,
       };
     };
   }
