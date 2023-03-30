@@ -10,7 +10,9 @@ describe('ColorPicker', () => {
 
   const setup = () => {
     const user = userEvent.setup();
-    const utils = render(<ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />);
+    const utils = render(
+      <ColorPicker colors={['Yellow', 'Black']} onColorClick={spyClick} />
+    );
     const buttons = screen.getAllByRole('button');
 
     return {

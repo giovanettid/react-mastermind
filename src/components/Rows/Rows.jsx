@@ -7,7 +7,13 @@ import './Rows.scss';
 
 function Rows({ boardCodeColors, boardKeyColors }) {
   const rows = boardCodeColors
-    .map((e, i) => <Row key={shortid.generate()} codeColors={e} keyColors={boardKeyColors[i]} />)
+    .map((e, i) => (
+      <Row
+        key={shortid.generate()}
+        codeColors={e}
+        keyColors={boardKeyColors[i]}
+      />
+    ))
     .reverse();
 
   return (
@@ -20,8 +26,10 @@ function Rows({ boardCodeColors, boardKeyColors }) {
 }
 
 Rows.propTypes = {
-  boardCodeColors: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-  boardKeyColors: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+  boardCodeColors: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+    .isRequired,
+  boardKeyColors: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+    .isRequired,
 };
 
 export default Rows;

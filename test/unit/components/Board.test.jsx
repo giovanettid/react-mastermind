@@ -23,12 +23,14 @@ describe('Board', () => {
     const colorsDecoder = new ColorsDecoder(colorsToGuess);
     const stateMutator = new BoardStateMutator(model, colorsDecoder);
 
-    const utils = render(<Board
-      colorsToPick={['Yellow', 'Green']}
-      colorsToGuess={colorsToGuess}
-      stateMutator={stateMutator}
-      onResetClick={spyClick}
-    />);
+    const utils = render(
+      <Board
+        colorsToPick={['Yellow', 'Green']}
+        colorsToGuess={colorsToGuess}
+        stateMutator={stateMutator}
+        onResetClick={spyClick}
+      />
+    );
     const picker = screen.getByRole('rowgroup', { name: 'Color Picker' });
 
     return {
@@ -50,19 +52,25 @@ describe('Board', () => {
     it('should display Rows', () => {
       setup();
 
-      expect(screen.getByRole('rowgroup', { name: 'Rows' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('rowgroup', { name: 'Rows' })
+      ).toBeInTheDocument();
     });
 
     it('should display nb rows*4 lightgrey ColorItem', () => {
       setup();
 
-      expect(screen.getAllByRole('cell', { name: 'Color item lightgrey' })).toHaveLength(NB_ROWS * NB_CODE_HOLES);
+      expect(
+        screen.getAllByRole('cell', { name: 'Color item lightgrey' })
+      ).toHaveLength(NB_ROWS * NB_CODE_HOLES);
     });
 
     it('should display ColorPicker', () => {
       setup();
 
-      expect(screen.getByRole('rowgroup', { name: 'Color Picker' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('rowgroup', { name: 'Color Picker' })
+      ).toBeInTheDocument();
     });
 
     it('should display 2 ClickableColor', () => {
@@ -74,7 +82,9 @@ describe('Board', () => {
     it('should not display Status', () => {
       setup();
 
-      expect(screen.queryByRole('rowgroup', { name: 'Status' })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('rowgroup', { name: 'Status' })
+      ).not.toBeInTheDocument();
     });
 
     it('should display reset button', () => {
@@ -95,7 +105,8 @@ describe('Board', () => {
   });
 
   describe('click ClickableColor(s)', () => {
-    const clickColors = (user, colors) => Promise.all(colors.map((color) => user.click(color)));
+    const clickColors = (user, colors) =>
+      Promise.all(colors.map((color) => user.click(color)));
 
     const simulateLoose = async (user, picker) => {
       const [, green] = within(picker).getAllByRole('button');
@@ -115,7 +126,10 @@ describe('Board', () => {
         await clickColors(user, [green, yellow]);
 
         const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
-        const [firstCode, lastCode] = within(lastRow).getAllByLabelText('Color Item', { exact: false });
+        const [firstCode, lastCode] = within(lastRow).getAllByLabelText(
+          'Color Item',
+          { exact: false }
+        );
 
         expect(firstCode).toHaveAccessibleName('Color item Green');
         expect(lastCode).toHaveAccessibleName('Color item Yellow');
@@ -130,7 +144,9 @@ describe('Board', () => {
         await clickColors(user, [yellow, yellow, green, yellow, green]);
 
         const [firstRow] = screen.getAllByRole('row', { name: 'Row' });
-        const [firstCode] = within(firstRow).getAllByLabelText('Color Item', { exact: false });
+        const [firstCode] = within(firstRow).getAllByLabelText('Color Item', {
+          exact: false,
+        });
 
         expect(firstCode).toHaveAccessibleName('Color item Green');
       });
@@ -144,7 +160,9 @@ describe('Board', () => {
         await clickColors(user, [yellow, green, green, yellow]);
 
         const [, lastRow] = screen.getAllByRole('row', { name: 'Row' });
-        const [firstKey] = within(lastRow).getAllByRole('cell', { name: 'Key hole Black' });
+        const [firstKey] = within(lastRow).getAllByRole('cell', {
+          name: 'Key hole Black',
+        });
 
         expect(firstKey).toBeInTheDocument();
       });
@@ -153,17 +171,23 @@ describe('Board', () => {
         it('should display Solution', async () => {
           const { user, picker } = setup();
 
-          expect(screen.queryByRole('rowgroup', { name: 'Solution' })).not.toBeInTheDocument();
+          expect(
+            screen.queryByRole('rowgroup', { name: 'Solution' })
+          ).not.toBeInTheDocument();
 
           await simulateWin(user, picker);
 
-          expect(screen.getByRole('rowgroup', { name: 'Solution' })).toBeInTheDocument();
+          expect(
+            screen.getByRole('rowgroup', { name: 'Solution' })
+          ).toBeInTheDocument();
         });
 
         it('should display win status message', async () => {
           const { user, picker } = setup();
 
-          expect(screen.queryByRole('rowgroup', { name: 'Status' })).not.toBeInTheDocument();
+          expect(
+            screen.queryByRole('rowgroup', { name: 'Status' })
+          ).not.toBeInTheDocument();
 
           await simulateWin(user, picker);
 
@@ -189,7 +213,9 @@ describe('Board', () => {
           await simulateLoose(user, picker);
           await simulateLoose(user, picker);
 
-          expect(screen.getByRole('rowgroup', { name: 'Solution' })).toBeInTheDocument();
+          expect(
+            screen.getByRole('rowgroup', { name: 'Solution' })
+          ).toBeInTheDocument();
         });
       });
 
@@ -213,7 +239,9 @@ describe('Board', () => {
 
           await user.click(screen.getByText('New game'));
 
-          expect(screen.queryByRole('rowgroup', { name: 'Solution' })).not.toBeInTheDocument();
+          expect(
+            screen.queryByRole('rowgroup', { name: 'Solution' })
+          ).not.toBeInTheDocument();
         });
 
         it('should hide Status', async () => {
@@ -224,7 +252,9 @@ describe('Board', () => {
 
           await user.click(screen.getByText('New game'));
 
-          expect(screen.queryByRole('rowgroup', { name: 'Status' })).not.toBeInTheDocument();
+          expect(
+            screen.queryByRole('rowgroup', { name: 'Status' })
+          ).not.toBeInTheDocument();
         });
       });
     });

@@ -3,11 +3,15 @@ import ColorsPredicates from 'components/Colors/ColorsPredicates';
 describe('ColorsPredicates', () => {
   describe('wrong', () => {
     it('when color is wrong at position the return true', () => {
-      expect(ColorsPredicates.wrong(['Black', 'Green'])('Black', 1)).toBeTruthy();
+      expect(
+        ColorsPredicates.wrong(['Black', 'Green'])('Black', 1)
+      ).toBeTruthy();
     });
 
     it('when color is correct at position the return false', () => {
-      expect(ColorsPredicates.wrong(['Black', 'Green'])('Black', 0)).toBeFalsy();
+      expect(
+        ColorsPredicates.wrong(['Black', 'Green'])('Black', 0)
+      ).toBeFalsy();
     });
 
     it('when color does not exist then return false', () => {

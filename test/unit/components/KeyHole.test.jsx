@@ -11,9 +11,11 @@ describe('KeyHole', () => {
             <KeyHole color="Black" />
           </tr>
         </tbody>
-      </table>,
+      </table>
     );
 
-    expect(screen.getByRole('cell', { name: 'Key hole Black' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('cell', { name: 'Key hole Black' })
+    ).toBeInTheDocument();
   });
 });

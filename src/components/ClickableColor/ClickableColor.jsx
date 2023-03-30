@@ -10,7 +10,12 @@ function ClickableColor({ onColorClick, color }) {
 
   return (
     <td>
-      <button type="button" aria-label={ariaLabel} className={className} onClick={handleClick} />
+      <button
+        type="button"
+        aria-label={ariaLabel}
+        className={className}
+        onClick={handleClick}
+      />
     </td>
   );
 }

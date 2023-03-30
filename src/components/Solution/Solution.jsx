@@ -7,8 +7,9 @@ import ColorItem from 'components/ColorItem/ColorItem';
 import './Solution.scss';
 
 function Solution({ colors }) {
-  const items = colors
-    .map((color) => <ColorItem key={shortid.generate()} color={color} />);
+  const items = colors.map((color) => (
+    <ColorItem key={shortid.generate()} color={color} />
+  ));
 
   return (
     <div className="Solution">

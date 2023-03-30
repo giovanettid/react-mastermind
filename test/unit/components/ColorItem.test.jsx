@@ -11,9 +11,11 @@ describe('ColorItem', () => {
             <ColorItem color="Green" />
           </tr>
         </tbody>
-      </table>,
+      </table>
     );
 
-    expect(screen.getByRole('cell', { name: 'Color item Green' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('cell', { name: 'Color item Green' })
+    ).toBeInTheDocument();
   });
 });
