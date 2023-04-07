@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+
 import Game from 'components/Game/Game';
 import GameConfiguration from 'components/Game/GameConfiguration';
 

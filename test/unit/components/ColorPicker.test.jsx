@@ -1,7 +1,7 @@
-import ColorPicker from 'components/ColorPicker/ColorPicker';
-
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import ColorPicker from 'components/ColorPicker/ColorPicker';
 
 describe('ColorPicker', () => {
   const sandbox = sinon.createSandbox();

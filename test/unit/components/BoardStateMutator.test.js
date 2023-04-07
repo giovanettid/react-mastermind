@@ -1,6 +1,5 @@
-import BoardStateMutator from 'components/Board/BoardStateMutator';
-
 import BoardModel from 'components/Board/BoardModel';
+import BoardStateMutator from 'components/Board/BoardStateMutator';
 import ColorsDecoder from 'components/Colors/ColorsDecoder';
 
 describe('BoardStateMutator', () => {

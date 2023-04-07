@@ -1,14 +1,13 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-import Rows from 'components/Rows/Rows';
 import ColorPicker from 'components/ColorPicker/ColorPicker';
+import Rows from 'components/Rows/Rows';
 import Solution from 'components/Solution/Solution';
 import StatusFactory from 'components/Status/StatusFactory';
 
-import BoardStateMutator from './BoardStateMutator';
-
 import './Board.scss';
+import BoardStateMutator from './BoardStateMutator';
 
 function Board({ colorsToPick, colorsToGuess, stateMutator, onResetClick }) {
   const [state, setState] = useState(stateMutator.getInitial());

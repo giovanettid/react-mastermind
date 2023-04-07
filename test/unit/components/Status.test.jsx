@@ -1,6 +1,6 @@
-import Status from 'components/Status/Status';
-
 import { render, screen } from '@testing-library/react';
+
+import Status from 'components/Status/Status';
 
 describe('Status', () => {
   describe('render', () => {

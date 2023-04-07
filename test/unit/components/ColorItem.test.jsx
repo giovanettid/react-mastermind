@@ -1,6 +1,6 @@
-import ColorItem from 'components/ColorItem/ColorItem';
-
 import { render, screen } from '@testing-library/react';
+
+import ColorItem from 'components/ColorItem/ColorItem';
 
 describe('ColorItem', () => {
   it('should display ColorItem with correct color', () => {

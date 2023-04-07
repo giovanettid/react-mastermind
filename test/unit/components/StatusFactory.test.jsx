@@ -1,6 +1,6 @@
-import StatusFactory from 'components/Status/StatusFactory';
-
 import { render, screen } from '@testing-library/react';
+
+import StatusFactory from 'components/Status/StatusFactory';
 
 describe('StatusFactory', () => {
   describe('render', () => {

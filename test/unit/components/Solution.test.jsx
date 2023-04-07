@@ -1,6 +1,6 @@
-import Solution from 'components/Solution/Solution';
-
 import { render, screen } from '@testing-library/react';
+
+import Solution from 'components/Solution/Solution';
 
 describe('Solution', () => {
   describe('render', () => {

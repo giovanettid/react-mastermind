@@ -1,7 +1,7 @@
-import ClickableColor from 'components/ClickableColor/ClickableColor';
-
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import ClickableColor from 'components/ClickableColor/ClickableColor';
 
 describe('ClickableColor', () => {
   const sandbox = sinon.createSandbox();

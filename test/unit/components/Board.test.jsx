@@ -1,11 +1,10 @@
-import ColorsDecoder from 'components/Colors/ColorsDecoder';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Board from 'components/Board/Board';
 import BoardModel from 'components/Board/BoardModel';
 import BoardStateMutator from 'components/Board/BoardStateMutator';
-
-import { render, screen, within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import ColorsDecoder from 'components/Colors/ColorsDecoder';
 
 describe('Board', () => {
   const NB_ROWS = 2;

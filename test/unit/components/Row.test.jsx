@@ -1,6 +1,6 @@
-import Row from 'components/Row/Row';
-
 import { render, screen } from '@testing-library/react';
+
+import Row from 'components/Row/Row';
 
 describe('Row', () => {
   describe('render', () => {

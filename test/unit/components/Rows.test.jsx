@@ -1,6 +1,6 @@
-import Rows from 'components/Rows/Rows';
-
 import { render, screen, within } from '@testing-library/react';
+
+import Rows from 'components/Rows/Rows';
 
 describe('Rows', () => {
   const setup = () => {
