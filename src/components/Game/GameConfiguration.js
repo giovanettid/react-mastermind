@@ -1,8 +1,7 @@
-import ColorsFactory from 'components/Colors/ColorsFactory';
-import ColorsDecoder from 'components/Colors/ColorsDecoder';
-
 import BoardModel from 'components/Board/BoardModel';
 import BoardStateMutator from 'components/Board/BoardStateMutator';
+import ColorsDecoder from 'components/Colors/ColorsDecoder';
+import ColorsFactory from 'components/Colors/ColorsFactory';
 
 const NB_ROWS = 10;
 const NB_CODE_HOLES = 4;

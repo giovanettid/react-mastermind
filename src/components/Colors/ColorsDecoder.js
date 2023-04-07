@@ -1,5 +1,5 @@
-import ColorsPredicates from './ColorsPredicates';
 import ColorsMappers from './ColorsMappers';
+import ColorsPredicates from './ColorsPredicates';
 
 const nbOccurences = (colors) =>
   ColorsMappers.nbOccurences(ColorsPredicates.same)(colors);

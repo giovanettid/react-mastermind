@@ -1,6 +1,5 @@
-import GameConfiguration from 'components/Game/GameConfiguration';
-
 import BoardStateMutator from 'components/Board/BoardStateMutator';
+import GameConfiguration from 'components/Game/GameConfiguration';
 
 describe('GameConfiguration', () => {
   const configuration = new GameConfiguration();

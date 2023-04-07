@@ -1,8 +1,8 @@
-import Game from 'components/Game/Game';
-import GameConfiguration from 'components/Game/GameConfiguration';
-
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import Game from 'components/Game/Game';
+import GameConfiguration from 'components/Game/GameConfiguration';
 
 describe('Game', () => {
   const configuration = () => ({ ...new GameConfiguration() });

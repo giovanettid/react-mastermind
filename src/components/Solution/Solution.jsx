@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import shortid from 'shortid';
 
 import ColorItem from 'components/ColorItem/ColorItem';

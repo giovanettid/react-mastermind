@@ -1,5 +1,5 @@
-import ColorsFactory from 'components/Colors/ColorsFactory';
 import Colors from 'components/Colors/Colors';
+import ColorsFactory from 'components/Colors/ColorsFactory';
 
 describe('ColorsFactory', () => {
   const sandbox = sinon.createSandbox();

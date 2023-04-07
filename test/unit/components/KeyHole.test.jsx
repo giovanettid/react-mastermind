@@ -1,6 +1,6 @@
-import KeyHole from 'components/KeyHole/KeyHole';
-
 import { render, screen } from '@testing-library/react';
+
+import KeyHole from 'components/KeyHole/KeyHole';
 
 describe('KeyHole', () => {
   it('should display KeyHole with correct color', () => {
